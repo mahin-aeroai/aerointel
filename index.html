@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AeroIntel DB — Aerospace & Defence Intelligence Platform</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="platform" id="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-mark">
+        <i class="ti ti-shield-bolt"></i>
+      </div>
+      <div class="sidebar-title-block">
+        <div class="sidebar-title">AeroIntel DB</div>
+        <div class="sidebar-sub">ERP Knowledge Platform</div>
+      </div>
+      <button class="sidebar-toggle" id="sidebarToggle" title="Collapse sidebar">
+        <i class="ti ti-layout-sidebar-left-collapse"></i>
+      </button>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Core Modules</div>
+      <div class="nav-item active" data-section="vehicles">
+        <i class="ti ti-plane"></i><span>Vehicle Master</span>
+        <span class="nav-count">42</span>
+      </div>
+      <div class="nav-item" data-section="wbs">
+        <i class="ti ti-sitemap"></i><span>System WBS</span>
+      </div>
+      <div class="nav-item" data-section="components">
+        <i class="ti ti-components"></i><span>Component DB</span>
+        <span class="nav-count">18</span>
+      </div>
+      <div class="nav-item" data-section="materials">
+        <i class="ti ti-atom-2"></i><span>Materials Eng</span>
+      </div>
+      <div class="nav-item" data-section="manufacturing">
+        <i class="ti ti-tools"></i><span>Manufacturing</span>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Technical</div>
+      <div class="nav-item" data-section="propulsion">
+        <i class="ti ti-flame"></i><span>Propulsion</span>
+        <span class="nav-count">14</span>
+      </div>
+      <div class="nav-item" data-section="electronics">
+        <i class="ti ti-cpu"></i><span>Electronics</span>
+      </div>
+      <div class="nav-item" data-section="software">
+        <i class="ti ti-code"></i><span>Software Stack</span>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Ecosystem</div>
+      <div class="nav-item" data-section="india">
+        <i class="ti ti-building-factory-2"></i><span>India Ecosystem</span>
+        <span class="nav-count">18</span>
+      </div>
+      <div class="nav-item" data-section="imports">
+        <i class="ti ti-arrows-transfer-up"></i><span>Import Dependency</span>
+      </div>
+      <div class="nav-item" data-section="supplychain">
+        <i class="ti ti-topology-star-ring-3"></i><span>Supply Chain</span>
+      </div>
+      <div class="nav-item" data-section="erp">
+        <i class="ti ti-database"></i><span>ERP Schema</span>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Intelligence</div>
+      <div class="nav-item" data-section="ai">
+        <i class="ti ti-brain"></i><span>AI Query Engine</span>
+        <span class="nav-badge">LIVE</span>
+      </div>
+      <div class="nav-item" data-section="gallery">
+        <i class="ti ti-photo-album"></i><span>Image Gallery</span>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-profile">
+        <div class="profile-avatar">M</div>
+        <div class="profile-info">
+          <div class="profile-name">Mahin</div>
+          <div class="profile-role">ML Engineer</div>
+        </div>
+        <a href="https://github.com/mahin-aeroai" target="_blank" class="github-link" title="GitHub Portfolio">
+          <i class="ti ti-brand-github"></i>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main" id="mainArea">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title" id="topbarTitle">Vehicle Master Database</span>
+        <span class="topbar-breadcrumb"><i class="ti ti-chevron-right"></i><span id="topbarSub">All Platforms</span></span>
+      </div>
+      <div class="topbar-right">
+        <div class="search-wrap">
+          <i class="ti ti-search"></i>
+          <input type="text" id="globalSearch" placeholder="Search platforms, systems, components…" oninput="globalFilter(this.value)">
+          <kbd>⌘K</kbd>
+        </div>
+        <button class="topbar-btn" onclick="showSection('ai')" title="AI Query">
+          <i class="ti ti-sparkles"></i>
+          <span>AI Query</span>
+        </button>
+        <a class="topbar-btn gh-btn" href="https://github.com/mahin-aeroai" target="_blank" title="GitHub">
+          <i class="ti ti-brand-github"></i>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- CONTENT AREA -->
+    <div class="content" id="contentArea">
+
+      <!-- ═══════════════ VEHICLES ═══════════════ -->
+      <section id="sec-vehicles" class="sec active">
+        <div class="sec-header">
+          <h2><i class="ti ti-plane"></i> Vehicle Master Database</h2>
+          <p>Complete inventory of aerospace, defence, UAV, space and aviation platforms — India-first coverage</p>
+        </div>
+        <div class="kpi-row" id="vehicleKPIs"></div>
+        <div class="filter-bar" id="vehicleFilters">
+          <button class="fbtn active" onclick="filterVehicles('All',this)"><i class="ti ti-layout-grid"></i> All</button>
+          <button class="fbtn" onclick="filterVehicles('Fighter',this)"><i class="ti ti-plane-tilt"></i> Fighter</button>
+          <button class="fbtn" onclick="filterVehicles('Trainer',this)"><i class="ti ti-school"></i> Trainer</button>
+          <button class="fbtn" onclick="filterVehicles('Transport',this)"><i class="ti ti-truck"></i> Transport</button>
+          <button class="fbtn" onclick="filterVehicles('Helicopter',this)"><i class="ti ti-helicopter"></i> Helicopter</button>
+          <button class="fbtn" onclick="filterVehicles('UAV',this)"><i class="ti ti-drone"></i> UAV</button>
+          <button class="fbtn" onclick="filterVehicles('Missile',this)"><i class="ti ti-rocket"></i> Missile</button>
+          <button class="fbtn" onclick="filterVehicles('Satellite/Space',this)"><i class="ti ti-planet"></i> Space</button>
+          <button class="fbtn" onclick="filterVehicles('eVTOL',this)"><i class="ti ti-windmill"></i> eVTOL</button>
+          <button class="fbtn" onclick="filterVehicles('Commercial',this)"><i class="ti ti-building-airport"></i> Commercial</button>
+        </div>
+        <div class="data-card">
+          <div class="table-wrap">
+            <table id="vehicleTable">
+              <thead><tr>
+                <th>Image</th><th>Platform</th><th>Category</th><th>Origin</th><th>Manufacturer</th>
+                <th>Status</th><th>MTOW</th><th>Range</th><th>Speed</th><th>Operators</th><th>Upload</th>
+              </tr></thead>
+              <tbody id="vehicleTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ WBS ═══════════════ -->
+      <section id="sec-wbs" class="sec">
+        <div class="sec-header">
+          <h2><i class="ti ti-sitemap"></i> System Work Breakdown Structure</h2>
+          <p>Complete subsystem hierarchy — airframe to embedded systems</p>
+        </div>
+        <div class="filter-bar">
+          <button class="fbtn active" onclick="filterWBS('All',this)"><i class="ti ti-layout-grid"></i> All</button>
+          <button class="fbtn" onclick="filterWBS('LCA',this)">LCA Tejas</button>
+          <button class="fbtn" onclick="filterWBS('AMCA',this)">AMCA</button>
+          <button class="fbtn" onclick="filterWBS('ALH',this)">ALH Dhruv</button>
+        </div>
+        <div id="wbsContent"></div>
+      </section>
+
+      <!-- ═══════════════ COMPONENTS ═══════════════ -->
+      <section id="sec-components" class="sec">
+        <div class="sec-header">
+          <h2><i class="ti ti-components"></i> Component Database</h2>
+          <p>Part-level data — materials, suppliers, certifications, costs, image uploads</p>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi-card"><div class="kpi-icon" style="color:#38bdf8"><i class="ti ti-puzzle"></i></div><div class="kpi-val">12,480</div><div class="kpi-label">Total Components</div></div>
+          <div class="kpi-card"><div class="kpi-icon" style="color:#4ade80"><i class="ti ti-building-factory"></i></div><div class="kpi-val">847</div><div class="kpi-label">Indian Suppliers</div></div>
+          <div class="kpi-card"><div class="kpi-icon" style="color:#fb923c"><i class="ti ti-arrows-exchange"></i></div><div class="kpi-val">3,210</div><div class="kpi-label">Import Dependent</div></div>
+          <div class="kpi-card"><div class="kpi-icon" style="color:#a78bfa"><i class="ti ti-lock"></i></div><div class="kpi-val">1,890</div><div class="kpi-label">ITAR Restricted</div></div>
+        </div>
+        <div class="data-card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Image</th><th>Component</th><th>Part No.</th><th>Material</th><th>Supplier</th><th>Country</th><th>Cert</th><th>Grade</th><th>Upload</th></tr></thead>
+              <tbody id="componentTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ MATERIALS ═══════════════ -->
+      <section id="sec-materials" class="sec">
+        <div class="sec-header">
+          <h2><i class="ti ti-atom-2"></i> Materials Engineering Database</h2>
+          <p>Metals, composites, polymers, ceramics — grades, properties, aerospace suppliers</p>
+        </div>
+        <div class="filter-bar" id="matFilters">
+          <button class="fbtn active" onclick="filterMat('All',this)"><i class="ti ti-layout-grid"></i> All</button>
+          <button class="fbtn" onclick="filterMat('Metal',this)"><i class="ti ti-circuit-cell"></i> Metals</button>
+          <button class="fbtn" onclick="filterMat('Composite',this)"><i class="ti ti-layers-difference"></i> Composites</button>
+          <button class="fbtn" onclick="filterMat('Polymer',this)"><i class="ti ti-droplet"></i> Polymers</button>
+          <button class="fbtn" onclick="filterMat('Ceramic',this)"><i class="ti ti-diamond"></i> Ceramics</button>
+        </div>
+        <div class="data-card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Material</th><th>Type</th><th>Grade</th><th>UTS (MPa)</th><th>Density</th><th>Temp Range</th><th>Applications</th><th>Key Suppliers</th></tr></thead>
+              <tbody id="materialTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ MANUFACTURING ═══════════════ -->
+      <section id="sec-manufacturing" class="sec">
+        <div class="sec-header">
+          <h2><i class="ti ti-tools"></i> Manufacturing Process Database</h2>
+          <p>Sheet metal, composites, machining, additive, joining, NDT — India deployment</p>
+        </div>
+        <div id="mfgContent"></div>
+      </section>
+
+      <!-- ═══════════════ PROPULSION ═══════════════ -->
+      <section id="sec-propulsion" class="sec">
+        <div class="sec-header">
+          <h2><i class="ti ti-flame"></i> Propulsion Systems</h2>
+          <p>Engines, turboshafts, rocket motors, ramjets — complete specifications</p>
+        </div>
+        <div class="data-card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Image</th><th>Engine</th><th>Manufacturer</th><th>Type</th><th>Thrust/Power</th><th>SFC</th><th>Weight</th><th>TBO</th><th>Applications</th><th>Status</th><th>Upload</th></tr></thead>
+              <tbody id="propTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ ELECTRONICS ═══════════════ -->
+      <section id="sec-electronics" class="sec">
+        <div class="sec-header">
+          <h2><i class="ti ti-cpu"></i> Electronics & Embedded Systems</h2>
+          <p>Processors, FPGAs, sensors, RTOS, communication protocols</p>
+        </div>
+        <div id="electronicsContent"></div>
+      </section>
+
+      <!-- ═══════════════ SOFTWARE ═══════════════ -->
+      <section id="sec-software" class="sec">
+        <div class="sec-header">
+          <h2><i class="ti ti-code"></i> Software Technology Stack</h2>
+          <p>CAD/CAE/CFD/PLM/Autonomy/AI — by domain, application and Indian deployment</p>
+        </div>
+        <div id="softwareContent"></div>
+      </section>
+
+      <!-- ═══════════════ INDIA ═══════════════ -->
+      <section id="sec-india" class="sec">
+        <div class="sec-header">
+          <h2><i class="ti ti-building-factory-2"></i> India Manufacturing Ecosystem</h2>
+          <p>DPSUs, private OEMs, Tier 1–3 suppliers, startups, R&D labs</p>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi-card"><div class="kpi-icon" style="color:#38bdf8"><i class="ti ti-building-factory"></i></div><div class="kpi-val">9</div><div class="kpi-label">DPSUs</div></div>
+          <div class="kpi-card"><div class="kpi-icon" style="color:#4ade80"><i class="ti ti-briefcase"></i></div><div class="kpi-val">38</div><div class="kpi-label">Private OEMs</div></div>
+          <div class="kpi-card"><div class="kpi-icon" style="color:#fb923c"><i class="ti ti-tool"></i></div><div class="kpi-val">1,200+</div><div class="kpi-label">MSME Suppliers</div></div>
+          <div class="kpi-card"><div class="kpi-icon" style="color:#a78bfa"><i class="ti ti-rocket"></i></div><div class="kpi-val">240+</div><div class="kpi-label">Aerospace Startups</div></div>
+        </div>
+        <div class="data-card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Company</th><th>Type</th><th>Location</th><th>Revenue</th><th>Employees</th><th>Capabilities</th><th>Customers</th><th>Certifications</th></tr></thead>
+              <tbody id="indiaTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ IMPORTS ═══════════════ -->
+      <section id="sec-imports" class="sec">
+        <div class="sec-header">
+          <h2><i class="ti ti-arrows-transfer-up"></i> Import Dependency Analysis</h2>
+          <p>Technology gaps, foreign dependence, Make in India indigenisation roadmap</p>
+        </div>
+        <div id="importsContent"></div>
+      </section>
+
+      <!-- ═══════════════ SUPPLY CHAIN ═══════════════ -->
+      <section id="sec-supplychain" class="sec">
+        <div class="sec-header">
+          <h2><i class="ti ti-topology-star-ring-3"></i> Supply Chain & Investors</h2>
+          <p>OEM → Tier 1 → Tier 2 → Tier 3 mapping, strategic investors, government bodies</p>
+        </div>
+        <div id="scContent"></div>
+      </section>
+
+      <!-- ═══════════════ ERP ═══════════════ -->
+      <section id="sec-erp" class="sec">
+        <div class="sec-header">
+          <h2><i class="ti ti-database"></i> ERP Database Schema</h2>
+          <p>SQL DDL, ER relationships, JSON API — production-ready structure</p>
+        </div>
+        <div id="erpContent"></div>
+      </section>
+
+      <!-- ═══════════════ AI ═══════════════ -->
+      <section id="sec-ai" class="sec">
+        <div class="sec-header">
+          <h2><i class="ti ti-brain"></i> AI Intelligence Query Engine</h2>
+          <p>Claude-powered — ask anything about aerospace, defence, space, UAV platforms</p>
+        </div>
+        <div class="ai-panel">
+          <div class="ai-header">
+            <div class="ai-badge"><i class="ti ti-sparkles"></i> AeroIntel AI · Claude Sonnet</div>
+            <span class="live-dot"><span></span>LIVE</span>
+          </div>
+          <div class="quick-chips" id="quickChips"></div>
+          <div class="ai-input-row">
+            <i class="ti ti-message-question"></i>
+            <input type="text" id="aiQuery" placeholder="Ask about any platform, engine, material, supplier, technology…" onkeydown="if(event.key==='Enter')queryAI()">
+            <button onclick="queryAI()" class="send-btn"><i class="ti ti-send"></i> Ask</button>
+          </div>
+          <div id="aiResponse" class="ai-response" style="display:none"></div>
+        </div>
+        <div class="data-card" style="margin-top:16px">
+          <div class="card-title-row"><i class="ti ti-history"></i> Query History</div>
+          <div id="queryHistory" class="query-history-empty">No queries yet — try a quick chip above or type below.</div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ GALLERY ═══════════════ -->
+      <section id="sec-gallery" class="sec">
+        <div class="sec-header">
+          <h2><i class="ti ti-photo-album"></i> Image Gallery</h2>
+          <p>All uploaded images for vehicles, components and engines — organised by category</p>
+        </div>
+        <div id="galleryContent">
+          <div class="gallery-empty"><i class="ti ti-photo-off"></i><p>No images uploaded yet. Use the upload buttons in each table row to add images.</p></div>
+        </div>
+      </section>
+
+    </div><!-- end content -->
+  </div><!-- end main -->
+</div><!-- end platform -->
+
+<!-- IMAGE UPLOAD MODAL -->
+<div class="modal-overlay" id="uploadModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><i class="ti ti-photo-up"></i> Upload Image</div>
+      <button class="modal-close" onclick="closeModal()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="upload-target-info" id="uploadTargetInfo"></div>
+      <div class="upload-spec-box" id="uploadSpecBox"></div>
+      <div class="drop-zone" id="dropZone">
+        <i class="ti ti-cloud-upload"></i>
+        <p>Drag & drop image here</p>
+        <p class="drop-sub">or click to browse</p>
+        <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileSelect(this)">
+        <button class="drop-btn" onclick="document.getElementById('fileInput').click()"><i class="ti ti-folder-open"></i> Browse Files</button>
+      </div>
+      <div id="imagePreview" style="display:none" class="img-preview-wrap">
+        <img id="previewImg" src="" alt="preview">
+        <div class="img-preview-info" id="imgPreviewInfo"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn-primary" id="confirmUploadBtn" onclick="confirmUpload()" disabled>
+        <i class="ti ti-check"></i> Save Image
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/render.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
