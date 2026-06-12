@@ -1,6 +1,6 @@
 # AeroIntel DB — Aerospace & Defence Intelligence Platform
 
-> **Live Demo:** [https://mahin-aeroai.github.io/aerointel-db](https://mahin-aeroai.github.io/aerointel-db)
+> **Live Demo:** [https://mahin-aeroai.github.io/aerointel-db](https://mahin-aeroai.github.io/aerointel)
 > 
 > **Portfolio:** [github.com/mahin-aeroai](https://github.com/mahin-aeroai)
 
