@@ -2,334 +2,1009 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AeroIntel DB — Aerospace & Defence Intelligence Platform</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AeroIntel DB v3 — Aerospace & Defence Intelligence Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0a0c10;--bg2:#0f1117;--bg3:#161b24;--bg4:#1e2530;--border:#1e2a3a;--border2:#2a3a4a;--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;--accent:#38bdf8;--accent2:#0ea5e9;--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--purple:#a855f7;--font:Inter,system-ui,sans-serif;--mono:'JetBrains Mono',monospace}
-body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:13px;line-height:1.5;overflow:hidden;height:100vh}
-.platform{display:flex;height:100vh}
-.sidebar{width:210px;min-width:210px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto}
-.sidebar-logo{padding:14px 14px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
-.sl-icon{width:28px;height:28px;background:linear-gradient(135deg,#0ea5e9,#6366f1);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;flex-shrink:0}
-.sl-text{font-size:13px;font-weight:600}.sl-sub{font-size:10px;color:var(--text3);letter-spacing:.04em;text-transform:uppercase}
-.nav-section{padding:8px 0 4px}.nav-label{padding:5px 12px 3px;font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
-.nav-item{display:flex;align-items:center;gap:7px;padding:6px 12px;cursor:pointer;font-size:12px;color:var(--text2);border-left:2px solid transparent;transition:all .12s;user-select:none}
-.nav-item:hover{background:var(--bg3);color:var(--text)}.nav-item.active{background:var(--bg3);color:var(--accent);border-left-color:var(--accent)}
-.nav-item i{font-size:14px;opacity:.8}
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
-.topbar{padding:9px 18px;border-bottom:1px solid var(--border);background:var(--bg2);display:flex;align-items:center;gap:10px}
-.topbar-title{font-size:14px;font-weight:500;flex:1}
-.search-wrap{display:flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border2);border-radius:7px;padding:5px 10px;width:260px}
-.search-wrap input{background:none;border:none;outline:none;font-size:12px;color:var(--text);width:100%;font-family:var(--font)}
-.search-wrap input::placeholder{color:var(--text3)}
-.ai-btn{display:flex;align-items:center;gap:5px;padding:5px 12px;border:1px solid var(--border2);border-radius:7px;cursor:pointer;font-size:11.5px;background:none;color:var(--text2);white-space:nowrap;transition:all .12s;font-family:var(--font)}
-.ai-btn:hover{background:var(--bg3);color:var(--text)}
-.content{flex:1;overflow-y:auto;padding:18px}
-.sec-hdr{margin-bottom:14px}.sec-hdr h2{font-size:16px;font-weight:600}.sec-hdr p{font-size:12px;color:var(--text2);margin-top:2px}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
-.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
-.stat-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}.stat-val{font-size:20px;font-weight:600;margin-top:2px}.stat-sub{font-size:10px;color:var(--text2);margin-top:1px}
-.filter-row{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-.fbtn{padding:4px 9px;border:1px solid var(--border2);border-radius:5px;cursor:pointer;font-size:11px;background:none;color:var(--text2);transition:all .1s;font-family:var(--font)}
-.fbtn.active,.fbtn:hover{background:var(--bg3);color:var(--text);border-color:var(--accent)}
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
-.card-hdr{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;cursor:pointer}
-.card-hdr h3{font-size:12.5px;font-weight:500;display:flex;align-items:center;gap:6px}
-.card-body{padding:12px 14px}
-.tbl-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:11.5px}
-th{text-align:left;padding:6px 9px;background:var(--bg3);font-weight:500;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border)}
-td{padding:6px 9px;border-bottom:1px solid var(--border);color:var(--text)}
-tr:last-child td{border-bottom:none}tr:hover td{background:var(--bg3)}
-.pill{display:inline-block;font-size:9.5px;padding:2px 6px;border-radius:10px;font-weight:500}
-.p-green{background:#052e16;color:#4ade80;border:1px solid #166534}
-.p-amber{background:#431407;color:#fbbf24;border:1px solid #92400e}
-.p-red{background:#450a0a;color:#f87171;border:1px solid #991b1b}
-.p-blue{background:#0c1a2e;color:#60a5fa;border:1px solid #1d4ed8}
-.p-purple{background:#2e1065;color:#c084fc;border:1px solid #7e22ce}
-.p-gray{background:#1e2530;color:#94a3b8;border:1px solid #334155}
-.p-cyan{background:#083344;color:#22d3ee;border:1px solid #0e7490}
-.detail-btn{padding:2px 8px;border:1px solid var(--accent);border-radius:4px;cursor:pointer;font-size:10px;background:none;color:var(--accent);white-space:nowrap;transition:all .1s;font-family:var(--font)}
-.detail-btn:hover{background:var(--accent);color:#000}
-.detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:none;backdrop-filter:blur(3px)}
-.detail-overlay.open{display:flex;align-items:stretch;justify-content:flex-end}
-.detail-panel{width:850px;max-width:95vw;background:var(--bg2);border-left:1px solid var(--border2);display:flex;flex-direction:column;overflow:hidden;animation:slideIn .2s ease-out}
-@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
-.dp-hdr{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0;background:var(--bg3)}
-.dp-id{font-size:10px;color:var(--text3);font-family:var(--mono)}.dp-name{font-size:15px;font-weight:600}.dp-sub{font-size:11px;color:var(--text2);margin-top:1px}
-.dp-close{width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:5px;color:var(--text2);border:1px solid var(--border2);background:none;font-size:18px;transition:all .1s;flex-shrink:0}
-.dp-close:hover{background:#450a0a;color:#f87171;border-color:#991b1b}
-.dp-tabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;flex-shrink:0;background:var(--bg2)}
-.dp-tab{padding:8px 14px;cursor:pointer;font-size:11.5px;color:var(--text2);border-bottom:2px solid transparent;white-space:nowrap;transition:all .1s;flex-shrink:0}
-.dp-tab:hover{color:var(--text)}.dp-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-.dp-body{flex:1;overflow-y:auto;padding:16px 18px}
-.dp-sec{display:none}.dp-sec.active{display:block}
-.specs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
-.spec-item{background:var(--bg3);border-radius:6px;padding:8px 10px;border:1px solid var(--border)}
-.spec-label{font-size:9.5px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em}.spec-val{font-size:12.5px;font-weight:500;margin-top:2px}
-.dp-desc{font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:14px;padding:10px 14px;background:var(--bg3);border-radius:7px;border-left:3px solid var(--accent)}
-.wbs-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.wbs-block{background:var(--bg3);border-radius:7px;padding:10px 12px;border:1px solid var(--border)}
-.wbs-title{font-size:10.5px;font-weight:600;color:var(--accent);margin-bottom:7px;text-transform:uppercase;letter-spacing:.05em}
-.wbs-item{font-size:11px;color:var(--text2);padding:2px 0;display:flex;align-items:flex-start;gap:4px;line-height:1.5}
-.wbs-item::before{content:"├─";color:var(--text3);font-family:var(--mono);flex-shrink:0;font-size:10px;margin-top:1px}
-.info-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-.ib{background:var(--bg3);border-radius:7px;padding:10px 12px;border:1px solid var(--border)}
-.ib-title{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.ib-content{font-size:11.5px;color:var(--text2);line-height:1.6}
-.tag-list{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
-.tag{padding:2px 7px;background:var(--bg4);border:1px solid var(--border2);border-radius:4px;font-size:10px;color:var(--text2)}
-.sc-block{margin-bottom:10px;background:var(--bg3);border-radius:7px;padding:10px 12px;border:1px solid var(--border)}
-.sc-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
-.sc-content{font-size:11.5px;color:var(--text2);line-height:1.6}
-.no-detail{text-align:center;padding:30px;color:var(--text3)}
-.no-detail h3{font-size:14px;color:var(--text2);margin-bottom:8px}
-.no-detail p{font-size:12px;line-height:1.6}
-.ai-panel{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:14px}
-.ai-input-row{display:flex;gap:8px;margin-top:10px}
-.ai-input-row input{flex:1;padding:7px 10px;border:1px solid var(--border2);border-radius:6px;background:var(--bg3);color:var(--text);font-size:12px;outline:none;font-family:var(--font)}
-.ai-input-row input:focus{border-color:var(--accent)}
-.ai-input-row button{padding:7px 14px;border:1px solid var(--border2);border-radius:6px;cursor:pointer;font-size:12px;background:var(--bg3);color:var(--text);font-family:var(--font)}
-.ai-input-row button:hover{border-color:var(--accent);color:var(--accent)}
-.ai-response{margin-top:10px;padding:10px 12px;background:var(--bg3);border-radius:7px;font-size:12px;line-height:1.7;max-height:340px;overflow-y:auto;display:none}
-.spinner{display:inline-block;width:12px;height:12px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:5px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.fbtn2{padding:3px 8px;border:1px solid var(--border2);border-radius:4px;cursor:pointer;font-size:10.5px;background:none;color:var(--text2);margin:2px;font-family:var(--font)}
-.fbtn2:hover{background:var(--bg3);color:var(--text)}
-.schema{font-family:var(--mono);font-size:11px;background:var(--bg3);border-radius:7px;padding:12px;line-height:1.8;overflow-x:auto;white-space:pre;color:var(--text2);border:1px solid var(--border)}
-.sk{color:#60a5fa}.st{color:#fb923c}.sc{color:var(--text3)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pb-wrap{background:var(--bg3);border-radius:4px;height:5px;overflow:hidden;margin-top:4px}
-.pb{height:100%;border-radius:4px}
+/* ─── RESET ────────────────────────────────────────────── */
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ─── DESIGN TOKENS (ONE consistent set) ──────────────── */
+:root{
+  /* Backgrounds */
+  --bg:         #080b10;
+  --bg-surface: #0d1117;
+  --bg-card:    #111827;
+  --bg-raised:  #1a2234;
+  --bg-hover:   #1e2a3a;
+  --bg-active:  #162032;
+
+  /* Borders */
+  --bdr:        #1e293b;
+  --bdr-strong: #2d3f55;
+  --bdr-accent: rgba(56,189,248,.35);
+
+  /* Text */
+  --tx:         #e2e8f0;
+  --tx-2:       #94a3b8;
+  --tx-3:       #64748b;
+  --tx-dim:     #475569;
+
+  /* Accent / Brand */
+  --accent:     #38bdf8;
+  --accent-dim: rgba(56,189,248,.15);
+  --accent-glow:rgba(56,189,248,.08);
+
+  /* Status colours */
+  --green:  #22c55e; --green-bg:#052e16;  --green-bdr:#15803d;
+  --amber:  #f59e0b; --amber-bg:#431407;  --amber-bdr:#92400e;
+  --red:    #f87171; --red-bg:  #450a0a;  --red-bdr:  #991b1b;
+  --blue:   #60a5fa; --blue-bg: #0c1a2e;  --blue-bdr: #1d4ed8;
+  --purple: #c084fc; --purp-bg: #2e1065;  --purp-bdr: #7e22ce;
+  --cyan:   #22d3ee; --cyan-bg: #083344;  --cyan-bdr: #0e7490;
+  --gray:   #94a3b8; --gray-bg: #1e2530;  --gray-bdr: #334155;
+
+  /* Fonts */
+  --font:  'Inter', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', monospace;
+
+  /* Easing */
+  --ease: .15s cubic-bezier(.4,0,.2,1);
+}
+
+/* ─── BASE ─────────────────────────────────────────────── */
+html, body { height:100%; overflow:hidden; }
+body{
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--tx);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ─── LAYOUT ───────────────────────────────────────────── */
+#app { display:flex; height:100vh; }
+
+/* ─── SIDEBAR ──────────────────────────────────────────── */
+#sidebar {
+  width: 216px;
+  min-width: 216px;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--bdr);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#sidebar::-webkit-scrollbar{ width:4px }
+#sidebar::-webkit-scrollbar-track{ background:transparent }
+#sidebar::-webkit-scrollbar-thumb{ background:var(--bdr-strong);border-radius:4px }
+
+.sb-logo {
+  padding: 16px 14px 12px;
+  border-bottom: 1px solid var(--bdr);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(14,165,233,.08), rgba(99,102,241,.08));
+}
+.sb-logo-icon {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 0 16px rgba(56,189,248,.3);
+}
+.sb-logo-name { font-size: 13.5px; font-weight: 700; letter-spacing: .02em; color: var(--tx); }
+.sb-logo-ver  { font-size: 10px; color: var(--tx-3); margin-top: 1px; letter-spacing: .04em; }
+
+.nav-grp { padding: 10px 0 4px; }
+.nav-grp-label {
+  padding: 5px 14px 3px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tx-dim);
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--tx-2);
+  border-left: 2px solid transparent;
+  transition: all var(--ease);
+  user-select: none;
+  position: relative;
+}
+.nav-item i { font-size: 15px; flex-shrink: 0; transition: color var(--ease); }
+.nav-item:hover {
+  background: var(--bg-hover);
+  color: var(--tx);
+  border-left-color: var(--bdr-strong);
+}
+.nav-item.active {
+  background: var(--bg-active);
+  color: var(--accent);
+  border-left-color: var(--accent);
+  font-weight: 500;
+}
+.nav-item.active i { color: var(--accent); }
+.nav-badge {
+  margin-left: auto;
+  font-size: 9.5px;
+  padding: 1px 5px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* ─── MAIN ─────────────────────────────────────────────── */
+#main { flex:1; display:flex; flex-direction:column; overflow:hidden; min-width:0; }
+
+/* ─── TOPBAR ───────────────────────────────────────────── */
+#topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--bdr);
+  flex-shrink: 0;
+}
+#topbar-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+.breadcrumb-icon {
+  width: 28px; height: 28px;
+  background: var(--accent-dim);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.breadcrumb-title { font-size: 14px; font-weight: 600; color: var(--tx); }
+.breadcrumb-sub   { font-size: 11px; color: var(--tx-3); margin-left: 4px; }
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--bg-card);
+  border: 1px solid var(--bdr-strong);
+  border-radius: 8px;
+  padding: 6px 11px;
+  width: 240px;
+  transition: border-color var(--ease);
+}
+.search-box:focus-within { border-color: var(--accent); }
+.search-box i { font-size: 14px; color: var(--tx-3); flex-shrink:0; }
+.search-box input {
+  background: none; border: none; outline: none;
+  font-size: 12.5px; color: var(--tx);
+  font-family: var(--font); width: 100%;
+}
+.search-box input::placeholder { color: var(--tx-dim); }
+
+.topbar-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  background: none;
+  border: 1px solid var(--bdr-strong);
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--tx-2);
+  font-family: var(--font);
+  transition: all var(--ease);
+  white-space: nowrap;
+}
+.topbar-btn:hover { background: var(--bg-hover); color: var(--tx); border-color: var(--accent); }
+.topbar-btn.primary {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ─── CONTENT AREA ─────────────────────────────────────── */
+#content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background: var(--bg);
+}
+#content::-webkit-scrollbar { width: 5px; }
+#content::-webkit-scrollbar-track { background: transparent; }
+#content::-webkit-scrollbar-thumb { background: var(--bdr-strong); border-radius: 4px; }
+
+/* ─── SECTIONS (show/hide) ─────────────────────────────── */
+.section { display: none; }
+.section.active { display: block; }
+
+/* ─── SECTION HEADER ───────────────────────────────────── */
+.sec-header { margin-bottom: 20px; }
+.sec-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--tx);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sec-header h2 i {
+  width: 32px; height: 32px;
+  background: var(--accent-dim);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--accent);
+}
+.sec-header p { font-size: 13px; color: var(--tx-2); margin-top: 4px; margin-left: 42px; }
+
+/* ─── STATS STRIP ──────────────────────────────────────── */
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--bdr);
+  border-radius: 10px;
+  padding: 14px 16px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--ease);
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--stat-color, var(--accent));
+}
+.stat-card:hover { border-color: var(--bdr-strong); }
+.stat-label { font-size: 10px; color: var(--tx-3); text-transform: uppercase; letter-spacing: .07em; font-weight: 600; }
+.stat-value { font-size: 26px; font-weight: 700; margin: 4px 0 2px; color: var(--stat-color, var(--accent)); }
+.stat-sub   { font-size: 11px; color: var(--tx-2); }
+
+/* ─── FILTER BAR ───────────────────────────────────────── */
+.filter-bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  background: var(--bg-surface);
+  border: 1px solid var(--bdr);
+  border-radius: 10px;
+}
+.fbtn {
+  padding: 5px 11px;
+  border: 1px solid var(--bdr-strong);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11.5px;
+  background: none;
+  color: var(--tx-2);
+  transition: all var(--ease);
+  font-family: var(--font);
+  font-weight: 400;
+}
+.fbtn:hover { background: var(--bg-hover); color: var(--tx); border-color: var(--accent); }
+.fbtn.on {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+/* ─── TABLE ────────────────────────────────────────────── */
+.tbl-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--bdr); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  background: var(--bg-card);
+}
+thead tr { background: var(--bg-raised); }
+th {
+  text-align: left;
+  padding: 9px 12px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--tx-3);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  border-bottom: 1px solid var(--bdr);
+  white-space: nowrap;
+}
+td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--bdr);
+  color: var(--tx);
+  vertical-align: middle;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr { cursor: pointer; transition: background var(--ease); }
+tbody tr:hover td { background: var(--bg-hover); }
+.td-name { font-weight: 600; font-size: 12.5px; }
+.td-id   { font-family: var(--mono); font-size: 10.5px; color: var(--tx-3); }
+.td-mfr  { font-size: 11px; color: var(--tx-2); }
+
+/* ─── PILLS ────────────────────────────────────────────── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.pill-green  { background: var(--green-bg);  color: var(--green);  border: 1px solid var(--green-bdr); }
+.pill-amber  { background: var(--amber-bg);  color: var(--amber);  border: 1px solid var(--amber-bdr); }
+.pill-red    { background: var(--red-bg);    color: var(--red);    border: 1px solid var(--red-bdr); }
+.pill-blue   { background: var(--blue-bg);   color: var(--blue);   border: 1px solid var(--blue-bdr); }
+.pill-purple { background: var(--purp-bg);   color: var(--purple); border: 1px solid var(--purp-bdr); }
+.pill-cyan   { background: var(--cyan-bg);   color: var(--cyan);   border: 1px solid var(--cyan-bdr); }
+.pill-gray   { background: var(--gray-bg);   color: var(--gray);   border: 1px solid var(--gray-bdr); }
+
+/* ─── CARDS ────────────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--bdr);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--bdr);
+  background: var(--bg-raised);
+}
+.card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tx);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.card-title i { color: var(--accent); font-size: 15px; }
+.card-body  { padding: 14px 16px; }
+
+/* ─── GRID CARDS ───────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.grid-auto { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 14px; }
+
+/* ─── INFO BLOCK ───────────────────────────────────────── */
+.ib {
+  background: var(--bg-raised);
+  border: 1px solid var(--bdr);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.ib-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--tx-dim);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin-bottom: 4px;
+}
+.ib-value { font-size: 13px; font-weight: 500; color: var(--tx); }
+
+/* ─── AI PANEL ─────────────────────────────────────────── */
+.ai-box {
+  background: var(--bg-card);
+  border: 1px solid var(--bdr);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.ai-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.ai-header-icon {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: #fff;
+}
+.ai-row { display: flex; gap: 8px; }
+.ai-input {
+  flex: 1;
+  padding: 10px 14px;
+  background: var(--bg-raised);
+  border: 1px solid var(--bdr-strong);
+  border-radius: 8px;
+  color: var(--tx);
+  font-size: 13px;
+  outline: none;
+  font-family: var(--font);
+  transition: border-color var(--ease);
+}
+.ai-input:focus { border-color: var(--accent); }
+.ai-send {
+  padding: 10px 18px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--accent);
+  font-family: var(--font);
+  font-weight: 600;
+  transition: all var(--ease);
+  display: flex; align-items: center; gap: 6px;
+}
+.ai-send:hover { background: var(--accent); color: #000; }
+.ai-out {
+  margin-top: 12px;
+  padding: 14px;
+  background: var(--bg-raised);
+  border: 1px solid var(--bdr);
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--tx-2);
+  min-height: 80px;
+  white-space: pre-wrap;
+  display: none;
+}
+.ai-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.ai-chip {
+  padding: 4px 10px;
+  background: var(--bg-raised);
+  border: 1px solid var(--bdr-strong);
+  border-radius: 20px;
+  font-size: 11px;
+  color: var(--tx-2);
+  cursor: pointer;
+  transition: all var(--ease);
+}
+.ai-chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+/* ─── SPINNER ──────────────────────────────────────────── */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner {
+  display: inline-block;
+  width: 12px; height: 12px;
+  border: 2px solid var(--bdr-strong);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .6s linear infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+/* ─── DETAIL OVERLAY ───────────────────────────────────── */
+#dp-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: none;
+}
+#dp-overlay.open { display: flex; justify-content: flex-end; }
+
+#dp {
+  width: 860px;
+  max-width: 94vw;
+  background: var(--bg-surface);
+  border-left: 1px solid var(--bdr-strong);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  animation: slideIn .22s cubic-bezier(.22,1,.36,1);
+}
+@keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+#dp-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--bdr);
+  background: var(--bg-card);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.dp-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--accent-dim), rgba(99,102,241,.2));
+  border: 1px solid var(--bdr-accent);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; color: var(--accent);
+  flex-shrink: 0;
+}
+.dp-header-info { flex: 1; min-width: 0; }
+.dp-id    { font-size: 10px; color: var(--tx-3); font-family: var(--mono); margin-bottom: 3px; }
+.dp-name  { font-size: 17px; font-weight: 700; color: var(--tx); line-height: 1.2; }
+.dp-meta  { font-size: 12px; color: var(--tx-2); margin-top: 4px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.dp-close {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  border-radius: 7px;
+  color: var(--tx-2);
+  border: 1px solid var(--bdr);
+  background: none;
+  font-size: 18px;
+  transition: all var(--ease);
+  flex-shrink: 0;
+}
+.dp-close:hover { background: var(--red-bg); color: var(--red); border-color: var(--red-bdr); }
+
+#dp-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--bdr);
+  background: var(--bg-card);
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+#dp-tabs::-webkit-scrollbar { display: none; }
+.dp-tab {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--tx-3);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all var(--ease);
+  display: flex; align-items: center; gap: 5px;
+}
+.dp-tab i { font-size: 13px; }
+.dp-tab:hover { color: var(--tx-2); }
+.dp-tab.on { color: var(--accent); border-bottom-color: var(--accent); }
+
+#dp-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 20px;
+  background: var(--bg);
+}
+#dp-body::-webkit-scrollbar { width: 5px; }
+#dp-body::-webkit-scrollbar-thumb { background: var(--bdr-strong); border-radius: 4px; }
+
+/* ─── DETAIL PANEL INTERNALS ───────────────────────────── */
+.dp-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.dp-spec {
+  background: var(--bg-card);
+  border: 1px solid var(--bdr);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.dp-spec-lbl { font-size: 9.5px; color: var(--tx-dim); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 3px; }
+.dp-spec-val { font-size: 13px; font-weight: 600; color: var(--tx); }
+.dp-desc {
+  background: var(--bg-card);
+  border: 1px solid var(--bdr);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--tx-2);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.dp-subsys { margin-bottom: 14px; }
+.dp-subsys-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  padding: 8px 0 6px;
+  border-bottom: 1px solid var(--bdr);
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.dp-subsys ul { padding-left: 0; list-style: none; }
+.dp-subsys li {
+  padding: 5px 0 5px 16px;
+  position: relative;
+  font-size: 12px;
+  color: var(--tx-2);
+  border-bottom: 1px solid var(--bdr);
+  line-height: 1.5;
+}
+.dp-subsys li:last-child { border-bottom: none; }
+.dp-subsys li::before {
+  content: '›';
+  position: absolute;
+  left: 2px;
+  color: var(--accent);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.dp-mat-block { margin-bottom: 14px; }
+.dp-mat-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--tx);
+  background: var(--bg-raised);
+  padding: 8px 12px;
+  border-radius: 7px 7px 0 0;
+  border: 1px solid var(--bdr);
+  border-bottom: none;
+}
+.dp-mat-list {
+  background: var(--bg-card);
+  border: 1px solid var(--bdr);
+  border-radius: 0 0 7px 7px;
+  overflow: hidden;
+}
+.dp-mat-item {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--bdr);
+  font-size: 12px;
+  color: var(--tx-2);
+  line-height: 1.5;
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.dp-mat-item:last-child { border-bottom: none; }
+.dp-mat-item::before { content: '◈'; color: var(--accent); font-size: 10px; margin-top: 2px; flex-shrink: 0; }
+
+.dp-prose-block {
+  background: var(--bg-card);
+  border: 1px solid var(--bdr);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+.dp-prose-title { font-size: 11.5px; font-weight: 700; color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.dp-prose-title i { font-size: 13px; }
+.dp-prose-body { font-size: 12.5px; color: var(--tx-2); line-height: 1.8; }
+
+.dp-sc-tier {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--bdr);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.dp-sc-label {
+  width: 90px;
+  min-width: 90px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding-top: 2px;
+}
+.dp-sc-content { font-size: 12.5px; color: var(--tx-2); line-height: 1.7; }
+
+/* ─── SCHEMA ───────────────────────────────────────────── */
+.schema-block {
+  background: var(--bg-card);
+  border: 1px solid var(--bdr);
+  border-radius: 8px;
+  padding: 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.9;
+  color: var(--tx-2);
+  overflow-x: auto;
+  white-space: pre;
+  tab-size: 2;
+}
+.sk { color: #60a5fa; }
+.st { color: #fb923c; }
+.sc { color: var(--tx-dim); }
+.sn { color: #a78bfa; }
+
+/* ─── NO-DETAIL PLACEHOLDER ────────────────────────────── */
+.no-detail-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 30px;
+  text-align: center;
+  gap: 12px;
+}
+.no-detail-placeholder i { font-size: 48px; color: var(--tx-dim); }
+.no-detail-placeholder h3 { font-size: 16px; color: var(--tx-2); }
+.no-detail-placeholder p  { font-size: 13px; color: var(--tx-3); max-width: 380px; line-height: 1.7; }
+.ask-ai-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 20px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--ease);
+  font-family: var(--font);
+  margin-top: 4px;
+}
+.ask-ai-btn:hover { background: var(--accent); color: #000; }
+
+/* ─── SECTION NAV HIGHLIGHT BAR ────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin-bottom: 20px;
+  opacity: .3;
+}
+
+/* ─── COMPANY CARD ─────────────────────────────────────── */
+.co-card {
+  background: var(--bg-card);
+  border: 1px solid var(--bdr);
+  border-radius: 12px;
+  padding: 16px;
+  transition: border-color var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.co-card:hover { border-color: var(--bdr-strong); }
+.co-name { font-size: 13.5px; font-weight: 700; color: var(--tx); }
+.co-meta { font-size: 11.5px; color: var(--tx-3); }
+.co-focus { font-size: 12px; color: var(--tx-2); line-height: 1.6; }
+.co-details { font-size: 11.5px; color: var(--tx-3); line-height: 1.7; }
+
+/* ─── MFG ITEM ─────────────────────────────────────────── */
+.mfg-card {
+  background: var(--bg-card);
+  border: 1px solid var(--bdr);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color var(--ease);
+}
+.mfg-card:hover { border-color: var(--bdr-strong); }
+.mfg-header {
+  padding: 12px 14px;
+  background: var(--bg-raised);
+  border-bottom: 1px solid var(--bdr);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tx);
+  display: flex; align-items: center; gap: 8px;
+}
+.mfg-header i { color: var(--accent); }
+.mfg-list { padding: 0; }
+.mfg-item {
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--bdr);
+  font-size: 12px;
+  color: var(--tx-2);
+  display: flex;
+  gap: 10px;
+  line-height: 1.5;
+}
+.mfg-item:last-child { border-bottom: none; }
+.mfg-item::before { content: '›'; color: var(--accent); flex-shrink: 0; font-size: 14px; }
+
+/* ─── RISK BAR ─────────────────────────────────────────── */
+.risk-bar {
+  height: 4px;
+  border-radius: 2px;
+  margin-top: 8px;
+}
+.risk-high   { background: var(--red); }
+.risk-medium { background: var(--amber); }
+.risk-low    { background: var(--green); }
+
+/* ─── RESPONSIVE PATCHES ───────────────────────────────── */
+@media (max-width: 900px) {
+  #sidebar { width: 44px; min-width: 44px; }
+  .nav-item span, .nav-grp-label, .sb-logo-name, .sb-logo-ver, .sb-logo { display: none; }
+  .nav-badge { display: none; }
+  #dp { max-width: 100vw; }
+}
 </style>
 </head>
 <body>
-<div class="platform">
-<div class="sidebar">
-  <div class="sidebar-logo">
-    <div class="sl-icon"><i class="ti ti-shield-bolt"></i></div>
-    <div><div class="sl-text">AeroIntel DB</div><div class="sl-sub">v2.0 · 600+ Platforms</div></div>
-  </div>
-  <div class="nav-section">
-    <div class="nav-label">Core Modules</div>
-    <div class="nav-item active" onclick="showSec('vehicles')"><i class="ti ti-plane"></i>Vehicle Master</div>
-    <div class="nav-item" onclick="showSec('wbs')"><i class="ti ti-sitemap"></i>System WBS</div>
-    <div class="nav-item" onclick="showSec('components')"><i class="ti ti-components"></i>Component DB</div>
-    <div class="nav-item" onclick="showSec('materials')"><i class="ti ti-atom"></i>Materials Engineering</div>
-    <div class="nav-item" onclick="showSec('mfg')"><i class="ti ti-settings-2"></i>Manufacturing</div>
-  </div>
-  <div class="nav-section">
-    <div class="nav-label">Technical</div>
-    <div class="nav-item" onclick="showSec('propulsion')"><i class="ti ti-flame"></i>Propulsion Systems</div>
-    <div class="nav-item" onclick="showSec('electronics')"><i class="ti ti-cpu"></i>Electronics & Embedded</div>
-    <div class="nav-item" onclick="showSec('software')"><i class="ti ti-code"></i>Software Stack</div>
-  </div>
-  <div class="nav-section">
-    <div class="nav-label">Ecosystem</div>
-    <div class="nav-item" onclick="showSec('india')"><i class="ti ti-building-factory-2"></i>India Ecosystem</div>
-    <div class="nav-item" onclick="showSec('imports')"><i class="ti ti-arrows-exchange"></i>Import Dependency</div>
-    <div class="nav-item" onclick="showSec('supply')"><i class="ti ti-network"></i>Supply Chain</div>
-    <div class="nav-item" onclick="showSec('erp')"><i class="ti ti-database"></i>ERP Schema</div>
-  </div>
-  <div class="nav-section">
-    <div class="nav-label">Intelligence</div>
-    <div class="nav-item" onclick="showSec('ai')"><i class="ti ti-brain"></i>AI Query Engine</div>
-  </div>
-</div>
+<!-- ═══════════════════ APP STRUCTURE ═══════════════════ -->
+<div id="app">
 
-<div class="main">
-<div class="topbar">
-  <span class="topbar-title" id="topbar-title">Vehicle Master Database</span>
-  <div class="search-wrap">
-    <i class="ti ti-search" style="font-size:13px;color:var(--text3)"></i>
-    <input type="text" placeholder="Search 600+ platforms..." id="gsearch" oninput="gFilter(this.value)">
-  </div>
-  <button class="ai-btn" onclick="showSec('ai')"><i class="ti ti-sparkles"></i>AI Query</button>
-</div>
-<div class="content" id="mainContent">
-<div id="sec-vehicles">
-<div class="sec-hdr"><h2>Vehicle Master Database</h2><p>Complete inventory of 600+ aerospace, defence, UAV, space, commercial, and autonomous platforms — click any row for full detail sheet</p></div>
-<div class="stats-row">
-  <div class="stat-card"><div class="stat-label">Total Platforms</div><div class="stat-val" style="color:var(--accent)">612</div><div class="stat-sub">Across 18 categories</div></div>
-  <div class="stat-card"><div class="stat-label">Indian Programmes</div><div class="stat-val" style="color:#4ade80">147</div><div class="stat-sub">Indigenous + JV + licence</div></div>
-  <div class="stat-card"><div class="stat-label">With Full Detail Sheet</div><div class="stat-val" style="color:#f59e0b">7</div><div class="stat-sub">WBS + materials + supply chain</div></div>
-  <div class="stat-card"><div class="stat-label">Categories</div><div class="stat-val" style="color:#c084fc">18</div><div class="stat-sub">Vehicle types</div></div>
-</div>
-<div class="filter-row" id="vFilters">
-  <button class="fbtn active" onclick="fVehicles('All',this)">All</button>
-  <button class="fbtn" onclick="fVehicles('Fighter',this)">Fighter</button>
-  <button class="fbtn" onclick="fVehicles('Trainer',this)">Trainer</button>
-  <button class="fbtn" onclick="fVehicles('Transport',this)">Transport</button>
-  <button class="fbtn" onclick="fVehicles('Helicopter',this)">Helicopter</button>
-  <button class="fbtn" onclick="fVehicles('Naval Aircraft',this)">Naval</button>
-  <button class="fbtn" onclick="fVehicles('Surveillance/AEW',this)">AEW/Surv</button>
-  <button class="fbtn" onclick="fVehicles('UAV',this)">UAV/Drone</button>
-  <button class="fbtn" onclick="fVehicles('Loitering Munition',this)">Loitering Mun</button>
-  <button class="fbtn" onclick="fVehicles('Missile',this)">Missile</button>
-  <button class="fbtn" onclick="fVehicles('Satellite/Space',this)">Satellite/Space</button>
-  <button class="fbtn" onclick="fVehicles('Commercial',this)">Commercial</button>
-  <button class="fbtn" onclick="fVehicles('Cargo',this)">Cargo</button>
-  <button class="fbtn" onclick="fVehicles('Business Jet',this)">Biz Jet</button>
-  <button class="fbtn" onclick="fVehicles('eVTOL',this)">eVTOL</button>
-  <button class="fbtn" onclick="fVehicles('Ground Vehicle',this)">Ground</button>
-</div>
-<div class="card"><div class="tbl-wrap">
-<table id="vTable">
-<thead><tr><th>Platform</th><th>Category</th><th>Origin</th><th>Manufacturer</th><th>Status</th><th>MTOW</th><th>Range</th><th>Speed</th><th>Operators</th><th>Detail</th></tr></thead>
-<tbody id="vTbody"></tbody>
-</table></div></div>
-</div>
-<div id="sec-wbs" style="display:none">
-<div class="sec-hdr"><h2>System Work Breakdown Structure</h2><p>Complete subsystem hierarchies — click platforms with detail sheets for full WBS</p></div>
-<div class="filter-row">
-  <button class="fbtn active" onclick="fWBS('LCA',this)">LCA Tejas Mk1A</button>
-  <button class="fbtn" onclick="fWBS('AMCA',this)">AMCA</button>
-  <button class="fbtn" onclick="fWBS('ALH',this)">ALH Dhruv</button>
-  <button class="fbtn" onclick="fWBS('Rafale',this)">Rafale EH</button>
-  <button class="fbtn" onclick="fWBS('Su30',this)">Su-30MKI</button>
-  <button class="fbtn" onclick="fWBS('BrahMos',this)">BrahMos</button>
-  <button class="fbtn" onclick="fWBS('PSLV',this)">PSLV-XL</button>
-</div>
-<div id="wbsContent"></div>
-</div>
-<div id="sec-components" style="display:none">
-<div class="sec-hdr"><h2>Component Database</h2><p>Part-level data: materials, suppliers, certifications, export controls</p></div>
-<div class="stats-row">
-  <div class="stat-card"><div class="stat-label">Components</div><div class="stat-val" style="color:var(--accent)">12,480</div><div class="stat-sub">Across all platforms</div></div>
-  <div class="stat-card"><div class="stat-label">Indian Suppliers</div><div class="stat-val" style="color:#4ade80">847</div><div class="stat-sub">Tier 1–3</div></div>
-  <div class="stat-card"><div class="stat-label">Import Dependent</div><div class="stat-val" style="color:#f87171">3,210</div><div class="stat-sub">Foreign sourced</div></div>
-  <div class="stat-card"><div class="stat-label">ITAR Restricted</div><div class="stat-val" style="color:#c084fc">1,890</div><div class="stat-sub">Export controlled</div></div>
-</div>
-<div class="card"><div class="tbl-wrap"><table>
-<thead><tr><th>Component</th><th>Part No.</th><th>Material</th><th>Supplier</th><th>Country</th><th>Certification</th><th>Grade</th></tr></thead>
-<tbody id="compTbody"></tbody>
-</table></div></div>
-</div>
-
-<div id="sec-materials" style="display:none">
-<div class="sec-hdr"><h2>Materials Engineering Database</h2><p>Metals, composites, polymers, ceramics — mechanical properties, grades, suppliers</p></div>
-<div class="filter-row">
-  <button class="fbtn active" onclick="fMat('All',this)">All</button>
-  <button class="fbtn" onclick="fMat('Metal',this)">Metals</button>
-  <button class="fbtn" onclick="fMat('Composite',this)">Composites</button>
-  <button class="fbtn" onclick="fMat('Polymer',this)">Polymers</button>
-  <button class="fbtn" onclick="fMat('Ceramic',this)">Ceramics</button>
-</div>
-<div class="card"><div class="tbl-wrap"><table>
-<thead><tr><th>Material</th><th>Type</th><th>Grade</th><th>UTS (MPa)</th><th>Density</th><th>Temp Range</th><th>Application</th><th>Key Suppliers</th></tr></thead>
-<tbody id="matTbody"></tbody>
-</table></div></div>
-</div>
-
-<div id="sec-mfg" style="display:none">
-<div class="sec-hdr"><h2>Manufacturing Process Database</h2><p>Sheet metal, composites, CNC machining, additive, joining, NDT processes</p></div>
-<div id="mfgContent"></div>
-</div>
-
-<div id="sec-propulsion" style="display:none">
-<div class="sec-hdr"><h2>Propulsion Systems Database</h2><p>Turbofans, turboshafts, ramjets, liquid/solid rockets — complete specification database</p></div>
-<div class="card"><div class="tbl-wrap"><table>
-<thead><tr><th>Engine</th><th>Manufacturer</th><th>Type</th><th>Thrust/Power</th><th>SFC</th><th>Weight</th><th>TBO (hrs)</th><th>Applications</th><th>Status</th></tr></thead>
-<tbody id="propTbody"></tbody>
-</table></div></div>
-</div>
-
-<div id="sec-electronics" style="display:none">
-<div class="sec-hdr"><h2>Electronics & Embedded Systems</h2><p>Processors, FPGAs, sensors, RTOS, data buses — aerospace & defence grade</p></div>
-<div id="elecContent"></div>
-</div>
-
-<div id="sec-software" style="display:none">
-<div class="sec-hdr"><h2>Software Technology Stack</h2><p>CAD/CAE/CFD/PLM/Embedded/AI — by domain with India usage mapping</p></div>
-<div id="swContent"></div>
-</div>
-
-<div id="sec-india" style="display:none">
-<div class="sec-hdr"><h2>India Manufacturing Ecosystem</h2><p>DPSUs, private OEMs, startups — capabilities, revenue, certifications — click for full profile</p></div>
-<div class="stats-row">
-  <div class="stat-card"><div class="stat-label">DPSUs</div><div class="stat-val" style="color:var(--accent)">9</div><div class="stat-sub">Public sector OEMs</div></div>
-  <div class="stat-card"><div class="stat-label">Private OEMs</div><div class="stat-val" style="color:#4ade80">38</div><div class="stat-sub">Tata, L&T, Mahindra…</div></div>
-  <div class="stat-card"><div class="stat-label">MSME Suppliers</div><div class="stat-val" style="color:#f59e0b">1,200+</div><div class="stat-sub">Tier 2/3 base</div></div>
-  <div class="stat-card"><div class="stat-label">Aerospace Startups</div><div class="stat-val" style="color:#c084fc">240+</div><div class="stat-sub">iDEX/IN-SPACe funded</div></div>
-</div>
-<div class="card"><div class="tbl-wrap"><table>
-<thead><tr><th>Company</th><th>Type</th><th>HQ</th><th>Revenue</th><th>Employees</th><th>Key Capabilities</th><th>Key Customers</th><th>Certs</th></tr></thead>
-<tbody id="indiaTbody"></tbody>
-</table></div></div>
-</div>
-
-<div id="sec-imports" style="display:none">
-<div class="sec-hdr"><h2>Import Dependency Analysis</h2><p>Critical foreign dependencies, technology gaps, indigenisation roadmap</p></div>
-<div id="importsContent"></div>
-</div>
-
-<div id="sec-supply" style="display:none">
-<div class="sec-hdr"><h2>Supply Chain & Investors</h2><p>OEM → Tier 1 → Tier 2 → Tier 3 mapping + investment landscape</p></div>
-<div id="supplyContent"></div>
-</div>
-
-<div id="sec-erp" style="display:none">
-<div class="sec-hdr"><h2>ERP Database Schema</h2><p>SQL DDL, ER relationships, JSON API — production-ready aerospace ERP schema</p></div>
-<div id="erpContent"></div>
-</div>
-
-<div id="sec-ai" style="display:none">
-<div class="sec-hdr"><h2>AI Intelligence Query Engine</h2><p>Powered by Claude — ask anything about platforms, engines, materials, suppliers, technologies</p></div>
-<div class="ai-panel">
-  <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-    <i class="ti ti-brain" style="font-size:16px;color:var(--accent)"></i>
-    <span style="font-size:13px;font-weight:500">AeroIntel AI</span>
-    <span class="pill p-green">Live</span>
-    <span style="font-size:10px;color:var(--text3);margin-left:4px">Powered by Claude claude-sonnet-4-6</span>
-  </div>
-  <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px">
-    <button class="fbtn2" onclick="setQ('What Indian fighter aircraft programmes are active in 2025?')">Indian fighters</button>
-    <button class="fbtn2" onclick="setQ('List all DRDO UAV programmes with current status')">DRDO UAVs</button>
-    <button class="fbtn2" onclick="setQ('Compare AMCA vs Rafale technical specifications')">AMCA vs Rafale</button>
-    <button class="fbtn2" onclick="setQ('What is the WBS for LCA Tejas Mk1A?')">Tejas WBS</button>
-    <button class="fbtn2" onclick="setQ('What materials are used in India aerospace composites manufacturing?')">India composites</button>
-    <button class="fbtn2" onclick="setQ('List all ISRO launch vehicles and payload capacities')">ISRO rockets</button>
-    <button class="fbtn2" onclick="setQ('What is the supply chain for BrahMos missile?')">BrahMos SC</button>
-    <button class="fbtn2" onclick="setQ('Indian eVTOL startups overview')">India eVTOL</button>
-    <button class="fbtn2" onclick="setQ('What is the import dependency for IAF fleet?')">IAF imports</button>
-    <button class="fbtn2" onclick="setQ('Top 10 defence startups in India 2024-25')">Defence startups</button>
-  </div>
-  <div class="ai-input-row">
-    <input type="text" id="aiQ" placeholder="Ask about any vehicle, engine, material, supplier, technology..." onkeydown="if(event.key==='Enter')doAI()">
-    <button onclick="doAI()"><i class="ti ti-send"></i> Ask</button>
-  </div>
-  <div id="aiResp" class="ai-response"></div>
-</div>
-<div class="card">
-  <div class="card-hdr"><h3><i class="ti ti-history"></i>Recent Queries</h3></div>
-  <div class="card-body" id="qHistory" style="font-size:11.5px;color:var(--text2);min-height:50px">No queries yet.</div>
-</div>
-</div>
-
-</div><!-- /content -->
-</div><!-- /main -->
-</div><!-- /platform -->
-<div id="detailOverlay" class="detail-overlay" onclick="closeDetailOnBg(event)">
-  <div class="detail-panel" id="detailPanel">
-    <div class="dp-hdr">
-      <div style="flex:1">
-        <div class="dp-id" id="dp-id"></div>
-        <div class="dp-name" id="dp-name"></div>
-        <div class="dp-sub" id="dp-sub"></div>
-      </div>
-      <span id="dp-catpill"></span>
-      <button class="dp-close" onclick="closeDetail()">&times;</button>
+<!-- ── SIDEBAR ── -->
+<nav id="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-icon"><i class="ti ti-shield-bolt"></i></div>
+    <div>
+      <div class="sb-logo-name">AeroIntel DB</div>
+      <div class="sb-logo-ver">v3.0 · 600+ Platforms</div>
     </div>
-    <div class="dp-tabs" id="dp-tabs"></div>
-    <div class="dp-body" id="dp-body"></div>
+  </div>
+
+  <div class="nav-grp">
+    <div class="nav-grp-label">Core</div>
+    <div class="nav-item active" id="nav-vehicles" onclick="showSec('vehicles',this,'ti-plane','Vehicle Master','600+ platforms across 18 categories')">
+      <i class="ti ti-plane"></i><span>Vehicle Master</span><span class="nav-badge">612</span>
+    </div>
+    <div class="nav-item" id="nav-wbs" onclick="showSec('wbs',this,'ti-sitemap','System WBS','Complete work breakdown structures')">
+      <i class="ti ti-sitemap"></i><span>System WBS</span>
+    </div>
+    <div class="nav-item" id="nav-components" onclick="showSec('components',this,'ti-components','Component Database','Part-level data with supplier links')">
+      <i class="ti ti-components"></i><span>Component DB</span>
+    </div>
+    <div class="nav-item" id="nav-materials" onclick="showSec('materials',this,'ti-atom','Materials Engineering','Metals, composites, ceramics, polymers')">
+      <i class="ti ti-atom"></i><span>Materials Eng</span>
+    </div>
+    <div class="nav-item" id="nav-mfg" onclick="showSec('mfg',this,'ti-settings-2','Manufacturing','Process & facility intelligence')">
+      <i class="ti ti-settings-2"></i><span>Manufacturing</span>
+    </div>
+  </div>
+
+  <div class="nav-grp">
+    <div class="nav-grp-label">Technical</div>
+    <div class="nav-item" id="nav-propulsion" onclick="showSec('propulsion',this,'ti-flame','Propulsion Systems','Engines, turbines, rockets, ramjets')">
+      <i class="ti ti-flame"></i><span>Propulsion</span>
+    </div>
+    <div class="nav-item" id="nav-electronics" onclick="showSec('electronics',this,'ti-cpu','Electronics & Embedded','Avionics, FPGA, sensors, RTOS')">
+      <i class="ti ti-cpu"></i><span>Electronics</span>
+    </div>
+    <div class="nav-item" id="nav-software" onclick="showSec('software',this,'ti-code','Software Stacks','CAD, CAE, CFD, PLM, embedded, AI')">
+      <i class="ti ti-code"></i><span>Software Stack</span>
+    </div>
+  </div>
+
+  <div class="nav-grp">
+    <div class="nav-grp-label">Ecosystem</div>
+    <div class="nav-item" id="nav-india" onclick="showSec('india',this,'ti-building-factory-2','India Ecosystem','OEMs, Tier-1/2/3, startups, DPSUs')">
+      <i class="ti ti-building-factory-2"></i><span>India Ecosystem</span>
+    </div>
+    <div class="nav-item" id="nav-imports" onclick="showSec('imports',this,'ti-arrows-exchange','Import Dependency','Critical gaps, indigenisation status')">
+      <i class="ti ti-arrows-exchange"></i><span>Import Dependency</span>
+    </div>
+    <div class="nav-item" id="nav-supply" onclick="showSec('supply',this,'ti-network','Supply Chain','OEM→Tier-1→Tier-2→Tier-3 mapping')">
+      <i class="ti ti-network"></i><span>Supply Chain</span>
+    </div>
+    <div class="nav-item" id="nav-erp" onclick="showSec('erp',this,'ti-database','ERP Schema','Oracle DDL, ER diagram, JSON API')">
+      <i class="ti ti-database"></i><span>ERP Schema</span>
+    </div>
+  </div>
+
+  <div class="nav-grp">
+    <div class="nav-grp-label">Intelligence</div>
+    <div class="nav-item" id="nav-ai" onclick="showSec('ai',this,'ti-brain','AI Query Engine','Ask Claude anything about aerospace')">
+      <i class="ti ti-brain"></i><span>AI Query Engine</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<div id="main">
+
+  <!-- TOPBAR -->
+  <div id="topbar">
+    <div id="topbar-breadcrumb">
+      <div class="breadcrumb-icon" id="tb-icon"><i class="ti ti-plane"></i></div>
+      <div>
+        <div class="breadcrumb-title" id="tb-title">Vehicle Master</div>
+        <span class="breadcrumb-sub" id="tb-sub">600+ platforms across 18 categories</span>
+      </div>
+    </div>
+    <div class="search-box">
+      <i class="ti ti-search"></i>
+      <input type="text" id="gsearch" placeholder="Search platforms, engines, materials…" oninput="gFilter(this.value)">
+    </div>
+    <button class="topbar-btn primary" onclick="showSec('ai',document.getElementById('nav-ai'),'ti-brain','AI Query Engine','')">
+      <i class="ti ti-sparkles"></i>AI Query
+    </button>
+  </div>
+
+  <!-- CONTENT -->
+  <div id="content">
+
+    <!-- ──── VEHICLES ──── -->
+    <div id="sec-vehicles" class="section active"></div>
+
+    <!-- ──── WBS ──── -->
+    <div id="sec-wbs" class="section"></div>
+
+    <!-- ──── COMPONENTS ──── -->
+    <div id="sec-components" class="section"></div>
+
+    <!-- ──── MATERIALS ──── -->
+    <div id="sec-materials" class="section"></div>
+
+    <!-- ──── MFG ──── -->
+    <div id="sec-mfg" class="section"></div>
+
+    <!-- ──── PROPULSION ──── -->
+    <div id="sec-propulsion" class="section"></div>
+
+    <!-- ──── ELECTRONICS ──── -->
+    <div id="sec-electronics" class="section"></div>
+
+    <!-- ──── SOFTWARE ──── -->
+    <div id="sec-software" class="section"></div>
+
+    <!-- ──── INDIA ──── -->
+    <div id="sec-india" class="section"></div>
+
+    <!-- ──── IMPORTS ──── -->
+    <div id="sec-imports" class="section"></div>
+
+    <!-- ──── SUPPLY ──── -->
+    <div id="sec-supply" class="section"></div>
+
+    <!-- ──── ERP ──── -->
+    <div id="sec-erp" class="section"></div>
+
+    <!-- ──── AI ──── -->
+    <div id="sec-ai" class="section"></div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /app -->
+
+<!-- ──── DETAIL OVERLAY (portal panel) ──── -->
+<div id="dp-overlay" onclick="closeDetailOuter(event)">
+  <div id="dp">
+    <div id="dp-header">
+      <div class="dp-icon" id="dp-icon"><i class="ti ti-plane"></i></div>
+      <div class="dp-header-info">
+        <div class="dp-id" id="dp-id">—</div>
+        <div class="dp-name" id="dp-name">Loading…</div>
+        <div class="dp-meta" id="dp-meta"></div>
+      </div>
+      <button class="dp-close" onclick="closeDetail()"><i class="ti ti-x"></i></button>
+    </div>
+    <div id="dp-tabs"></div>
+    <div id="dp-body"></div>
   </div>
 </div>
-<script>
 
+<script>
 const VEHICLES = [
 {id:"IND-F-001",name:"LCA Tejas Mk1A",cat:"Fighter",origin:"India",mfr:"HAL",status:"Production",mtow:"13,500 kg",range:"3,000 km",speed:"Mach 1.8",ops:"IAF",detail:true},
 {id:"IND-F-002",name:"LCA Tejas Mk2",cat:"Fighter",origin:"India",mfr:"HAL / ADA",status:"Development",mtow:"17,500 kg",range:"3,500 km",speed:"Mach 1.8+",ops:"IAF (planned)",detail:false},
@@ -690,358 +1365,896 @@ const INDIA_COMPANIES = [
   {id:"IND-CO-018",name:"Centum Electronics",type:"Tier-3 Electronics",hq:"Bangalore",emp:"600+",rev:"₹340 Cr (FY24)",certs:"AS9100, ITAR, DRDO",products:"Mission computer cards (BEL programmes), PCB assemblies, embedded sub-systems",focus:"High-reliability electronics manufacturing for ISRO, HAL, BEL, DRDO programmes"},
 ];
 
-// ── RENDER & UI FUNCTIONS ─────────────────────────────────────────────────────
-let currentSec = 'vehicles';
-let filterText = '';
 
-function showSec(id) {
-  currentSec = id;
+// ══════════════════════════════════════════════════════════════
+// NAV + SECTION SYSTEM — completely rebuilt
+// ══════════════════════════════════════════════════════════════
+let _activeSec = 'vehicles';
+let _activeNav = null;
+
+function showSec(id, navEl, icon, title, sub) {
+  // deactivate old section
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const navItems = document.querySelectorAll('.nav-item');
-  navItems.forEach(n => { if(n.getAttribute('onclick') && n.getAttribute('onclick').includes("'"+id+"'")) n.classList.add('active'); });
-  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+
+  // activate new
   const sec = document.getElementById('sec-'+id);
   if(sec) sec.classList.add('active');
-  const fns = {vehicles:renderVehicles, components:renderComponents, materials:renderMaterials, propulsion:renderPropulsion, india:renderIndia, mfg:renderMfg, electronics:renderElectronics, software:renderSoftware, imports:renderImports, supply:renderSupply, erp:renderERP, wbs:renderWBS, ai:renderAI};
-  if(fns[id]) fns[id]();
+  if(navEl) navEl.classList.add('active');
+  _activeSec = id;
+
+  // update topbar
+  document.getElementById('tb-icon').innerHTML = `<i class="ti ${icon||'ti-circle'}"></i>`;
+  document.getElementById('tb-title').textContent = title || id;
+  document.getElementById('tb-sub').textContent = sub || '';
+
+  // lazy render
+  const renders = {
+    vehicles:    renderVehicles,
+    wbs:         renderWBS,
+    components:  renderComponents,
+    materials:   renderMaterials,
+    mfg:         renderMfg,
+    propulsion:  renderPropulsion,
+    electronics: renderElectronics,
+    software:    renderSoftware,
+    india:       renderIndia,
+    imports:     renderImports,
+    supply:      renderSupply,
+    erp:         renderERP,
+    ai:          renderAI,
+  };
+  if(renders[id]) renders[id]();
 }
 
-function globalFilter(v) {
-  filterText = v.toLowerCase();
-  if(currentSec === 'vehicles') renderVehicles();
+// ── GLOBAL FILTER ──────────────────────────────────────────
+function gFilter(v) {
+  if(_activeSec === 'vehicles') renderVehicles(v.toLowerCase());
 }
 
-function stPill(s) {
-  const map = {'In Service':'p-green','Development':'p-amber','Operational':'p-green','Test':'p-amber','Production':'p-blue','Certification':'p-blue','Concept':'p-gray','In Service (limited)':'p-green','Mission Complete':'p-purple','Evaluation':'p-cyan'};
-  return `<span class="pill ${map[s]||'p-gray'}">${s}</span>`;
+// ══════════════════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════════════════
+function statusPill(s) {
+  const m = {
+    'In Service':'pill-green','Operational':'pill-green','Production':'pill-blue',
+    'Development':'pill-amber','Design':'pill-amber','Certification':'pill-blue',
+    'Test':'pill-cyan','Evaluation':'pill-cyan','Phasing Out':'pill-red',
+    'Concept':'pill-gray','Mission Complete':'pill-purple','Active':'pill-green',
+  };
+  return `<span class="pill ${m[s]||'pill-gray'}">${s}</span>`;
+}
+function catPill(c) {
+  const m = {
+    Fighter:'pill-red', Trainer:'pill-blue', Transport:'pill-blue',
+    Helicopter:'pill-green', 'Naval Aircraft':'pill-cyan', 'Surveillance/AEW':'pill-purple',
+    UAV:'pill-amber', 'Loitering Munition':'pill-red', Missile:'pill-red',
+    'Satellite/Space':'pill-purple', Commercial:'pill-blue', Cargo:'pill-gray',
+    'Business Jet':'pill-gray', eVTOL:'pill-cyan', 'Ground Vehicle':'pill-amber',
+    'Autonomous Vehicle':'pill-amber',
+  };
+  return `<span class="pill ${m[c]||'pill-gray'}">${c}</span>`;
+}
+function detailPill(d) {
+  return d
+    ? `<span class="pill pill-cyan" style="cursor:pointer">⬡ Full Sheet</span>`
+    : `<span class="pill pill-gray">Basic</span>`;
+}
+function catIcon(c) {
+  const m = {
+    Fighter:'ti-plane', Trainer:'ti-plane', Transport:'ti-plane-tilt',
+    Helicopter:'ti-drone-off', UAV:'ti-drone', 'Loitering Munition':'ti-bomb',
+    Missile:'ti-arrow-guide', 'Satellite/Space':'ti-rocket', Commercial:'ti-plane',
+    Cargo:'ti-package', 'Business Jet':'ti-plane', eVTOL:'ti-propeller',
+    'Ground Vehicle':'ti-military-award', 'Autonomous Vehicle':'ti-robot',
+    'Naval Aircraft':'ti-anchor', 'Surveillance/AEW':'ti-radar',
+  };
+  return m[c] || 'ti-circle';
 }
 
-function renderVehicles() {
-  const cats = ['All',...[...new Set(VEHICLES.map(v=>v.cat))].sort()];
-  const activeCat = window._vCat || 'All';
-  let html = `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
-    ${cats.map(c=>`<button class="filter-btn ${c===activeCat?'active':''}" onclick="window._vCat='${c}';renderVehicles()">${c}</button>`).join('')}
+// ══════════════════════════════════════════════════════════════
+// SECTION RENDERERS
+// ══════════════════════════════════════════════════════════════
+
+// ── VEHICLES ──────────────────────────────────────────────────
+let _vCat = 'All';
+function renderVehicles(search) {
+  if(search === undefined) search = document.getElementById('gsearch')?.value?.toLowerCase() || '';
+  const el = document.getElementById('sec-vehicles');
+
+  // filter
+  const data = VEHICLES.filter(v => {
+    const catOk = _vCat === 'All' || v.cat === _vCat;
+    const txtOk = !search || JSON.stringify(v).toLowerCase().includes(search);
+    return catOk && txtOk;
+  });
+
+  // count by country
+  const indiaCount = VEHICLES.filter(v => v.origin.includes('India')).length;
+  const detailCount = VEHICLES.filter(v => v.detail).length;
+
+  const cats = ['All', ...new Set(VEHICLES.map(v => v.cat))].sort((a,b) => a==='All'?-1:a.localeCompare(b));
+
+  el.innerHTML = `
+  <div class="sec-header">
+    <h2><i class="ti ti-plane"></i>Vehicle Master Database</h2>
+    <p>Click any row to open the full intelligence sheet — WBS, materials, propulsion, electronics, supply chain</p>
   </div>
-  <table class="data-table"><thead><tr><th>ID</th><th>Platform</th><th>Category</th><th>Origin</th><th>Manufacturer</th><th>MTOW</th><th>Range</th><th>Speed</th><th>Operators</th><th>Status</th><th>Detail</th></tr></thead><tbody>`;
-  const filtered = VEHICLES.filter(v => {
-    const cat = activeCat === 'All' || v.cat === activeCat;
-    const txt = !filterText || JSON.stringify(v).toLowerCase().includes(filterText);
-    return cat && txt;
-  });
-  filtered.forEach(v => {
-    html += `<tr onclick="openDetail('${v.id}')" style="cursor:pointer">
-      <td><code>${v.id}</code></td>
-      <td><strong>${v.name}</strong></td>
-      <td>${v.cat}</td>
-      <td>${v.origin}</td>
-      <td>${v.mfr}</td>
-      <td>${v.mtow}</td>
-      <td>${v.range}</td>
-      <td>${v.speed}</td>
-      <td>${v.ops}</td>
-      <td>${stPill(v.status)}</td>
-      <td>${v.detail ? '<span class="pill p-cyan">Full Sheet</span>' : '<span class="pill p-gray">Basic</span>'}</td>
-    </tr>`;
-  });
-  html += `</tbody></table><p style="margin-top:8px;color:var(--text-muted);font-size:12px">${filtered.length} platforms shown</p>`;
-  document.getElementById('sec-vehicles').innerHTML = html;
+
+  <div class="stats-strip">
+    <div class="stat-card" style="--stat-color:#38bdf8">
+      <div class="stat-label">Total Platforms</div>
+      <div class="stat-value">${VEHICLES.length}</div>
+      <div class="stat-sub">Across 18 categories</div>
+    </div>
+    <div class="stat-card" style="--stat-color:#22c55e">
+      <div class="stat-label">Indian Programmes</div>
+      <div class="stat-value">${indiaCount}</div>
+      <div class="stat-sub">Indigenous + JV + licence</div>
+    </div>
+    <div class="stat-card" style="--stat-color:#f59e0b">
+      <div class="stat-label">Full Detail Sheets</div>
+      <div class="stat-value">${detailCount}</div>
+      <div class="stat-sub">WBS + materials + supply chain</div>
+    </div>
+    <div class="stat-card" style="--stat-color:#c084fc">
+      <div class="stat-label">Categories</div>
+      <div class="stat-value">18</div>
+      <div class="stat-sub">Vehicle types indexed</div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <span style="font-size:11px;color:var(--tx-3);margin-right:2px;align-self:center">Filter:</span>
+    ${cats.map(c => `<button class="fbtn ${c===_vCat?'on':''}" onclick="_vCat='${c}';renderVehicles()">${c}</button>`).join('')}
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr>
+        <th>Platform</th><th>ID</th><th>Category</th><th>Origin</th>
+        <th>Manufacturer</th><th>MTOW</th><th>Range</th><th>Speed</th>
+        <th>Operators</th><th>Status</th><th style="text-align:center">Detail</th>
+      </tr></thead>
+      <tbody>
+        ${data.map(v => `
+        <tr onclick="openDetail('${v.id}')">
+          <td><span class="td-name"><i class="ti ${catIcon(v.cat)}" style="color:var(--accent);margin-right:5px;font-size:13px"></i>${v.name}</span></td>
+          <td><span class="td-id">${v.id}</span></td>
+          <td>${catPill(v.cat)}</td>
+          <td style="font-size:11.5px">${v.origin}</td>
+          <td class="td-mfr">${v.mfr}</td>
+          <td style="font-size:11.5px;font-family:var(--mono)">${v.mtow}</td>
+          <td style="font-size:11.5px">${v.range}</td>
+          <td style="font-size:11.5px;font-weight:600">${v.speed}</td>
+          <td class="td-mfr">${v.ops}</td>
+          <td>${statusPill(v.status)}</td>
+          <td style="text-align:center">${detailPill(v.detail)}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:10px;font-size:11.5px;color:var(--tx-dim)">
+    Showing ${data.length} of ${VEHICLES.length} platforms${_vCat!=='All'?' · filtered: '+_vCat:''} · Click any row to open full intelligence sheet
+  </p>`;
 }
 
-function renderComponents() {
-  let html = `<h2 class="sec-title">Component Database</h2>
-  <table class="data-table"><thead><tr><th>ID</th><th>Component</th><th>Platform</th><th>Category</th><th>Material</th><th>Manufacturer</th><th>Lead Time</th><th>Unit Cost</th><th>Status</th></tr></thead><tbody>`;
-  COMPONENTS.forEach(c => {
-    html += `<tr><td><code>${c.id}</code></td><td><strong>${c.name}</strong></td><td><code>${c.platform}</code></td><td>${c.cat}</td><td>${c.material}</td><td>${c.mfr}</td><td>${c.lead}</td><td>${c.unit}</td><td>${stPill(c.status)}</td></tr>`;
-  });
-  html += `</tbody></table>`;
-  document.getElementById('sec-components').innerHTML = html;
-}
-
-function renderMaterials() {
-  let html = `<h2 class="sec-title">Materials Engineering Database</h2>
-  <table class="data-table"><thead><tr><th>ID</th><th>Material</th><th>Type</th><th>UTS</th><th>Density</th><th>Max Temp</th><th>Aerospace Uses</th><th>India Supply</th></tr></thead><tbody>`;
-  MATERIALS.forEach(m => {
-    html += `<tr><td><code>${m.id}</code></td><td><strong>${m.name}</strong></td><td>${m.cat}</td><td>${m.uts}</td><td>${m.density||'-'}</td><td>${m.temp}</td><td>${m.uses}</td><td>${m.source}</td></tr>`;
-  });
-  html += `</tbody></table>`;
-  document.getElementById('sec-materials').innerHTML = html;
-}
-
-function renderPropulsion() {
-  let html = `<h2 class="sec-title">Propulsion Systems Database</h2>
-  <table class="data-table"><thead><tr><th>ID</th><th>Engine</th><th>Platform</th><th>Type</th><th>Origin</th><th>Thrust/Power (dry)</th><th>Thrust (wet)</th><th>Bypass</th><th>TBO</th><th>FADEC</th><th>India Mfr</th></tr></thead><tbody>`;
-  PROPULSION.forEach(p => {
-    html += `<tr><td><code>${p.id}</code></td><td><strong>${p.name}</strong></td><td>${p.platform}</td><td>${p.type}</td><td>${p.origin}</td><td>${p.thrust_dry}</td><td>${p.thrust_wet||'-'}</td><td>${p.bypass}</td><td>${p.tbo}</td><td>${p.fadec}</td><td>${p.mfr_india}</td></tr>`;
-  });
-  html += `</tbody></table>`;
-  document.getElementById('sec-propulsion').innerHTML = html;
-}
-
-function renderIndia() {
-  let html = `<h2 class="sec-title">India Aerospace Ecosystem</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:16px;margin-top:16px">`;
-  INDIA_COMPANIES.forEach(c => {
-    html += `<div class="card"><div class="card-header"><div><div class="card-title">${c.name}</div><div class="card-sub">${c.type} · ${c.hq}</div></div><span class="pill p-blue">${c.emp} emp</span></div>
-    <div style="margin:10px 0;font-size:13px;color:var(--text-secondary)">${c.focus}</div>
-    <div style="font-size:12px;color:var(--text-muted)"><strong>Revenue:</strong> ${c.rev}<br><strong>Products:</strong> ${c.products}<br><strong>Certs:</strong> ${c.certs}</div>
-    </div>`;
-  });
-  html += `</div>`;
-  document.getElementById('sec-india').innerHTML = html;
-}
-
-function renderMfg() {
-  let html = `<h2 class="sec-title">Manufacturing Intelligence</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:16px;margin-top:16px">`;
-  const mfgData = [
-    {title:"HAL Composites Division — Bangalore",items:["Automated Fibre Placement (AFP) — CFRP wing panels, fin structures","Autoclave: 5m × 12m at 180°C/7 bar — largest in India","Filament winding: pressure vessels, rocket nozzles","RTM for complex geometry weapon bays","CFRP machining: 5-axis Starrag/Forest-Liné","Inspection: Ultrasonic C-scan, X-ray RT, PAUT"]},
-    {title:"HAL Koraput — Engine Factory",items:["EJ200 turbofan licence assembly (in progress)","AL-31FP TVC engine overhaul + limited manufacture","Shakti (TM333) turboshaft full manufacture","Kaveri development support manufacturing","5-axis CNC for Ni-superalloy turbine blades","Electron beam welding (EBW) for engine discs"]},
-    {title:"ISRO SDSC SHAR — Sriharikota",items:["Solid motor propellant casting (vertical, 139T S1 motor)","Maraging steel casing rolling + EB welding","2 launch pads (First Launch Pad + Second Launch Pad)","Vehicle Assembly Building (height 98m)","Propellant storage: UDMH + N₂O₄ complexes","Mission Control, Telemetry Receiving Station"]},
-    {title:"ISRO LPSC — Thiruvananthapuram",items:["Vikas liquid engine: Inconel CNC machining + brazing","CE-20 cryogenic engine development + manufacture","Turbopump assembly clean room","Propellant (UDMH, MMH, MON-3) handling facility","Engine test facility (sea-level + altitude simulation)","SCCE (Semi-Cryogenic Engine) development test stand"]},
-    {title:"BrahMos Aerospace — Hyderabad + Thiruvananthapuram",items:["Titanium precision casting (lost-wax process)","5-axis CNC: Ti airframe machining","Ramjet assembly: fuel system integration, leak test","Solid booster integration (DRDO HEMRL propellant)","Final missile integration + acceptance test","Air-launch integration with Su-30MKI at HAL Nasik"]},
-    {title:"Walchandnagar Industries — Satara",items:["ISRO PSLV casing fabrication (Stage 1 maraging steel)","Large diameter ring forging (up to 5m dia)","Pressure vessel fabrication — ASME VIII Div.2","LVM3 structural machining","Indigenous CNC turning: 6m dia capacity","Key ISRO sole-source vendor since 1970s"]},
-  ];
-  mfgData.forEach(m => {
-    html += `<div class="card"><div class="card-title" style="margin-bottom:12px">${m.title}</div><ul style="margin:0;padding-left:18px;color:var(--text-secondary);font-size:13px;line-height:1.7">${m.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
-  });
-  html += `</div>`;
-  document.getElementById('sec-mfg').innerHTML = html;
-}
-
-function renderElectronics() {
-  let html = `<h2 class="sec-title">Electronics & Embedded Systems</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:16px;margin-top:16px">`;
-  const elData = [
-    {title:"AESA Radar Technology (India)",items:["Uttam AESA (BEL/LRDE): 780+ GaN T/R modules; X-band; 100+ km range; SAR/MTI/ECCM; mounted LCA Tejas Mk1A","GaN-on-SiC MMIC chips: BEL Hyderabad + DRDO GAETEC (Hyderabad) — first Indian GaN T/R module production","Arudhra — Ground-based AESA for AAD missile system (DRDO LRDE)","UTTAM vs EL/M-2032: AESA gives 30% better track-while-scan, LPI waveforms, faster beam steering"]},
-    {title:"Electronic Warfare Systems",items:["Tarang RWR (BEL): 2–18 GHz, 64-threat library, instantaneous AoA","DRDO Mayavi ASPJ: noise + deceptive jamming, 100W ERP, forward/aft antennas","SAP-518 Sorbtsiya (Russian): wingtip pods on Su-30MKI; active noise jamming","CMDS upgrade (HAL/BEL): smart chaff/flare; triggered by Tarang + MAWS","Kaveri programme EW tech transfer lessons applied to domestic Mayavi design"]},
-    {title:"Mission Computers & FCS",items:["DARE Mission Computer (Tejas): VxWorks RTOS; 1553B MIL bus; quad-redundant voting","Digital FBW (HAL/Safran): Ada language; gain-scheduled PID; DO-178B Level A","BrahMos guidance computer: DSP-based; Ring Laser Gyro INS (ISRO IISU); GPS/GLONASS/NavIC","Rafale MDPU: sensor fusion (RBE2+OSF+SPECTRA); single tactical picture; 1,553 bus","ISRO OBCM: 32-bit DSP; FOG INS; dual redundant; 6-DOF trajectory propagation"]},
-    {title:"India Indigenous Electronics Ecosystem",items:["BEL Hyderabad: Uttam AESA, RAWL-02 naval radar, Lynx fire control, L-70 AAG upgrade","DRDO LRDE Chennai: radar design (AESA), ground surveillance, naval radar","DRDO DARE Bangalore: mission computer SW, EW system SW","Alpha Design Technologies: EW integration, ELINT stations, drone defeat systems","Centum Electronics: PCB, mission computer cards for ISRO/HAL/BEL","Paras Defence: EO-IRST sensors, space optics — listed BSE/NSE"]},
-  ];
-  elData.forEach(e => {
-    html += `<div class="card"><div class="card-title" style="margin-bottom:12px">${e.title}</div><ul style="margin:0;padding-left:18px;color:var(--text-secondary);font-size:13px;line-height:1.7">${e.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
-  });
-  html += `</div>`;
-  document.getElementById('sec-electronics').innerHTML = html;
-}
-
-function renderSoftware() {
-  let html = `<h2 class="sec-title">Software Stacks — Aerospace & Defence</h2>
-  <table class="data-table"><thead><tr><th>Domain</th><th>Tools / Frameworks</th><th>Std / Cert</th><th>India Context</th></tr></thead><tbody>`;
-  const swData = [
-    ["Flight Control SW","Ada, SCADE Suite (Esterel), VxWorks RTOS, AUTOSAR, Simulink MBD","DO-178C Level A, EN 9001","DARE Bangalore (LCA FBW); Safran ToT for FCS"],
-    ["Structural Analysis (FEA)","NASTRAN, ANSYS Mechanical, ABAQUS, HyperWorks, MSC Patran","FAR/CS 25 loads","HAL, NAL, ADA — NASTRAN primary; ANSYS at IITs for R&D"],
-    ["Aerodynamic CFD","ANSYS Fluent, Star-CCM+, OpenFOAM, OVERFLOW (NASA), SU2","AS 9100 process","NAL CSIR: in-house CFD codes + Fluent; VSSC uses in-house 6-DOF + Fluent"],
-    ["CAD / PLM","CATIA V5/V6, SOLIDWORKS, NX Unigraphics, PTC Creo, Pro/E","AS 9100","HAL/ADA: CATIA V5 primary; Dassault Systèmes partnership; ISRO: Pro/ENGINEER + CATIA"],
-    ["EW / Radar SW","MATLAB Signal Processing, Python SciPy, CUDA (GPU DSP), CST Microwave Studio","MIL-STD-810G","DRDO LRDE, BEL: C/C++ + FPGA firmware (Xilinx); GAETEC: GaN chip design (Cadence)"],
-    ["Guidance & Trajectory","MATLAB/Simulink, Python, C (embedded), dSPACE ASM, GVSIM (ISRO)","MIL-STD-1750A","ISRO VSSC: GVSIM (proprietary 6-DOF); BrahMos AE: in-house DSP guidance"],
-    ["Mission Planning","C2/C4ISR: AFNET (IAF), ADGES, TDL-4/Link-16; commercial: SkyVector, Jeppesen","MIL-STD-6016","IAF AFNET: HAL integrated; TDL-4: BEL + DRDO adaptation of Link-16"],
-    ["Embedded / FPGA","C/C++, VHDL/Verilog, Xilinx Vivado, Intel Quartus, FreeRTOS, Zephyr RTOS","DO-254, IEC 61508","BEL: Xilinx + Intel FPGAs; Centum: PCB + firmware; Alpha Design: custom FPGAs"],
-    ["Simulation / Test","dSPACE HIL, Vector CANalyzer, Rhapsody IBM, Python pytest, JTAG","DO-178C, MIL-STD-461","HAL: dSPACE HIL (FBW test); ADA: Iron Bird rigs; ISRO: custom HIL test beds"],
-    ["Structural NDT SW","TOFD, C-scan analysis (UTEX), OmniScan (Olympus), DICONDE PACS","ASTM E2580, EN 4179","HAL Composites: automated C-scan lines; DRDO DMRL: PAUT + 3D CT X-ray"],
-  ];
-  swData.forEach(r => {
-    html += `<tr><td><strong>${r[0]}</strong></td><td style="font-size:12px;font-family:var(--mono)">${r[1]}</td><td><code style="font-size:11px">${r[2]}</code></td><td style="font-size:12px">${r[3]}</td></tr>`;
-  });
-  html += `</tbody></table>`;
-  document.getElementById('sec-software').innerHTML = html;
-}
-
-function renderImports() {
-  let html = `<h2 class="sec-title">Import Dependency Analysis — India Aerospace</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:16px;margin-top:16px">`;
-  const impData = [
-    {title:"Critical Imports — Propulsion (HIGH dependency)",risk:"p-red",items:["EJ200 (Tejas Mk1A): Eurojet — HAL licence not yet operational; ~68 Cr/unit","AL-31FP (Su-30MKI): Saturn Russia; political risk; HAL overhaul only","M88-4E (Rafale): Safran France — no transfer; 100% import","GE T700/CF6/LEAP: GE USA — 100% import; ITAR controlled","Kaveri engine: delayed 20+ years — stopgap imports continue"]},
-    {title:"Critical Imports — CFRP Composites (MEDIUM-HIGH)",risk:"p-amber",items:["Toray T800/M55J (Japan): no India production; strategic dependency","Hexcel 8552 epoxy prepreg (USA/UK): imported for Tejas/AMCA","Autoclave tooling + AFP equipment: imported (Coriolis, MAG, Electroimpact)","CFRP semi-finished: HAL Composites imports 70% of raw prepreg","India initiative: CSIR-NCL + HAL joint CFRP prepreg project (early stage)"]},
-    {title:"Critical Imports — Electronics (MEDIUM-HIGH)",risk:"p-amber",items:["GaN-on-SiC wafers: II-VI / Wolfspeed USA (ITAR) — GAETEC imports base wafers","EL/M-2032 radar (IAI Israel): legacy Tejas Mk1 — replaced by Uttam","Thales RBE2 AESA (France): Rafale — no ToT on radar","Martin Baker ejection seats: UK — sole source, ~5 Cr/seat","Xilinx/Intel FPGAs: USA — critical avionics dependency; no Indian equivalent"]},
-    {title:"Reducing Dependency (LOW-MEDIUM, improving)",risk:"p-blue",items:["Shakti engine: HAL Koraput now full manufacture (Safran ToT complete)","Uttam AESA: BEL Hyderabad GaN T/R module line operational 2023","Maraging Steel 250: MIDHANI — indigenised, exports to Russia","PSLV motor casings: Walchandnagar, MIDHANI — 100% indigenous","BrahMos airframe + ramjet: 70%+ indigenisation (target 85% by 2025)","MRSAM (Barak-8): BDL manufacture increasing; IAI gradually transferring technology"]},
-  ];
-  impData.forEach(d => {
-    html += `<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div class="card-title">${d.title}</div><span class="pill ${d.risk}">Risk</span></div><ul style="margin:0;padding-left:18px;color:var(--text-secondary);font-size:13px;line-height:1.8">${d.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
-  });
-  html += `</div>`;
-  document.getElementById('sec-imports').innerHTML = html;
-}
-
-function renderSupply() {
-  let html = `<h2 class="sec-title">Supply Chain Intelligence</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:16px;margin-top:16px">`;
-  const scData = [
-    {title:"LCA Tejas Mk1A — Supply Chain Structure",items:["OEM: HAL Aircraft Division (prime, design authority ADA)","Engine: Eurojet / HAL Koraput (EJ200 licence)","Radar: BEL/DRDO LRDE (Uttam AESA)","EW: BEL + DRDO DARE","Composites: HAL Composites Division","Structures Tier-2: Dynamatic Technologies (wing spars), TASL (panels)","Forgings: Bharat Forge (Ti/steel), MIDHANI (alloy supply)","Electronics: Centum Electronics (cards), Paras Defence (EO)","Ejection Seat: Martin Baker UK (import — sole source)","Landing Gear: Safran (France, ToT partially HAL)"]},
-    {title:"PSLV / LVM3 — Supply Chain Structure",items:["System: ISRO VSSC/SDSC (prime)","Engines: ISRO LPSC (Vikas/CE-20)","Solid Motors: ISRO SDSC SHAR","Casings: Walchandnagar Industries, MIDHANI","Structures: ISRO fabrication, L&T (large structures)","Avionics: ISRO SAC (onboard), ISRO IISU (INS/IMU)","Batteries/Power: ISRO SAC, Exide Industries","Electronics: BEL (telemetry, ground systems), ECIL","Valves/Actuators: MTAR Technologies (IPO 2021, key ISRO vendor)","Payloads: ISAC (national), commercial (OneWeb, others)"]},
-    {title:"BrahMos — Supply Chain Structure",items:["JV: BrahMos Aerospace (50.5% India, 49.5% Russia)","Airframe: BrahMos Thiruvananthapuram (Ti casting + machining)","Ramjet: BrahMos AE Hyderabad (with NPO Mashinostroyeniya tech)","Booster: DRDO HEMRL (propellant), BDL (assembly)","Seeker: BEL Hyderabad (active radar seeker)","INS/IMU: ISRO IISU (RLG-based)","Fuze: DRDO ARDE","Integration: BrahMos AE Hyderabad final line","Air-launch pylon: HAL Nasik (Su-30 integration)","Launcher/TEL: L&T Defence, Tata Power SED"]},
-    {title:"Rafale (IAF) — Global Supply Chain",items:["OEM: Dassault Aviation Mérignac (design + final assembly)","Engine: Safran M88-4E (Gennevilliers) — no India ToT","Radar: Thales RBE2-AA AESA (Élancourt)","EW: Thales SPECTRA suite (Élancourt)","Weapons: MBDA (Meteor, MICA, SCALP) — UK/France","Composites raw: Hexcel (USA/UK T800), Constellium (Al-Li)","India offset: TASL (structures), Reliance Defence (limited assembly)","HAL Nasik: last 5 aircraft local integration (limited)","MRO: Air France Industries KLM E&M + HAL agreement","Spare support: 5-year performance-based logistics (PBL) contract Safran/Thales"]},
-  ];
-  scData.forEach(d => {
-    html += `<div class="card"><div class="card-title" style="margin-bottom:12px">${d.title}</div><ul style="margin:0;padding-left:18px;color:var(--text-secondary);font-size:13px;line-height:1.7">${d.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
-  });
-  html += `</div>`;
-  document.getElementById('sec-supply').innerHTML = html;
-}
-
-function renderERP() {
-  let html = `<h2 class="sec-title">ERP / Oracle DDL Schema — AeroIntel DB</h2>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">`;
-  const tables = [
-    {name:"PLATFORMS",cols:["platform_id VARCHAR2(20) PK","platform_name VARCHAR2(200) NOT NULL","category_code VARCHAR2(30)","origin_country VARCHAR2(50)","manufacturer VARCHAR2(200)","status_code VARCHAR2(30)","first_flight_date DATE","in_service_date DATE","mtow_kg NUMBER","range_km NUMBER","max_speed_mach NUMBER","created_by VARCHAR2(100)","created_date TIMESTAMP DEFAULT SYSDATE"]},
-    {name:"PLATFORM_SPECS",cols:["spec_id NUMBER PK","platform_id FK→PLATFORMS","wingspan_m NUMBER","length_m NUMBER","height_m NUMBER","wing_area_sqm NUMBER","service_ceiling_m NUMBER","thrust_weight_ratio NUMBER","internal_fuel_l NUMBER","hardpoints NUMBER","max_payload_kg NUMBER"]},
-    {name:"ENGINES",cols:["engine_id VARCHAR2(20) PK","engine_name VARCHAR2(200)","engine_type VARCHAR2(50)","origin_country VARCHAR2(50)","manufacturer VARCHAR2(200)","thrust_dry_kn NUMBER","thrust_wet_kn NUMBER","bypass_ratio NUMBER","tbo_hours NUMBER","fadec_flag VARCHAR2(1)","india_manufacture_flag VARCHAR2(1)"]},
-    {name:"PLATFORM_ENGINES",cols:["id NUMBER PK","platform_id FK→PLATFORMS","engine_id FK→ENGINES","quantity NUMBER","install_type VARCHAR2(50)","notes VARCHAR2(500)"]},
-    {name:"MATERIALS",cols:["material_id VARCHAR2(20) PK","material_name VARCHAR2(200)","material_category VARCHAR2(50)","uts_mpa NUMBER","yield_mpa NUMBER","density_gcc NUMBER","max_temp_c NUMBER","elastic_mod_gpa NUMBER","uses_desc VARCHAR2(1000)","india_source VARCHAR2(500)"]},
-    {name:"COMPONENTS",cols:["component_id VARCHAR2(20) PK","component_name VARCHAR2(200)","platform_id FK→PLATFORMS","category VARCHAR2(50)","material_id FK→MATERIALS","manufacturer VARCHAR2(200)","lead_time_weeks NUMBER","unit_cost_inr NUMBER","unit_cost_usd NUMBER","status_code VARCHAR2(30)"]},
-    {name:"COMPANIES",cols:["company_id VARCHAR2(20) PK","company_name VARCHAR2(300)","company_type VARCHAR2(50)","hq_city VARCHAR2(100)","hq_state VARCHAR2(100)","employees NUMBER","annual_rev_cr NUMBER","certifications VARCHAR2(500)","primary_products CLOB","focus_area VARCHAR2(1000)"]},
-    {name:"WBS_ELEMENTS",cols:["wbs_id NUMBER PK","platform_id FK→PLATFORMS","level1_code VARCHAR2(10)","level1_name VARCHAR2(200)","level2_code VARCHAR2(10)","level2_name VARCHAR2(500)","level3_code VARCHAR2(10)","level3_name VARCHAR2(500)"]},
-    {name:"SUPPLY_CHAIN",cols:["sc_id NUMBER PK","platform_id FK→PLATFORMS","tier_level VARCHAR2(10)","company_id FK→COMPANIES","supply_role VARCHAR2(200)","component_supplied VARCHAR2(500)","indigenous_flag VARCHAR2(1)","import_country VARCHAR2(50)","risk_level VARCHAR2(20)"]},
-    {name:"IMPORT_RISKS",cols:["risk_id NUMBER PK","platform_id FK→PLATFORMS","component_name VARCHAR2(200)","supplier_country VARCHAR2(50)","risk_level VARCHAR2(20)","risk_reason CLOB","mitigation_plan CLOB","indigenisation_target DATE"]},
-  ];
-  tables.forEach(t => {
-    html += `<div class="card"><div class="card-title" style="font-family:var(--mono);margin-bottom:8px">📋 ${t.name}</div><div style="font-family:var(--mono);font-size:11px;color:var(--text-secondary);line-height:1.8">${t.cols.map(c=>`<div style="padding:2px 0;border-bottom:1px solid var(--border)">${c}</div>`).join('')}</div></div>`;
-  });
-  html += `</div>`;
-  document.getElementById('sec-erp').innerHTML = html;
-}
-
+// ── WBS ──────────────────────────────────────────────────────
+let _wbsPid = 'IND-F-001';
 function renderWBS() {
   const platforms = VEHICLES.filter(v => v.detail);
-  let html = `<h2 class="sec-title">Work Breakdown Structures</h2>
-  <div style="margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap">
-    ${platforms.map(p=>`<button class="filter-btn ${window._wbsPlatform===p.id?'active':''}" onclick="window._wbsPlatform='${p.id}';renderWBS()">${p.name}</button>`).join('')}
+  const el = document.getElementById('sec-wbs');
+  const det = DETAIL_DATA[_wbsPid];
+  const v = VEHICLES.find(x => x.id === _wbsPid);
+
+  el.innerHTML = `
+  <div class="sec-header">
+    <h2><i class="ti ti-sitemap"></i>System Work Breakdown Structure</h2>
+    <p>Complete subsystem hierarchies for platforms with full detail sheets — select platform below</p>
+  </div>
+  <div class="filter-bar">
+    ${platforms.map(p => `<button class="fbtn ${p.id===_wbsPid?'on':''}" onclick="_wbsPid='${p.id}';renderWBS()">${p.name}</button>`).join('')}
+  </div>
+  ${det && det.wbs ? `
+    <div style="margin-bottom:14px;padding:12px 16px;background:var(--bg-card);border:1px solid var(--bdr);border-radius:10px;display:flex;align-items:center;gap:10px">
+      <i class="ti ${catIcon(v?.cat||'Fighter')}" style="font-size:20px;color:var(--accent)"></i>
+      <div>
+        <div style="font-weight:700;font-size:13.5px">${v?.name}</div>
+        <div style="font-size:12px;color:var(--tx-2)">${v?.mfr} · ${v?.origin} · ${statusPill(v?.status||'')}</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      ${Object.entries(det.wbs).map(([sys, items]) => `
+        <div class="dp-subsys" style="background:var(--bg-card);border:1px solid var(--bdr);border-radius:10px;padding:14px">
+          <div class="dp-subsys-title"><i class="ti ti-list-check"></i>${sys}</div>
+          <ul>${items.map(i => `<li>${i}</li>`).join('')}</ul>
+        </div>`).join('')}
+    </div>
+  ` : '<p style="color:var(--tx-3);padding:20px">Select a platform above to view its WBS.</p>'}`;
+}
+
+// ── COMPONENTS ──────────────────────────────────────────────
+function renderComponents() {
+  const el = document.getElementById('sec-components');
+  el.innerHTML = `
+  <div class="sec-header">
+    <h2><i class="ti ti-components"></i>Component Database</h2>
+    <p>Part-level data — materials, lead times, suppliers, cost indicators</p>
+  </div>
+  <div class="stats-strip">
+    <div class="stat-card" style="--stat-color:#38bdf8"><div class="stat-label">Total Components</div><div class="stat-value">12,480</div><div class="stat-sub">All platforms</div></div>
+    <div class="stat-card" style="--stat-color:#22c55e"><div class="stat-label">Indian Suppliers</div><div class="stat-value">847</div><div class="stat-sub">Tier 1–3</div></div>
+    <div class="stat-card" style="--stat-color:#f87171"><div class="stat-label">Import Dependent</div><div class="stat-value">3,210</div><div class="stat-sub">Foreign sourced</div></div>
+    <div class="stat-card" style="--stat-color:#c084fc"><div class="stat-label">ITAR Restricted</div><div class="stat-value">1,890</div><div class="stat-sub">Export controlled</div></div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Component</th><th>Platform</th><th>Category</th><th>Material</th><th>Manufacturer</th><th>Lead Time</th><th>Unit Cost</th><th>Status</th></tr></thead>
+      <tbody>
+        ${COMPONENTS.map(c => `<tr>
+          <td><span class="td-name">${c.name}</span><br><span class="td-id">${c.id}</span></td>
+          <td><span class="td-id">${c.platform}</span></td>
+          <td><span class="pill pill-blue">${c.cat}</span></td>
+          <td style="font-size:11.5px">${c.material}</td>
+          <td class="td-mfr">${c.mfr}</td>
+          <td style="font-family:var(--mono);font-size:11px">${c.lead}</td>
+          <td style="font-weight:600;color:var(--accent);font-family:var(--mono);font-size:11.5px">${c.unit}</td>
+          <td>${statusPill(c.status)}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
   </div>`;
-  const pid = window._wbsPlatform || platforms[0]?.id;
-  if(!window._wbsPlatform) window._wbsPlatform = pid;
-  const det = DETAIL_DATA[pid];
-  if(det && det.wbs) {
-    html += `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:16px">`;
-    Object.entries(det.wbs).forEach(([top, items]) => {
-      html += `<div class="card"><div class="card-title" style="margin-bottom:10px">${top}</div><ul style="margin:0;padding-left:18px;color:var(--text-secondary);font-size:13px;line-height:1.8">${items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
-    });
-    html += `</div>`;
-  }
-  document.getElementById('sec-wbs').innerHTML = html;
 }
 
+// ── MATERIALS ──────────────────────────────────────────────
+let _matCat = 'All';
+function renderMaterials() {
+  const el = document.getElementById('sec-materials');
+  const cats = ['All','Aluminium Alloy','Titanium Alloy','Nickel Superalloy','Steel','Composite','Core Material','Thermoplastic','Ceramic Matrix Composite'];
+  const data = MATERIALS.filter(m => _matCat==='All' || m.cat===_matCat);
+  el.innerHTML = `
+  <div class="sec-header">
+    <h2><i class="ti ti-atom"></i>Materials Engineering Database</h2>
+    <p>Metals, composites, ceramics, polymers — mechanical properties, temperature ratings, suppliers</p>
+  </div>
+  <div class="filter-bar">
+    ${cats.map(c => `<button class="fbtn ${c===_matCat?'on':''}" onclick="_matCat='${c}';renderMaterials()">${c}</button>`).join('')}
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Material</th><th>Type</th><th>UTS (MPa)</th><th>Density</th><th>Max Temp</th><th>Aerospace Applications</th><th>India / Global Suppliers</th></tr></thead>
+      <tbody>
+        ${data.map(m => `<tr>
+          <td><span class="td-name">${m.name}</span><br><span class="td-id">${m.id}</span></td>
+          <td><span class="pill pill-cyan">${m.cat}</span></td>
+          <td style="font-weight:600;font-family:var(--mono)">${m.uts}</td>
+          <td style="font-family:var(--mono);font-size:11.5px">${m.density||m['density']||'—'}</td>
+          <td style="font-family:var(--mono);font-size:11.5px">${m.temp}</td>
+          <td style="font-size:11.5px;color:var(--tx-2)">${m.uses}</td>
+          <td style="font-size:11px;color:var(--tx-3)">${m.source}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+// ── MFG ──────────────────────────────────────────────────────
+function renderMfg() {
+  const el = document.getElementById('sec-mfg');
+  const items = [
+    {icon:'ti-building-factory-2',title:'HAL Composites Division — Bangalore',items:['Automated Fibre Placement (AFP) — CFRP wing panels, fin structures, fuselage skins','Autoclave: 5m × 12m at 180°C/7 bar — largest in India','Filament winding: pressure vessels, rocket motor nozzles','RTM for complex geometry weapon bays and fairings','CFRP CNC machining: 5-axis Starrag/Forest-Liné','Inspection: Ultrasonic C-scan, X-ray RT, PAUT, laser tracker']},
+    {icon:'ti-tools',title:'HAL Koraput — Engine Factory',items:['EJ200 turbofan licence assembly (in progress)','AL-31FP TVC engine overhaul + limited manufacture (Su-30MKI)','Shakti (TM333-2C2H) turboshaft full manufacture','5-axis CNC for Ni-superalloy turbine blades and discs','Electron beam welding (EBW) for engine compressor discs','Turbine blade ceramic coating facility (TBC plasma spray)']},
+    {icon:'ti-rocket',title:'ISRO SDSC SHAR — Sriharikota',items:['Solid motor propellant casting — vertical, 139T S1 motor (HTPB-AP-Al)','Maraging steel 250 casing rolling + EB welding','2 launch pads: First Launch Pad + Second Launch Pad','Vehicle Assembly Building (VAB): 98m height capacity','Propellant storage: UDMH + N₂O₄ separate complexes','Mission Control, Telemetry & Range Safety systems']},
+    {icon:'ti-flame',title:'ISRO LPSC — Thiruvananthapuram',items:['Vikas liquid engine: Inconel CNC machining + regenerative brazing','CE-20 cryogenic engine development + serial production','High-speed turbopump clean-room assembly','Propellant handling: UDMH, MMH, MON-3 cryogenics','Engine sea-level + altitude simulation test stands','Semi-cryogenic engine (SCE-200) test infrastructure']},
+    {icon:'ti-crosshair',title:'BrahMos Aerospace — Hyderabad + TVM',items:['Titanium precision casting (lost-wax / investment casting)','5-axis CNC: Ti airframe body machining','Ramjet sustainer assembly: fuel system, inlet integration','Solid booster integration (DRDO HEMRL propellant cast)','Final missile integration + Factory Acceptance Testing (FAT)','Air-launch integration with Su-30MKI pylon at HAL Nasik']},
+    {icon:'ti-cylinder',title:'Walchandnagar Industries — Satara',items:['ISRO PSLV casing fabrication (Stage 1 maraging steel)','Large diameter ring forging — up to 5m diameter','Pressure vessel fabrication per ASME VIII Div.2','LVM3 structural machining (3.2m dia, 25m length)','CNC turning: 6m diameter capacity; vertical + horizontal boring','Key ISRO sole-source vendor since 1970s, 40+ mission history']},
+    {icon:'ti-atom-2',title:'MIDHANI — Hyderabad',items:['Ti-6Al-4V plate, bar, forging — aerospace grade ELI','Inconel 718 AMS 5662 / 5664 — turbine disc, case forgings','Maraging Steel 250 — ISRO motor casings, DRDO missile bodies','M250/280/300 grades indigenised, export-qualified (Russia, France)','Cobalt alloys, Haynes 282, Waspaloy — engine hot sections','CFRP prepreg development programme with CSIR-NCL']},
+    {icon:'ti-settings',title:'Aequs Aerospace — Belagavi SEZ',items:['Precision CNC machining — Airbus A320/A330 Al alloy details','Boeing 737/787 nacelle and door components','Safran landing gear machined parts','On-site Airbus/Safran quality teams in dedicated SEZ','5-axis machining cells: DMGMORI, Makino, Mazak','AS9100 + NADCAP machining certification; 2,500+ employees']},
+  ];
+  el.innerHTML = `
+  <div class="sec-header">
+    <h2><i class="ti ti-settings-2"></i>Manufacturing Intelligence</h2>
+    <p>Key Indian manufacturing facilities, processes, and capabilities</p>
+  </div>
+  <div class="grid-auto">
+    ${items.map(it => `
+      <div class="mfg-card">
+        <div class="mfg-header"><i class="ti ${it.icon}"></i>${it.title}</div>
+        <div class="mfg-list">
+          ${it.items.map(i => `<div class="mfg-item">${i}</div>`).join('')}
+        </div>
+      </div>`).join('')}
+  </div>`;
+}
+
+// ── PROPULSION ──────────────────────────────────────────────
+function renderPropulsion() {
+  const el = document.getElementById('sec-propulsion');
+  el.innerHTML = `
+  <div class="sec-header">
+    <h2><i class="ti ti-flame"></i>Propulsion Systems Database</h2>
+    <p>Turbofans, turboshafts, liquid/solid rockets, ramjets — complete specification index</p>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Engine</th><th>Type</th><th>Platform</th><th>Origin</th><th>Thrust/Power (dry)</th><th>Thrust (wet)</th><th>Bypass</th><th>TBO</th><th>FADEC</th><th>India Manufacture</th></tr></thead>
+      <tbody>
+        ${PROPULSION.map(p => `<tr>
+          <td><span class="td-name">${p.name}</span><br><span class="td-id">${p.id}</span></td>
+          <td><span class="pill pill-blue">${p.type}</span></td>
+          <td style="font-size:11.5px">${p.platform}</td>
+          <td style="font-size:11.5px">${p.origin}</td>
+          <td style="font-weight:700;color:var(--accent);font-family:var(--mono)">${p.thrust_dry}</td>
+          <td style="font-family:var(--mono);font-size:11.5px">${p.thrust_wet||'—'}</td>
+          <td style="font-family:var(--mono)">${p.bypass}</td>
+          <td style="font-family:var(--mono);font-size:11.5px">${p.tbo}</td>
+          <td style="font-size:11.5px">${p.fadec}</td>
+          <td style="font-size:11.5px;color:${p.mfr_india.startsWith('No')?'var(--red)':'var(--green)'}">${p.mfr_india}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+// ── ELECTRONICS ──────────────────────────────────────────────
+function renderElectronics() {
+  const el = document.getElementById('sec-electronics');
+  const blocks = [
+    {title:'AESA Radar Technology — India',icon:'ti-radar',items:['Uttam AESA (BEL/LRDE): 780+ GaN T/R modules; X-band; 100+ km detection range; SAR/MTI/ECCM; first India-made AESA flying on Tejas Mk1A','GaN-on-SiC MMIC wafers: produced at BEL Hyderabad + DRDO GAETEC — first Indian GaN RF production line (2023)','Arudhra AESA: ground-based for Akash NG / AAD missile command (DRDO LRDE, Chennai)','Uttam vs EL/M-2032: AESA gives 30% better track-while-scan, LPI waveforms, 4× faster beam steering, simultaneous modes']},
+    {title:'Electronic Warfare — India Capabilities',icon:'ti-antenna',items:['Tarang RWR (BEL): 2–18 GHz; 64-threat library; instantaneous angle-of-arrival; on Tejas/Su-30MKI/ALH','Mayavi ASPJ (DRDO DARE): noise + deceptive jamming; 100W ERP; front/rear antennas; flying on Tejas Mk1A','SAP-518 Sorbtsiya (Russian): wingtip pods on Su-30MKI; active noise jamming K through J-band','CMDS upgrade (HAL/BEL): smart chaff/flare; triggered by Tarang + MAWS UV sensors','DRDO Kavach DIRCM (laser dazzle) — helicopter self-protection system under development']},
+    {title:'Mission Computers & Flight Control',icon:'ti-cpu',items:['DARE Mission Computer (Tejas Mk1A): VxWorks DO-178B; quad-redundant 1553B bus; PowerPC 750GX processor','Digital FBW (HAL/Safran): Ada language; gain-scheduled nonlinear PID; quad voting computers; DO-178B Level A','BrahMos GNC Computer: DSP-based; INS (ISRO IISU RLG); GPS/GLONASS/NavIC; DO-178B equivalent','Rafale MDPU: Inmos T805 Transputer array → PowerPC upgrade; sensor fusion (RBE2+OSF+SPECTRA)','ISRO OBCM: 32-bit DSP; 10ms cycle; 6-DOF propagation; dual-redundant; Ada/C on custom RTOS']},
+    {title:'Embedded Platforms & RTOS',icon:'ti-circuit-board',items:['VxWorks 653 (Wind River): ARINC 653 partitioned; Tejas DFCC, avionics; DO-178C DAL-A standard','RTEMS (OAR): open-source; ISRO on-board; ECSS-qualified; C/C++ Ada compatible','FreeRTOS: UAV flight controllers (ideaForge SWITCH, CATS Warrior prototype)','dSPACE MicroAutoBox II: HIL test platform at HAL, NAL, DRDO labs','TI TMS570LC4357: safety MCU for landing gear, fuel management (DO-254 Level A); BEL + DRDO use']},
+    {title:'Key India Electronics Manufacturers',icon:'ti-building',items:['BEL Hyderabad Division: Uttam AESA, RAWL-02 naval radar, L-70 AAG, Lynx fire control, IFF Mk-XII','DRDO LRDE Chennai: AESA radar R&D, SAR radar, ground surveillance radar (Battlefield Surveillance Radar)','Alpha Design Technologies Bangalore: EW integration, ELINT ground stations, counter-drone systems','Paras Defence & Space Thane: EO-IRST cameras, space optics, laser sub-systems — listed NSE/BSE','Centum Electronics Bangalore: PCB assemblies, mission computer cards, satellite sub-systems, ISRO/HAL vendor','ECIL Hyderabad: telemetry, tracking, TT&C systems for ISRO; nuclear + space grade electronics']},
+  ];
+  el.innerHTML = `
+  <div class="sec-header">
+    <h2><i class="ti ti-cpu"></i>Electronics & Embedded Systems</h2>
+    <p>Avionics, EW, mission computers, RTOS, radar — India ecosystem detail</p>
+  </div>
+  <div class="grid-auto">
+    ${blocks.map(b => `
+      <div class="mfg-card">
+        <div class="mfg-header"><i class="ti ${b.icon}"></i>${b.title}</div>
+        <div class="mfg-list">
+          ${b.items.map(i => `<div class="mfg-item">${i}</div>`).join('')}
+        </div>
+      </div>`).join('')}
+  </div>`;
+}
+
+// ── SOFTWARE ──────────────────────────────────────────────────
+function renderSoftware() {
+  const el = document.getElementById('sec-software');
+  const rows = [
+    ['Flight Control','Ada, SCADE Suite, VxWorks 653, RTEMS, Simulink MBD → Embedded Coder','DO-178C Level A','DARE Bangalore (Tejas FBW); Safran ToT for FCS; ADA/C dual-language'],
+    ['Structural FEA','MSC Nastran, ANSYS Mechanical, ABAQUS, HyperWorks, PATRAN','FAR/CS-25, AS 9100 FEA','HAL/ADA: Nastran primary; NAL + IITs: ANSYS; ISRO uses ANSYS + Nastran'],
+    ['Aerodynamic CFD','ANSYS Fluent, Simcenter Star-CCM+, OpenFOAM, SU2 (Stanford)','CFD validation protocol','NAL CSIR: in-house + Fluent; VSSC: 6-DOF Euler + Fluent inlet CFD; DRDL: Star-CCM+'],
+    ['CAD / Modelling','CATIA V5/V6, Siemens NX, PTC Creo, SOLIDWORKS, Pro/ENGINEER','AS 9100','HAL/ADA: CATIA V5 primary (Dassault partnership); ISRO: Pro/E + CATIA; TASL: NX Siemens'],
+    ['PLM / PDM','Siemens Teamcenter, Dassault 3DEXPERIENCE, PTC Windchill, SAP ERP','AS 9100, ISO 9001','HAL: Teamcenter + SAP ERP; ISRO: 3DEXPERIENCE (2023 adoption); ADA: Windchill'],
+    ['EW / Radar Signal','MATLAB Signal Proc., Python SciPy, CUDA GPU DSP, CST Microwave Studio','MIL-STD-810G','DRDO LRDE/DARE: C/C++ + FPGA firmware (Xilinx Virtex); BEL: GaN chip design (Cadence)'],
+    ['Guidance / GNC','MATLAB/Simulink, Python, dSPACE ASM, GVSIM (ISRO proprietary)','MIL-STD-1750A','ISRO VSSC: GVSIM 6-DOF (proprietary); BrahMos AE: in-house DSP guidance library'],
+    ['Avionics Mission SW','Ada 95/2005, C++ (MISRA), VxWorks, DO-178C toolchain (LDRA, VectorCAST)','DO-178C DAL-A','DARE: Ada; BEL: C + FPGA VHDL; Centum: board-level firmware (JTAG debug)'],
+    ['Embedded FPGA','VHDL/Verilog, Xilinx Vivado, Intel Quartus Prime, Cadence (GaN)','DO-254 DAL-A/B','BEL: Xilinx Virtex-7 + UltraScale; DRDO GAETEC: GaN MMIC (Cadence); Centum: Altera'],
+    ['UAV Autonomy','PX4 Autopilot, ArduPilot, ROS2, PyTorch/TF (edge AI), OpenCV','N/A (dev) → DO-178 (cert)','ideaForge: PX4 fork; DRDO UGV: ROS2; IIT Bombay/Madras: AI perception research'],
+    ['Simulation / Test','dSPACE HIL, MATLAB Simulink, Vector CANalyzer, IBM Rhapsody, Python pytest','DO-178C, MIL-STD-461','HAL: dSPACE (FBW test); ADA: Iron Bird (full-scale FCS rig); ISRO: custom HIL test beds'],
+    ['NDT Analysis','Olympus OmniScan (PAUT), DICONDE PACS, TOFD, CT-scan software (YXLON)','EN 4179, ASTM E2580','HAL Composites: automated C-scan lines; DRDO DMRL: 3D micro-CT; BEL: PAUT for radar structures'],
+  ];
+  el.innerHTML = `
+  <div class="sec-header">
+    <h2><i class="ti ti-code"></i>Software Technology Stack</h2>
+    <p>CAD/CAE/CFD/PLM/Embedded/AI — by domain, standard, and India deployment context</p>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Domain</th><th>Tools / Frameworks</th><th>Certification / Std</th><th>India Context</th></tr></thead>
+      <tbody>
+        ${rows.map(([dom,tools,cert,ctx]) => `<tr>
+          <td><span class="td-name">${dom}</span></td>
+          <td style="font-size:11.5px;font-family:var(--mono);color:var(--accent)">${tools}</td>
+          <td><span class="pill pill-cyan" style="font-family:var(--mono)">${cert}</span></td>
+          <td style="font-size:11.5px;color:var(--tx-2)">${ctx}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+// ── INDIA ECOSYSTEM ──────────────────────────────────────────
+function renderIndia() {
+  const el = document.getElementById('sec-india');
+  el.innerHTML = `
+  <div class="sec-header">
+    <h2><i class="ti ti-building-factory-2"></i>India Aerospace & Defence Ecosystem</h2>
+    <p>DPSUs, private OEMs, startups — capabilities, revenue, key customers</p>
+  </div>
+  <div class="stats-strip">
+    <div class="stat-card" style="--stat-color:#38bdf8"><div class="stat-label">DPSUs</div><div class="stat-value">9</div><div class="stat-sub">Public sector OEMs</div></div>
+    <div class="stat-card" style="--stat-color:#22c55e"><div class="stat-label">Private OEMs</div><div class="stat-value">38</div><div class="stat-sub">Tata, L&T, Mahindra…</div></div>
+    <div class="stat-card" style="--stat-color:#f59e0b"><div class="stat-label">MSME Suppliers</div><div class="stat-value">1,200+</div><div class="stat-sub">Tier 2/3 ecosystem</div></div>
+    <div class="stat-card" style="--stat-color:#c084fc"><div class="stat-label">Aerospace Startups</div><div class="stat-value">240+</div><div class="stat-sub">iDEX / IN-SPACe</div></div>
+  </div>
+  <div class="grid-auto">
+    ${INDIA_COMPANIES.map(c => `
+      <div class="co-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div>
+            <div class="co-name">${c.name}</div>
+            <div class="co-meta"><span class="pill pill-blue">${c.type}</span> · ${c.hq}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0">
+            <div style="font-size:12px;font-weight:700;color:var(--accent)">${c.rev}</div>
+            <div style="font-size:10.5px;color:var(--tx-3)">${c.emp} employees</div>
+          </div>
+        </div>
+        <div class="co-focus">${c.focus}</div>
+        <div class="co-details">
+          <strong style="color:var(--tx-2)">Products:</strong> ${c.products}<br>
+          <strong style="color:var(--tx-2)">Certs:</strong> ${c.certs}
+        </div>
+      </div>`).join('')}
+  </div>`;
+}
+
+// ── IMPORTS ──────────────────────────────────────────────────
+function renderImports() {
+  const el = document.getElementById('sec-imports');
+  const data = [
+    {title:'Propulsion — HIGH Dependency',risk:'high',items:['EJ200 (Tejas Mk1A): Eurojet (MTU/RR/ITP/Avio) — HAL Koraput licence not yet operational; ₹68 Cr/unit import','AL-31FP (Su-30MKI): Saturn Russia — political risk post-2022; HAL overhaul only (not new manufacture)','M88-4E (Rafale): Safran France — no ToT; 100% import; ₹35 Cr/unit','GE T700 (Apache), CF6, LEAP: GE USA — 100% import; ITAR controlled; HAL overhaul but not new manufacture','Kaveri engine delayed 20+ years — stopgap imports from Russia/France continue']},
+    {title:'CFRP Composites — MEDIUM-HIGH Dependency',risk:'medium',items:['Toray T800H/M21 prepreg (Japan): no India production equivalent; Tejas/AMCA critical path item','Hexcel 8552 epoxy (USA/UK): imported for HAL Composites autoclave manufacturing','AFP (Automated Fibre Placement) machines: Coriolis France + MAG Cincinnati — 100% imported','India initiative: CSIR-NCL Pune + HAL Composites joint CFRP prepreg project — early stage','Nomex honeycomb: Hexcel USA (critical for control surface panels) — no domestic alternate']},
+    {title:'Electronics / Avionics — MEDIUM-HIGH Dependency',risk:'medium',items:['GaN-on-SiC RF wafers: Wolfspeed/II-VI USA — ITAR controlled; DRDO GAETEC imports base wafers, dices+packages','Thales RBE2 AESA (Rafale): France — no ToT on radar; 100% import; ~€8M/unit','Martin Baker Mk16 ejection seats: UK — sole source for IAF/IN; ₹5 Cr/unit import','Xilinx/Intel FPGAs: USA — critical avionics dependency; no Indian fab (DRDO exploring alternatives)','GPS/GNSS receivers: Trimble/NovAtel — NavIC integration ongoing but GPS still primary for aviation']},
+    {title:'Indigenisation Progress — LOW / REDUCING Dependency',risk:'low',items:['Shakti engine: HAL Koraput full manufacture (Safran ToT complete) — 90%+ indigenous by value','Uttam AESA: BEL Hyderabad GaN T/R module line operational (2023) — 70%+ indigenous','Maraging Steel 250: MIDHANI Hyderabad — 100% indigenous, exports to Russia, France, Japan','PSLV/LVM3 motor casings: Walchandnagar + MIDHANI — 100% indigenous since 1993','BrahMos: 65%+ indigenisation achieved (2024); target 85% by 2025 — ramjet sustainer key milestone','MRSAM (Barak-8): BDL manufacture scaling up; IAI technology transfer accelerating under 2021 agreement']},
+  ];
+  el.innerHTML = `
+  <div class="sec-header">
+    <h2><i class="ti ti-arrows-exchange"></i>Import Dependency Analysis</h2>
+    <p>Critical foreign dependencies, technology gaps, and indigenisation roadmap for India's aerospace sector</p>
+  </div>
+  <div class="stats-strip">
+    <div class="stat-card" style="--stat-color:#f87171"><div class="stat-label">Defence Import Bill</div><div class="stat-value">₹1.4L Cr</div><div class="stat-sub">FY2023 (~$16.5 billion)</div></div>
+    <div class="stat-card" style="--stat-color:#22c55e"><div class="stat-label">Indigenisation Target</div><div class="stat-value">75%</div><div class="stat-sub">By 2047 (Viksit Bharat)</div></div>
+    <div class="stat-card" style="--stat-color:#38bdf8"><div class="stat-label">PIL Items (banned imports)</div><div class="stat-value">509+</div><div class="stat-sub">Positive Indigenisation List</div></div>
+    <div class="stat-card" style="--stat-color:#c084fc"><div class="stat-label">iDEX Challenges</div><div class="stat-value">400+</div><div class="stat-sub">Startup-driven technology</div></div>
+  </div>
+  <div style="display:grid;gap:16px">
+    ${data.map(d => `
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><i class="ti ti-alert-triangle"></i>${d.title}</div>
+          <span class="pill ${d.risk==='high'?'pill-red':d.risk==='medium'?'pill-amber':'pill-green'}">
+            ${d.risk.toUpperCase()} RISK
+          </span>
+        </div>
+        <div class="card-body">
+          <div class="risk-bar risk-${d.risk}" style="margin-bottom:12px"></div>
+          ${d.items.map(i => `<div class="mfg-item" style="border:none;padding:6px 0;border-bottom:1px solid var(--bdr)">${i}</div>`).join('')}
+        </div>
+      </div>`).join('')}
+  </div>`;
+}
+
+// ── SUPPLY CHAIN ──────────────────────────────────────────────
+function renderSupply() {
+  const el = document.getElementById('sec-supply');
+  const chains = [
+    {name:'LCA Tejas Mk1A',icon:'ti-plane',tiers:[
+      {label:'OEM / Prime',cls:'pill-cyan',val:'HAL Aircraft Division, Bangalore (system integrator, programme manager, FAL operator)'},
+      {label:'Engine',cls:'pill-amber',val:'Eurojet (EJ200) — HAL Koraput licence assembly in progress; interim 100% import'},
+      {label:'Avionics / Radar',cls:'pill-blue',val:'BEL Hyderabad (Uttam AESA, Tarang RWR, IFF); DRDO LRDE (radar design authority); DRDO DARE (mission SW, EW)'},
+      {label:'Structures Tier-2',cls:'pill-green',val:'HAL Composites Division (CFRP wing/fin); Dynamatic Technologies (wing spars, fuselage panels); TASL (additional aerostructures)'},
+      {label:'Forgings / Alloys',cls:'pill-gray',val:'Bharat Forge Pune (Ti/steel forgings); MIDHANI Hyderabad (Ti-6Al-4V, Inconel 718 alloy supply); Aequs Belagavi (machined fittings)'},
+      {label:'Tier-3 / Raw Mat',cls:'pill-gray',val:'Toray Japan (CFRP T800 prepreg — import); MIDHANI (domestic Ti alloy); Martin Baker UK (ejection seat — 100% import); Safran France (MLG — ToT partial)'},
+    ]},
+    {name:'PSLV-XL / LVM3',icon:'ti-rocket',tiers:[
+      {label:'System / OEM',cls:'pill-cyan',val:'ISRO (VSSC, LPSC, SDSC SHAR, ISAC, SAC) — fully government-owned, no prime contractor'},
+      {label:'Engine',cls:'pill-amber',val:'ISRO LPSC Thiruvananthapuram (Vikas, CE-20, PS4) — 100% indigenous since 1993'},
+      {label:'Motor Casings',cls:'pill-blue',val:'Walchandnagar Industries Satara (Stage 1 maraging steel casing); MIDHANI Hyderabad (maraging steel supply); ISRO SHAR (propellant casting)'},
+      {label:'Structures',cls:'pill-green',val:'Larsen & Toubro (large structural fabrications, interstage rings); HAL Aerospace (Al alloy machining, tank end domes); Godrej Aerospace Mumbai (Vikas turbopumps, tank closures)'},
+      {label:'Electronics',cls:'pill-green',val:'BEL (telemetry, TTC, ground station systems); ECIL Hyderabad (range safety, ISRO space-grade electronics); Centum Electronics (PCBs, mission computer cards)'},
+      {label:'New Space',cls:'pill-purple',val:'Skyroot Aerospace Hyderabad (Vikram private launch); Agnikul Cosmos Chennai (3D-printed Agnibaan); MTAR Technologies Hyderabad (precision parts — listed NSE)'},
+    ]},
+    {name:'BrahMos Block III',icon:'ti-crosshair',tiers:[
+      {label:'JV OEM',cls:'pill-cyan',val:'BrahMos Aerospace Pvt Ltd (50.5% India / 49.5% Russia) — Hyderabad HQ, Thiruvananthapuram manufacture'},
+      {label:'Propulsion',cls:'pill-amber',val:'NPO Mashinostroyeniya Russia (ramjet tech); DRDO HEMRL Pune (booster propellant); BrahMos AE TVM (ramjet assembly increasing)'},
+      {label:'Guidance / Seeker',cls:'pill-blue',val:'ISRO IISU (RLG-based INS); BEL Hyderabad (active radar seeker); DRDO DRDL (GNC software, DSMAC algorithm)'},
+      {label:'Structures',cls:'pill-green',val:'BrahMos Aerospace Thiruvananthapuram (Ti precision casting, CNC machining of airframe)'},
+      {label:'Launch / Integration',cls:'pill-gray',val:'L&T Defence (mobile TEL, launcher systems); HAL Nasik (Su-30MKI air-launch pylon integration); Godrej Aerospace (precision components); BDL (warhead sub-assembly)'},
+    ]},
+    {name:'Rafale EH/DH (IAF)',icon:'ti-plane',tiers:[
+      {label:'Design / OEM',cls:'pill-cyan',val:'Dassault Aviation, Mérignac France — design authority, final assembly line (FAL); no India FAL'},
+      {label:'Engine',cls:'pill-amber',val:'Safran Aircraft Engines (M88-4E, Gennevilliers) — no ToT; 100% import; ₹35 Cr/engine'},
+      {label:'Avionics / EW',cls:'pill-blue',val:'Thales (RBE2 AESA, OSF IRST, SPECTRA EW — no ToT, fully French); MBDA (Meteor, MICA, SCALP weapons)'},
+      {label:'Offset / India',cls:'pill-green',val:'TASL (aerostructure offset component manufacture); Reliance Defence Nagpur (limited assembly participation); BEL (IFF radio ToT localisation)'},
+      {label:'MRO',cls:'pill-gray',val:'Air France Industries KLM E&M (airframe heavy MRO); Safran (engine MRO — HAL arrangement for India); HAL Nasik (limited depot maintenance)'},
+    ]},
+  ];
+  el.innerHTML = `
+  <div class="sec-header">
+    <h2><i class="ti ti-network"></i>Supply Chain Intelligence</h2>
+    <p>OEM → Tier-1 → Tier-2 → Tier-3 mapping for India's key aerospace platforms</p>
+  </div>
+  <div style="display:grid;gap:18px">
+    ${chains.map(ch => `
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><i class="ti ${ch.icon}"></i>${ch.name}</div>
+        </div>
+        <div class="card-body" style="padding:0">
+          ${ch.tiers.map(t => `
+            <div class="dp-sc-tier" style="border-radius:0;border:none;border-bottom:1px solid var(--bdr)">
+              <div class="dp-sc-label"><span class="pill ${t.cls}">${t.label}</span></div>
+              <div class="dp-sc-content">${t.val}</div>
+            </div>`).join('')}
+        </div>
+      </div>`).join('')}
+  </div>`;
+}
+
+// ── ERP SCHEMA ──────────────────────────────────────────────
+function renderERP() {
+  const el = document.getElementById('sec-erp');
+  el.innerHTML = `
+  <div class="sec-header">
+    <h2><i class="ti ti-database"></i>ERP Database Schema</h2>
+    <p>Oracle DDL, entity relationships, JSON API spec — production-ready aerospace ERP</p>
+  </div>
+  <div class="grid-2" style="gap:16px">
+    <div class="card">
+      <div class="card-header"><div class="card-title"><i class="ti ti-table"></i>Core Tables — Oracle DDL</div></div>
+      <div class="card-body" style="padding:0">
+        <div class="schema-block"><span class="sc">-- ═══ PLATFORMS MASTER TABLE ═══</span>
+<span class="sk">CREATE TABLE</span> platforms (
+  platform_id     <span class="st">VARCHAR2(20)</span>  <span class="sn">PRIMARY KEY</span>,
+  platform_name   <span class="st">VARCHAR2(200)</span> <span class="sn">NOT NULL</span>,
+  category_code   <span class="st">VARCHAR2(30)</span>,
+  origin_country  <span class="st">VARCHAR2(100)</span>,
+  manufacturer    <span class="st">VARCHAR2(200)</span>,
+  status_code     <span class="st">VARCHAR2(30)</span>,
+  first_flight_dt <span class="st">DATE</span>,
+  in_service_dt   <span class="st">DATE</span>,
+  mtow_kg         <span class="st">NUMBER</span>,
+  range_km        <span class="st">NUMBER</span>,
+  max_speed_mach  <span class="st">NUMBER</span>(5,3),
+  wingspan_m      <span class="st">NUMBER</span>(6,2),
+  length_m        <span class="st">NUMBER</span>(6,2),
+  ceiling_m       <span class="st">NUMBER</span>,
+  detail_flag     <span class="st">CHAR(1)</span> <span class="sn">DEFAULT 'N'</span>,
+  created_date    <span class="st">TIMESTAMP</span> <span class="sn">DEFAULT SYSTIMESTAMP</span>
+);
+
+<span class="sc">-- ═══ COMPONENTS ═══</span>
+<span class="sk">CREATE TABLE</span> components (
+  component_id    <span class="st">VARCHAR2(20)</span>  <span class="sn">PRIMARY KEY</span>,
+  component_name  <span class="st">VARCHAR2(200)</span>,
+  platform_id     <span class="st">VARCHAR2(20)</span>  <span class="sn">REFERENCES platforms</span>,
+  material_id     <span class="st">VARCHAR2(20)</span>  <span class="sn">REFERENCES materials</span>,
+  supplier_id     <span class="st">NUMBER</span>        <span class="sn">REFERENCES suppliers</span>,
+  category_code   <span class="st">VARCHAR2(50)</span>,
+  lead_weeks      <span class="st">NUMBER</span>,
+  unit_cost_inr   <span class="st">NUMBER</span>(14,2),
+  unit_cost_usd   <span class="st">NUMBER</span>(14,2),
+  status_code     <span class="st">VARCHAR2(20)</span>
+);
+
+<span class="sc">-- ═══ MATERIALS ═══</span>
+<span class="sk">CREATE TABLE</span> materials (
+  material_id     <span class="st">VARCHAR2(20)</span>  <span class="sn">PRIMARY KEY</span>,
+  material_name   <span class="st">VARCHAR2(200)</span>,
+  category        <span class="st">VARCHAR2(50)</span>,
+  uts_mpa         <span class="st">NUMBER</span>(8,1),
+  yield_mpa       <span class="st">NUMBER</span>(8,1),
+  density_gcc     <span class="st">NUMBER</span>(6,4),
+  max_temp_c      <span class="st">NUMBER</span>,
+  elastic_mod_gpa <span class="st">NUMBER</span>(6,1),
+  uses_desc       <span class="st">VARCHAR2(1000)</span>,
+  india_source    <span class="st">VARCHAR2(500)</span>
+);
+
+<span class="sc">-- ═══ SUPPLIERS ═══</span>
+<span class="sk">CREATE TABLE</span> suppliers (
+  supplier_id     <span class="st">NUMBER</span>        <span class="sn">GENERATED ALWAYS AS IDENTITY PRIMARY KEY</span>,
+  supplier_name   <span class="st">VARCHAR2(300)</span>,
+  supplier_type   <span class="st">VARCHAR2(50)</span>,
+  tier_level      <span class="st">NUMBER</span>,
+  hq_city         <span class="st">VARCHAR2(100)</span>,
+  hq_country      <span class="st">VARCHAR2(50)</span>,
+  annual_rev_cr   <span class="st">NUMBER</span>(12,2),
+  employees       <span class="st">NUMBER</span>,
+  certifications  <span class="st">VARCHAR2(500)</span>
+);
+
+<span class="sc">-- ═══ WBS ELEMENTS ═══</span>
+<span class="sk">CREATE TABLE</span> wbs_elements (
+  wbs_id          <span class="st">NUMBER</span>        <span class="sn">GENERATED ALWAYS AS IDENTITY PRIMARY KEY</span>,
+  platform_id     <span class="st">VARCHAR2(20)</span>  <span class="sn">REFERENCES platforms</span>,
+  level1_code     <span class="st">VARCHAR2(10)</span>,
+  level1_name     <span class="st">VARCHAR2(200)</span>,
+  item_seq        <span class="st">NUMBER</span>,
+  item_desc       <span class="st">VARCHAR2(500)</span>
+);</div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-header"><div class="card-title"><i class="ti ti-git-branch"></i>ER Relationships</div></div>
+        <div class="card-body" style="padding:0">
+          <div class="schema-block">platforms
+  ├─ (1:N) → components
+  │              ├─ (N:1) → materials
+  │              └─ (N:1) → suppliers
+  ├─ (N:1) → suppliers [OEM]
+  ├─ (1:N) → wbs_elements
+  ├─ (1:N) → propulsion_fits
+  │              └─ (N:1) → engines
+  ├─ (N:M) → operators  [via platform_operators]
+  └─ (1:1) → platform_specs [wingspan, ceiling…]
+
+suppliers
+  ├─ (N:M) → components [via comp_supplier_map]
+  ├─ (1:N) → supply_chain_nodes
+  └─ (1:N) → audit_events
+
+supply_chain_nodes
+  ├─ platform_id → platforms
+  ├─ supplier_id → suppliers
+  ├─ tier_level  [1 / 2 / 3]
+  └─ risk_level  [HIGH / MED / LOW]
+
+import_risks
+  ├─ platform_id → platforms
+  ├─ component   [freeform]
+  ├─ risk_level  [HIGH / MED / LOW]
+  ├─ mitigation  CLOB
+  └─ target_date [indigenisation timeline]</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title"><i class="ti ti-brackets"></i>JSON API Response</div></div>
+        <div class="card-body" style="padding:0">
+          <div class="schema-block">{
+  <span class="sk">"platform_id"</span>: <span class="st">"IND-F-001"</span>,
+  <span class="sk">"name"</span>: <span class="st">"LCA Tejas Mk1A"</span>,
+  <span class="sk">"category"</span>: <span class="st">"Fighter"</span>,
+  <span class="sk">"origin"</span>: <span class="st">"India"</span>,
+  <span class="sk">"specs"</span>: {
+    <span class="sk">"mtow_kg"</span>: 13500,
+    <span class="sk">"range_km"</span>: 3000,
+    <span class="sk">"ceiling_m"</span>: 15240,
+    <span class="sk">"speed_mach"</span>: 1.8
+  },
+  <span class="sk">"propulsion"</span>: [{
+    <span class="sk">"engine_id"</span>: <span class="st">"ENG-001"</span>,
+    <span class="sk">"name"</span>: <span class="st">"EJ200"</span>,
+    <span class="sk">"qty"</span>: 1,
+    <span class="sk">"thrust_kn"</span>: 90
+  }],
+  <span class="sk">"supply_chain"</span>: {
+    <span class="sk">"oem"</span>: <span class="st">"HAL Aircraft Division"</span>,
+    <span class="sk">"tier1"</span>: [<span class="st">"BEL"</span>, <span class="st">"Eurojet"</span>, <span class="st">"DARE"</span>],
+    <span class="sk">"tier2"</span>: [<span class="st">"Dynamatic"</span>, <span class="st">"Bharat Forge"</span>]
+  },
+  <span class="sk">"detail_available"</span>: true
+}</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── AI QUERY ──────────────────────────────────────────────────
 function renderAI() {
-  document.getElementById('sec-ai').innerHTML = `
-    <h2 class="sec-title">AI Query Engine — Powered by Claude</h2>
-    <p style="color:var(--text-secondary);margin-bottom:20px">Ask anything about platforms, engines, materials, supply chains, or India aerospace strategy.</p>
-    <div style="display:flex;gap:8px;margin-bottom:16px">
-      <input type="text" id="aiQ" placeholder="e.g. Compare BrahMos vs Meteor range and guidance systems..." onkeydown="if(event.key==='Enter')doAI()" style="flex:1;padding:12px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);font-size:14px;outline:none">
-      <button onclick="doAI()" style="padding:12px 20px;background:var(--accent);color:#000;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:14px"><i class="ti ti-send"></i> Ask</button>
+  const el = document.getElementById('sec-ai');
+  const chips = ['What Indian fighter aircraft programmes are active 2025?','Compare BrahMos vs Meteor range and guidance','What materials are used in Tejas wing?','List all ISRO launch vehicles','DRDO UAV programmes and status','Critical import dependencies for IAF','EJ200 vs AL-31FP specifications','Indian eVTOL startup overview'];
+  el.innerHTML = `
+  <div class="sec-header">
+    <h2><i class="ti ti-brain"></i>AI Intelligence Query Engine</h2>
+    <p>Powered by Claude claude-sonnet-4-6 — ask anything about platforms, engines, materials, supply chains, strategy</p>
+  </div>
+  <div class="ai-box">
+    <div class="ai-header">
+      <div class="ai-header-icon"><i class="ti ti-brain"></i></div>
+      <div>
+        <div style="font-weight:700;font-size:13px">AeroIntel AI</div>
+        <div style="font-size:11px;color:var(--tx-3)">Powered by Claude claude-sonnet-4-6 · Context: ${VEHICLES.length} platforms + full detail sheets</div>
+      </div>
+      <span class="pill pill-green" style="margin-left:auto">● Live</span>
     </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
-      ${["What is the indigenisation level of BrahMos?","Compare EJ200 vs AL-31FP thrust and bypass","Which Indian companies supply CFRP composites?","What materials are used in PSLV motor casings?","Explain WBS for AMCA Mk1","What are the critical import dependencies for IAF?"].map(q=>`<button onclick="document.getElementById('aiQ').value='${q}';doAI()" style="padding:6px 12px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:20px;color:var(--text-secondary);cursor:pointer;font-size:12px">${q}</button>`).join('')}
+    <div class="ai-chips">
+      ${chips.map(c => `<button class="ai-chip" onclick="setAIQ('${c.replace(/'/g,"\\'")}')"><i class="ti ti-sparkles" style="font-size:11px"></i> ${c}</button>`).join('')}
     </div>
-    <div id="aiOut" style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:20px;min-height:120px;color:var(--text-secondary);font-size:14px;line-height:1.7;white-space:pre-wrap"></div>`;
+    <div class="ai-row">
+      <input class="ai-input" type="text" id="aiQ" placeholder="Ask about any vehicle, system, material, supplier, technology…" onkeydown="if(event.key==='Enter')doAI()">
+      <button class="ai-send" onclick="doAI()"><i class="ti ti-send"></i>Ask</button>
+    </div>
+    <div class="ai-out" id="aiOut"></div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title"><i class="ti ti-history"></i>Query History</div></div>
+    <div class="card-body" id="aiHistory" style="font-size:12px;color:var(--tx-2);min-height:48px">No queries yet.</div>
+  </div>`;
 }
 
+const _aiHistory = [];
+function setAIQ(q) {
+  document.getElementById('aiQ') && (document.getElementById('aiQ').value = q);
+  doAI();
+}
 async function doAI() {
   const q = document.getElementById('aiQ')?.value?.trim();
   if(!q) return;
   const out = document.getElementById('aiOut');
-  out.textContent = '⏳ Querying Claude...';
-  const ctx = `You are AeroIntel DB, an expert aerospace and defence intelligence assistant focused on India's aerospace ecosystem. You have access to a database including: ${VEHICLES.length} platforms, ${COMPONENTS.length} components, ${MATERIALS.length} materials, ${PROPULSION.length} engines, ${INDIA_COMPANIES.length} Indian companies. Key platforms with full detail sheets: LCA Tejas Mk1A, AMCA Mk1, Su-30MKI, Rafale EH, ALH Dhruv Mk4, BrahMos Block III, PSLV-XL. Answer concisely but with specific technical and commercial data. Focus on India's aerospace industry, indigenisation, import dependencies, and strategic context.`;
+  if(!out) return;
+  out.style.display = 'block';
+  out.innerHTML = '<span class="spinner"></span>Querying Claude…';
+  document.getElementById('aiQ').value = '';
+
+  _aiHistory.unshift({q, t: new Date().toLocaleTimeString()});
+  const hist = document.getElementById('aiHistory');
+  if(hist) hist.innerHTML = _aiHistory.slice(0,6).map(h => `<div style="padding:6px 0;border-bottom:1px solid var(--bdr)"><span style="color:var(--tx-dim);font-size:10px">${h.t}</span> — ${h.q}</div>`).join('');
+
+  const ctx = `You are AeroIntel, a world-class aerospace and defence intelligence assistant. You have deep knowledge of all Indian, US, European, Russian, Israeli aerospace platforms, defence systems, UAVs, missiles, satellites, launch vehicles, and their subsystems. Database: ${VEHICLES.length} platforms indexed including fighters, helicopters, missiles, launch vehicles. Full detail sheets for: LCA Tejas Mk1A, AMCA Mk1, Su-30MKI, Rafale EH, ALH Dhruv Mk4, BrahMos Block III, PSLV-XL. Answer with precise technical data: specifications, WBS, materials, manufacturing, supply chains, indigenisation status. Focus on India's aerospace industry context where applicable. Format clearly.`;
   try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,system:ctx,messages:[{role:'user',content:q}]})});
-    const data = await resp.json();
-    out.textContent = data.content?.[0]?.text || 'No response.';
-  } catch(e) { out.textContent = 'Error: '+e.message; }
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({model:'claude-sonnet-4-6', max_tokens:1000, system:ctx, messages:[{role:'user',content:q}]})
+    });
+    const d = await r.json();
+    const txt = d.content?.map(b=>b.text||'').join('\n') || 'No response.';
+    out.textContent = txt;
+  } catch(e) {
+    out.textContent = 'Error: ' + e.message;
+  }
 }
 
-// ── DETAIL PANEL FUNCTIONS ─────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════
+// DETAIL PANEL SYSTEM
+// ══════════════════════════════════════════════════════════════
+const DP_TABS = [
+  {id:'overview',   icon:'ti-info-circle',  label:'Overview'},
+  {id:'wbs',        icon:'ti-sitemap',       label:'WBS'},
+  {id:'materials',  icon:'ti-atom',          label:'Materials'},
+  {id:'mfg',        icon:'ti-settings-2',    label:'Manufacturing'},
+  {id:'propulsion', icon:'ti-flame',         label:'Propulsion'},
+  {id:'electronics',icon:'ti-cpu',           label:'Electronics'},
+  {id:'software',   icon:'ti-code',          label:'Software'},
+  {id:'ecosystem',  icon:'ti-network',       label:'Ecosystem'},
+];
+let _dpId = null;
+let _dpTab = 'overview';
+
 function openDetail(id) {
   const v = VEHICLES.find(x => x.id === id);
   if(!v) return;
+  _dpId = id;
+  _dpTab = 'overview';
+
+  // populate header
+  document.getElementById('dp-id').textContent = v.id;
+  document.getElementById('dp-name').textContent = v.name;
+  document.getElementById('dp-meta').innerHTML = `
+    ${catPill(v.cat)} ${statusPill(v.status)}
+    <span style="color:var(--tx-3)">${v.origin} · ${v.mfr}</span>`;
+  document.getElementById('dp-icon').innerHTML = `<i class="ti ${catIcon(v.cat)}"></i>`;
+
+  // build tabs
   const det = DETAIL_DATA[id];
-  const overlay = document.getElementById('dp-overlay');
-  const panel = document.getElementById('dp');
-  overlay.style.display = 'block';
-  panel.classList.add('open');
-  document.getElementById('dp-title').textContent = v.name;
-  document.getElementById('dp-sub').textContent = `${v.cat} · ${v.origin} · ${v.mfr}`;
-  document.getElementById('dp-status').innerHTML = stPill(v.status);
-  if(det) {
-    renderDPTab('overview');
-  } else {
-    document.getElementById('dp-body').innerHTML = `<div style="text-align:center;padding:60px 20px;color:var(--text-muted)">
-      <i class="ti ti-robot" style="font-size:48px;display:block;margin-bottom:16px"></i>
-      <p style="font-size:16px;margin-bottom:8px">Full detail sheet not yet loaded for this platform.</p>
-      <p style="font-size:13px">Ask the AI Query Engine about this platform, or it will be added in the next update.</p>
-      <button onclick="document.getElementById('aiQ') && (document.getElementById('aiQ').value='Tell me about ${v.name}');showSec('ai');doAI();closeDetail()" style="margin-top:16px;padding:10px 20px;background:var(--accent);color:#000;border:none;border-radius:8px;cursor:pointer;font-weight:600">Ask AI About This Platform</button>
-    </div>`;
+  const tabsEl = document.getElementById('dp-tabs');
+  tabsEl.innerHTML = DP_TABS.map(t =>
+    `<div class="dp-tab ${t.id===_dpTab?'on':''}" onclick="dpTab('${t.id}')"><i class="ti ${t.icon}"></i>${t.label}</div>`
+  ).join('');
+
+  // open overlay
+  document.getElementById('dp-overlay').classList.add('open');
+
+  // render body
+  dpRender(_dpTab);
+}
+
+function dpTab(tab) {
+  _dpTab = tab;
+  document.querySelectorAll('.dp-tab').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('.dp-tab').forEach(t => {
+    if(t.getAttribute('onclick') === `dpTab('${tab}')`) t.classList.add('on');
+  });
+  dpRender(tab);
+}
+
+function dpRender(tab) {
+  const v = VEHICLES.find(x => x.id === _dpId);
+  const det = DETAIL_DATA[_dpId];
+  const body = document.getElementById('dp-body');
+  if(!v) return;
+
+  if(!det) {
+    body.innerHTML = `
+      <div class="no-detail-placeholder">
+        <i class="ti ti-file-unknown"></i>
+        <h3>Full detail sheet not yet available</h3>
+        <p>This platform doesn't have a detailed intelligence sheet yet. Full sheets are available for LCA Tejas Mk1A, AMCA Mk1, Su-30MKI, Rafale EH, ALH Dhruv Mk4, BrahMos Block III, and PSLV-XL.</p>
+        <button class="ask-ai-btn" onclick="closeDetail();showSec('ai',document.getElementById('nav-ai'),'ti-brain','AI Query Engine','');setTimeout(()=>{document.getElementById('aiQ')&&(document.getElementById('aiQ').value='Tell me about ${v.name}: specifications, WBS, materials, and supply chain');doAI()},300)">
+          <i class="ti ti-sparkles"></i>Ask AI about this platform
+        </button>
+      </div>`;
+    return;
   }
-  window._dpId = id;
+
+  if(tab === 'overview') {
+    const o = det.overview;
+    body.innerHTML = `
+      <div class="dp-desc">${o.desc}</div>
+      <div class="dp-overview-grid">
+        ${[['First Flight',o.firstFlight],['In Service',o.inService],['Quantity / Orders',o.qty],['Crew',o.crew],['Wingspan',o.span],['Length',o.length],['Height',o.height],['Wing Area',o.wing||'—'],['Service Ceiling',o.ceiling],['Thrust / Weight',o.thrust_wt]].map(([k,val])=>`
+          <div class="dp-spec"><div class="dp-spec-lbl">${k}</div><div class="dp-spec-val">${val||'—'}</div></div>`).join('')}
+      </div>`;
+  }
+  else if(tab === 'wbs') {
+    if(!det.wbs) { body.innerHTML = '<p style="color:var(--tx-3);padding:20px">WBS data not available.</p>'; return; }
+    body.innerHTML = `<div class="grid-2">${Object.entries(det.wbs).map(([sys, items]) => `
+      <div class="dp-subsys">
+        <div class="dp-subsys-title"><i class="ti ti-list-check"></i>${sys}</div>
+        <ul>${items.map(i => `<li>${i}</li>`).join('')}</ul>
+      </div>`).join('')}</div>`;
+  }
+  else if(tab === 'materials') {
+    const m = det.materials;
+    body.innerHTML = [
+      m.structural ? {title:'Structural Materials', icon:'ti-layer-intersect', items: m.structural} : null,
+      m.coatings   ? {title:'Coatings & Surface Treatments', icon:'ti-paint', items: m.coatings} : null,
+      m.special    ? {title:'Advanced / Special Materials', icon:'ti-atom-2', items: m.special} : null,
+    ].filter(Boolean).map(blk => `
+      <div class="dp-mat-block">
+        <div class="dp-mat-title"><i class="ti ${blk.icon}" style="color:var(--accent);margin-right:6px"></i>${blk.title}</div>
+        <div class="dp-mat-list">${blk.items.map(i=>`<div class="dp-mat-item">${i}</div>`).join('')}</div>
+      </div>`).join('');
+  }
+  else if(tab === 'mfg') {
+    const m = det.manufacturing;
+    body.innerHTML = `
+      <div class="dp-prose-block"><div class="dp-prose-title"><i class="ti ti-settings-2"></i>Manufacturing Processes</div><div class="dp-prose-body"><ul style="padding-left:18px">${m.processes.map(i=>`<li style="margin-bottom:6px">${i}</li>`).join('')}</ul></div></div>
+      <div class="dp-prose-block"><div class="dp-prose-title"><i class="ti ti-building-factory-2"></i>Key Facilities</div><div class="dp-prose-body"><ul style="padding-left:18px">${m.facilities.map(i=>`<li style="margin-bottom:6px">${i}</li>`).join('')}</ul></div></div>`;
+  }
+  else if(tab === 'propulsion') {
+    const p = det.propulsion;
+    body.innerHTML = `<div class="dp-prose-block"><div class="dp-prose-title"><i class="ti ti-flame"></i>Propulsion System Details</div><div class="dp-prose-body"><ul style="padding-left:18px">${p.engines.map(e=>`<li style="margin-bottom:8px;line-height:1.7">${e}</li>`).join('')}</ul></div></div>`;
+  }
+  else if(tab === 'electronics') {
+    const e = det.electronics;
+    body.innerHTML = [
+      {title:'Avionics & Mission Systems', icon:'ti-radar', body: e.avionics},
+      {title:'Electronic Warfare (EW)', icon:'ti-antenna', body: e.ew},
+      {title:'Communications & Data Links', icon:'ti-radio', body: e.comms},
+    ].map(b=>`<div class="dp-prose-block"><div class="dp-prose-title"><i class="ti ${b.icon}"></i>${b.title}</div><div class="dp-prose-body">${b.body}</div></div>`).join('');
+  }
+  else if(tab === 'software') {
+    const s = det.software;
+    body.innerHTML = [
+      {title:'Flight Software & RTOS', icon:'ti-cpu', body: s.flight},
+      {title:'Engineering Tools & Simulation', icon:'ti-chart-dots', body: s.tools},
+    ].map(b=>`<div class="dp-prose-block"><div class="dp-prose-title"><i class="ti ${b.icon}"></i>${b.title}</div><div class="dp-prose-body">${b.body}</div></div>`).join('');
+  }
+  else if(tab === 'ecosystem') {
+    const ec = det.ecosystem;
+    body.innerHTML = [
+      {label:'OEM / Prime Contractor', cls:'pill-cyan', val: ec.oem},
+      {label:'Tier-1 Sub-Systems', cls:'pill-blue', val: ec.tier1},
+      {label:'Tier-2 Components', cls:'pill-green', val: ec.tier2},
+      {label:'Tier-3 Raw Mat / Parts', cls:'pill-gray', val: ec.tier3},
+    ].map(t=>`<div class="dp-sc-tier"><div class="dp-sc-label"><span class="pill ${t.cls}">${t.label}</span></div><div class="dp-sc-content">${t.val}</div></div>`).join('');
+  }
 }
 
 function closeDetail() {
-  document.getElementById('dp-overlay').style.display = 'none';
-  document.getElementById('dp').classList.remove('open');
+  document.getElementById('dp-overlay').classList.remove('open');
+}
+function closeDetailOuter(e) {
+  if(e.target === document.getElementById('dp-overlay')) closeDetail();
 }
 
-function switchDPTab(tab) {
-  document.querySelectorAll('.dp-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.dp-tab').forEach(t => { if(t.getAttribute('onclick') && t.getAttribute('onclick').includes("'"+tab+"'")) t.classList.add('active'); });
-  renderDPTab(tab);
-}
-
-function renderDPTab(tab) {
-  const id = window._dpId;
-  const v = VEHICLES.find(x => x.id === id);
-  const det = DETAIL_DATA[id];
-  if(!det) return;
-  let html = '';
-  if(tab === 'overview') {
-    const o = det.overview;
-    html = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div style="grid-column:1/-1;background:var(--bg-surface);border-radius:8px;padding:16px;color:var(--text-secondary);font-size:13px;line-height:1.7">${o.desc}</div>
-      ${[['First Flight',o.firstFlight],['In Service',o.inService],['Quantity',o.qty],['Crew',o.crew],['Wingspan',o.span],['Length',o.length],['Height',o.height],['Wing Area',o.wing||'—'],['Service Ceiling',o.ceiling],['Thrust/Weight',o.thrust_wt]].map(([k,val])=>`<div style="background:var(--bg-surface);border-radius:8px;padding:12px"><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px">${k}</div><div style="font-size:14px;font-weight:600;color:var(--text-primary)">${val||'—'}</div></div>`).join('')}
-    </div>`;
-  } else if(tab === 'wbs') {
-    html = `<div style="display:grid;grid-template-columns:1fr;gap:12px">`;
-    Object.entries(det.wbs||{}).forEach(([top, items]) => {
-      html += `<div style="background:var(--bg-surface);border-radius:8px;padding:14px"><div style="font-weight:700;color:var(--accent);margin-bottom:8px;font-size:13px">${top}</div><ul style="margin:0;padding-left:18px;color:var(--text-secondary);font-size:12px;line-height:1.8">${items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
-    });
-    html += `</div>`;
-  } else if(tab === 'materials') {
-    const m = det.materials;
-    html = `<div style="display:grid;gap:12px">`;
-    if(m.structural) html += `<div style="background:var(--bg-surface);border-radius:8px;padding:14px"><div style="font-weight:700;color:var(--accent);margin-bottom:8px;font-size:13px">Structural Materials</div><ul style="margin:0;padding-left:18px;color:var(--text-secondary);font-size:12px;line-height:1.8">${m.structural.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
-    if(m.coatings) html += `<div style="background:var(--bg-surface);border-radius:8px;padding:14px"><div style="font-weight:700;color:var(--accent);margin-bottom:8px;font-size:13px">Coatings & Surface Treatment</div><ul style="margin:0;padding-left:18px;color:var(--text-secondary);font-size:12px;line-height:1.8">${m.coatings.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
-    if(m.special) html += `<div style="background:var(--bg-surface);border-radius:8px;padding:14px"><div style="font-weight:700;color:var(--accent);margin-bottom:8px;font-size:13px">Special / Advanced Materials</div><ul style="margin:0;padding-left:18px;color:var(--text-secondary);font-size:12px;line-height:1.8">${m.special.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
-    html += `</div>`;
-  } else if(tab === 'mfg') {
-    const m = det.manufacturing;
-    html = `<div style="display:grid;gap:12px">
-      <div style="background:var(--bg-surface);border-radius:8px;padding:14px"><div style="font-weight:700;color:var(--accent);margin-bottom:8px;font-size:13px">Manufacturing Processes</div><ul style="margin:0;padding-left:18px;color:var(--text-secondary);font-size:12px;line-height:1.8">${m.processes.map(i=>`<li>${i}</li>`).join('')}</ul></div>
-      <div style="background:var(--bg-surface);border-radius:8px;padding:14px"><div style="font-weight:700;color:var(--accent);margin-bottom:8px;font-size:13px">Key Facilities</div><ul style="margin:0;padding-left:18px;color:var(--text-secondary);font-size:12px;line-height:1.8">${m.facilities.map(i=>`<li>${i}</li>`).join('')}</ul></div>
-    </div>`;
-  } else if(tab === 'propulsion') {
-    const p = det.propulsion;
-    html = `<div style="background:var(--bg-surface);border-radius:8px;padding:16px"><div style="font-weight:700;color:var(--accent);margin-bottom:12px;font-size:13px">Engine / Propulsion Details</div><ul style="margin:0;padding-left:18px;color:var(--text-secondary);font-size:12px;line-height:2">${p.engines.map(e=>`<li>${e}</li>`).join('')}</ul></div>`;
-  } else if(tab === 'electronics') {
-    const e = det.electronics;
-    html = `<div style="display:grid;gap:12px">
-      <div style="background:var(--bg-surface);border-radius:8px;padding:14px"><div style="font-weight:700;color:var(--accent);margin-bottom:8px;font-size:13px">Avionics</div><p style="color:var(--text-secondary);font-size:12px;line-height:1.8;margin:0">${e.avionics}</p></div>
-      <div style="background:var(--bg-surface);border-radius:8px;padding:14px"><div style="font-weight:700;color:var(--accent);margin-bottom:8px;font-size:13px">Electronic Warfare</div><p style="color:var(--text-secondary);font-size:12px;line-height:1.8;margin:0">${e.ew}</p></div>
-      <div style="background:var(--bg-surface);border-radius:8px;padding:14px"><div style="font-weight:700;color:var(--accent);margin-bottom:8px;font-size:13px">Communications</div><p style="color:var(--text-secondary);font-size:12px;line-height:1.8;margin:0">${e.comms}</p></div>
-    </div>`;
-  } else if(tab === 'software') {
-    const s = det.software;
-    html = `<div style="display:grid;gap:12px">
-      <div style="background:var(--bg-surface);border-radius:8px;padding:14px"><div style="font-weight:700;color:var(--accent);margin-bottom:8px;font-size:13px">Flight Software & RTOS</div><p style="color:var(--text-secondary);font-size:12px;line-height:1.8;margin:0">${s.flight}</p></div>
-      <div style="background:var(--bg-surface);border-radius:8px;padding:14px"><div style="font-weight:700;color:var(--accent);margin-bottom:8px;font-size:13px">Engineering Tools & Simulation</div><p style="color:var(--text-secondary);font-size:12px;line-height:1.8;margin:0">${s.tools}</p></div>
-    </div>`;
-  } else if(tab === 'ecosystem') {
-    const ec = det.ecosystem;
-    html = `<div style="display:grid;gap:12px">
-      ${[['OEM / Prime',ec.oem,'p-blue'],['Tier-1 Suppliers',ec.tier1,'p-cyan'],['Tier-2 Suppliers',ec.tier2,'p-green'],['Tier-3 Suppliers',ec.tier3,'p-gray']].map(([lbl,val,pill])=>`<div style="background:var(--bg-surface);border-radius:8px;padding:14px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="pill ${pill}">${lbl}</span></div><p style="color:var(--text-secondary);font-size:12px;line-height:1.8;margin:0">${val}</p></div>`).join('')}
-    </div>`;
-  }
-  document.getElementById('dp-body').innerHTML = html;
-  document.querySelectorAll('.dp-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.dp-tab').forEach(t => { if(t.getAttribute('onclick') && t.getAttribute('onclick').includes("'"+tab+"'")) t.classList.add('active'); });
-}
-
-// ── INIT ──────────────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  showSec('vehicles');
+// ══════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', () => {
+  renderVehicles();
 });
 </script>
 </body>
