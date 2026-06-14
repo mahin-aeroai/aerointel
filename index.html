@@ -848,6 +848,128 @@ tbody tr:hover td { background: var(--bg-hover); }
   .nav-badge { display: none; }
   #dp { max-width: 100vw; }
 }
+
+/* ─── IMAGE GALLERY / UPLOAD ──────────────────────────────── */
+.dp-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: var(--bg-raised);
+  border: 1px solid var(--bdr);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dp-image-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.dp-image-credit {
+  position: absolute;
+  bottom: 6px; right: 8px;
+  font-size: 9.5px;
+  color: rgba(255,255,255,.6);
+  background: rgba(0,0,0,.5);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.dp-image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--tx-dim);
+}
+.dp-image-placeholder i { font-size: 40px; }
+.dp-image-placeholder span { font-size: 12px; }
+
+.upload-zone {
+  border: 2px dashed var(--bdr-strong);
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--ease);
+  background: var(--bg-card);
+  position: relative;
+  margin-bottom: 14px;
+}
+.upload-zone:hover, .upload-zone.drag-over {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+.upload-zone i { font-size: 32px; color: var(--tx-dim); display: block; margin-bottom: 8px; }
+.upload-zone h4 { font-size: 13px; color: var(--tx-2); margin-bottom: 4px; }
+.upload-zone p { font-size: 11.5px; color: var(--tx-3); }
+.upload-zone input[type="file"] {
+  position: absolute; inset: 0;
+  opacity: 0; cursor: pointer; width: 100%; height: 100%;
+}
+.upload-thumb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+.upload-thumb {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: var(--bg-raised);
+  border: 1px solid var(--bdr);
+  cursor: pointer;
+  transition: border-color var(--ease);
+}
+.upload-thumb:hover { border-color: var(--accent); }
+.upload-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.upload-thumb .del-btn {
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 20px; height: 20px;
+  background: rgba(239,68,68,.85);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--ease);
+  font-family: var(--font);
+}
+.upload-thumb:hover .del-btn { opacity: 1; }
+
+/* lightbox */
+#lightbox {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.92);
+  z-index: 500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+#lightbox.open { display: flex; }
+#lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 60px rgba(0,0,0,.8);
+}
+#lightbox-close {
+  position: absolute;
+  top: 20px; right: 24px;
+  font-size: 28px; color: #fff;
+  cursor: pointer;
+  background: none; border: none;
+  line-height: 1;
+}
 </style>
 </head>
 <body>
@@ -1364,6 +1486,226 @@ const INDIA_COMPANIES = [
   {id:"IND-CO-017",name:"Aequs Aerospace",type:"Tier-2/3 Machined Parts",hq:"Belagavi, Karnataka",emp:"2,500+",rev:"₹900 Cr est.",certs:"AS9100, NADCAP machining",products:"Airbus complex aluminium parts, Boeing nacelle parts, Safran India precision machining",focus:"Precision machined aerospace components; SEZ Belagavi with on-site Airbus/Safran support"},
   {id:"IND-CO-018",name:"Centum Electronics",type:"Tier-3 Electronics",hq:"Bangalore",emp:"600+",rev:"₹340 Cr (FY24)",certs:"AS9100, ITAR, DRDO",products:"Mission computer cards (BEL programmes), PCB assemblies, embedded sub-systems",focus:"High-reliability electronics manufacturing for ISRO, HAL, BEL, DRDO programmes"},
 ];
+
+
+
+// ══════════════════════════════════════════════════════════════
+// ADDITIONAL DETAIL SHEETS — 20 more platforms
+// ══════════════════════════════════════════════════════════════
+
+// ── IND-F-002 · LCA Tejas Mk2 ──────────────────────────────
+DETAIL_DATA["IND-F-002"] = {
+  overview:{desc:"Heavier evolution of the Tejas with a redesigned enlarged delta wing, new engine inlet, and significantly expanded payload. Bridges Mk1A to AMCA; targets 10 tonnes of payload, in-flight refuelling, and full BVR suite with Uttam AESA. Intended to replace Jaguar in IAF service.",firstFlight:"2027 (target)",inService:"2030+ (target)",qty:"108 planned",crew:"1",span:"9.5 m",length:"14.5 m",height:"4.9 m",wing:"52 m² (est.)",ceiling:"16,800 m",thrust_wt:"1.10 (EJ200)"},
+  wbs:{"1. Airframe":["1.1 Enlarged cranked-delta wing (CFRP — 15% bigger than Mk1A)","1.2 Blended LERXs (extended for higher AOA)","1.3 Revised forward fuselage (wider spine for avionics growth)","1.4 Strengthened undercarriage (heavier MTOW)","1.5 New aft fuselage (EJ230-ready / EJ200 compatible)"],
+  "2. Propulsion":["2.1 EJ200 (interim, 90 kN)","2.2 EJ230 upgrade target (105 kN — Eurojet roadmap)","2.3 Kaveri Mk2 (indigenous long-term)","2.4 Revised DSI inlet (increased mass flow)","2.5 Larger internal fuel capacity: ~3,200 L (vs 2,458 L Mk1A)"],
+  "3. Avionics":["3.1 Uttam AESA Mk2 (larger aperture, 1,024 T/R modules)","3.2 IRST (upgraded, longer range)","3.3 EW Suite Mk2 (360° MAWS, enhanced ASPJ)","3.4 New mission computer (multi-core SPARC/ARM)","3.5 IFR probe (fixed, retractable variant)","3.6 Link-16 + MADL (future)"],
+  "4. Weapons":["4.1 10 hardpoints (vs 8 on Mk1A)","4.2 Meteor BVR AAM (primary)","4.3 BrahMos-NG (under fuselage)","4.4 AASM Hammer / SPICE-250","4.5 Astra Mk2 (160 km BVR)"]},
+  materials:{structural:["CFRP T800/M21 wing skins and spars (60%+ composite fraction)","Ti-6Al-4V ELI enlarged bulkheads, engine bay frames","Al-Li 2099 fuselage panels (weight saving over 7075)","Inconel 718 revised aft fuselage for EJ230 compatibility"],coatings:["Broadband RAM on wing leading edges + inlet","ITO canopy (reduced RCS vs Mk1A)","Hi-temp TBC on EJ200/EJ230 nozzle"],special:["CMC SiC panels in nozzle area","Embedded SHM (structural health monitoring) piezo sensors"]},
+  manufacturing:{processes:["HAL new AFP line (Nasik) for enlarged wing panels","5-axis CNC expanded capacity (Ti bulk machining)","RTM for inlet components","Digital twin assembly verification"],facilities:["HAL Nasik Aircraft Division (planned FAL)","HAL Composites Bangalore (wing panels)","ADA Bangalore (design authority)"]},
+  propulsion:{engines:["EJ200 (interim): 90 kN AB / 60 kN dry; same as Mk1A","EJ230 (planned upgrade): 105 kN AB / 65 kN dry; 10% thrust increase; same core","Kaveri Mk2 (indigenous long-term): 98 kN AB / 73 kN dry; GTRE; 2030 target"]},
+  electronics:{avionics:"Uttam AESA Mk2 with 1,024 GaN T/R modules (vs 780 on Mk1A); dual-band X+Ku experimental; range 120 km; SAR/GMTI modes. New mission computer: multi-core (ARM Cortex-A72 cluster + GPU), DO-178C Level A.",ew:"DARE EW Suite Mk2: 360° MAWS coverage, improved ASPJ (150W ERP), towed decoy (Ariel fibre-optic type), laser warning receiver.",comms:"Link-16 MIDS + SATCOM Ku-band; BEL BNET-V2 SDR; NavIC/GPS dual-constellation."},
+  software:{flight:"FBW Mk2: same Ada/SCADE architecture as Mk1A but 30% more computing headroom; new IFR auto-coupling mode; expanded envelope (AOA 32°).",tools:"CATIA V6 (3D master model for Mk2 vs V5 for Mk1A); ANSYS Fluent (new inlet CFD); Simulink updated FBW models."},
+  ecosystem:{oem:"ADA (design) + HAL Aircraft + HAL Nasik (manufacture)",tier1:"BEL (Uttam Mk2 AESA); GTRE (Kaveri Mk2); Eurojet (EJ200/EJ230); Safran (LG); DARE (EW)",tier2:"TASL (composites); Dynamatic (structures); MIDHANI (Ti alloy); Bharat Forge (forgings)",tier3:"Toray (CFRP T800); Hexcel (prepreg); Martin Baker (seat); Moog (actuators)"}
+};
+
+// ── IND-F-005 · TEDBF ──────────────────────────────────────
+DETAIL_DATA["IND-F-005"] = {
+  overview:{desc:"Twin Engine Deck Based Fighter — India's first indigenously designed carrier-borne fighter for INS Vikrant and INS Vikramaditya replacement. Features twin EJ200 engines, folding delta wing, ski-jump + EMALS compatibility, and full BVR/strike capability. ADA leading design from 2017.",firstFlight:"2026-27 (target)",inService:"2032+ (target)",qty:"57 planned (IN)",crew:"1",span:"11.5 m (folded: 7.5 m)",length:"17.0 m",height:"5.2 m",wing:"65 m² (est.)",ceiling:"18,000 m",thrust_wt:"1.08 (twin EJ200)"},
+  wbs:{"1. Airframe":["1.1 Carrier-stressed fuselage (cat/STOBAR rated)","1.2 Folding outer wing sections (hydraulic fold)","1.3 Twin-fin arrangement (yaw stability at low speed)","1.4 Nose-tow catapult attachment point (CATOBAR option)","1.5 Anti-corrosion treatment (salt atmosphere)","1.6 Arrestor hook (retractable, Navy spec)"],
+  "2. Propulsion":["2.1 Twin EJ200 (90 kN each)","2.2 Twin-engine for carrier safety (single-engine OEI recovery)","2.3 Revised intake geometry (upward kick for ski-jump AOA)","2.4 ECS rated for humid/marine environment"],
+  "3. Carrier Systems":["3.1 Ski-jump launch capability (15°)","3.2 EMALS compatibility (future INS Vishal)","3.3 Arrestor hook + tailhook (MIL-A-18717)","3.4 Wing-fold actuator + lock mechanism","3.5 Deck handling tow bar attachment"],
+  "4. Avionics":["4.1 Uttam AESA (naval variant — sea search mode)","4.2 EO-IRST (extended maritime detection)","4.3 Naval IFF (Mode S + Mode 5)","4.4 Data link (Link-16 + BEL naval variant)","4.5 Radar altimeter (low-level approach)"]},
+  materials:{structural:["High-corrosion-resistant Al alloys (anodised + sealed)","CFRP with marine-grade resin (improved humidity resistance)","Ti-6Al-4V for arrestor hook, catapult fittings","Stainless steel 316L (wet areas, deck fittings)"],coatings:["Zinc chromate primer + marine topcoat","Salt-spray resistant anodising on all Al parts","Ram-air cooling intake anti-icing"],special:["Wing fold hinge: Ti-6Al-4V + grease-packed bearings","Arrestor hook: 300M steel alloy (AMS 6257)"]},
+  manufacturing:{processes:["HAL Aircraft Division (FAL planned Bangalore/Nasik)","Naval systems integration test at INS Hansa Goa","Corrosion-accelerated testing in salt fog chamber"],facilities:["ADA Bangalore (design)","HAL Aircraft Division (prototype)","DRDO NSTL (naval systems)","INS Hansa Goa (shore-based carrier trials)"]},
+  propulsion:{engines:["2× EJ200: 180 kN total AB; 1.08 T/W ratio loaded; twin gives OEI carrier recovery capability at 500 fpm ROC.","Intake: revised S-bend geometry for ski-jump AOA; boundary layer diverter redesigned."]},
+  electronics:{avionics:"Uttam AESA with ISAR (Inverse SAR for ship detection) and sea-clutter rejection; naval EO-IRST with longer wave MWIR detector; carrier approach guidance: ILS + ACLS (Automatic Carrier Landing System).",ew:"DARE naval EW suite with ESM for ship radar detection; chaff/decoy (IR + RF); MAWS (UV + MWIR).",comms:"HF for over-horizon; UHF/VHF; Link-16 MIDS; SATCOM; ICS (inter-crew — NA for single seat, but deck crew comms)."},
+  software:{flight:"Carrier approach mode: auto throttle + AOA hold; deck lock logic; hook-down sequencing; FBW gain schedule for ski-jump rotation.",tools:"CATIA V6 (ADA); FLIGHTLAB (carrier dynamics simulation); ANSYS (deck loads structural); dSPACE HIL (carrier approach testing)."},
+  ecosystem:{oem:"ADA Bangalore (design authority); HAL Aircraft Division (production)",tier1:"Eurojet/HAL Koraput (EJ200 engines); BEL (avionics, AESA); DRDO NSTL (naval systems); Safran (landing gear naval spec)",tier2:"Bharat Forge (arrestor hook, forgings); MIDHANI (Ti alloy); Dynamatic (wing fold structures); BDL (naval weapon integration)",tier3:"Martin Baker (naval ejection seat); Moog (wing fold actuators); Honeywell (ACLS)"}
+};
+
+// ── RUS-F-002 · MiG-29K ────────────────────────────────────
+DETAIL_DATA["RUS-F-002"] = {
+  overview:{desc:"Carrier-based multirole fighter operated by Indian Navy from INS Vikramaditya. Naval variant of MiG-29 with folding wings, arresting hook, strengthened landing gear. India operates 45 aircraft (16 KUB two-seaters + 29 K single-seaters). Currently undergoing modernisation.",firstFlight:"1988 (K variant)",inService:"2010 (IN)",qty:"45 (IN fleet)",crew:"1 (K) / 2 (KUB)",span:"11.4 m (7.8 m folded)",length:"17.3 m",height:"4.73 m",wing:"43.0 m²",ceiling:"17,500 m",thrust_wt:"0.98"},
+  wbs:{"1. Airframe":["1.1 LERX-dominated fuselage blending (MiG-29 family signature)","1.2 Folding outer wing panels (hydraulic)","1.3 Strengthened undercarriage (carrier landing)","1.4 Arrestor hook (retractable)","1.5 Corrosion protection (salt environment)"],
+  "2. Propulsion":["2.1 2× RD-33MK (naval, corrosion-resistant)","2.2 FADEC (Russian control)","2.3 Extended fuel tanks (wing + spine)","2.4 IFR probe (retractable)"],
+  "3. Avionics":["3.1 Zhuk-ME radar (X-band, PESA)","3.2 OLS-K IRST","3.3 Glass cockpit (IN upgrade)","3.4 HMS (Helmet Mounted Sight)"]},
+  materials:{structural:["Al-alloy primary structure (fuselage, wings)","Steel landing gear + hook (high-load)","CFRP composite fin panels, some fairings"],coatings:["Extended corrosion protection (zinc chromate + marine primer)","Salt-spray accelerated treatment on all external surfaces"],special:["Wing fold hinge: high-strength steel with sealed bearings","Hook: 300M steel, replaceable tip"]},
+  manufacturing:{processes:["RSK MiG Lukhovitsy (Russia) — original manufacture","HAL upgrade: IN avionics integration, partial depot MRO","DARE: EW upgrade integration for IN fleet"],facilities:["RSK MiG Lukhovitsy Russia (OEM)","HAL Nasik (MRO + upgrade)","INS Hansa Goa (acceptance trials)"]},
+  propulsion:{engines:["2× Klimov RD-33MK: 53 kN dry / 88 kN wet each; smokeless combustor; improved corrosion resistance vs base RD-33; bypass 0.49; TBO 1,000 hr; MiG licence assembly possible at HAL Koraput (not done yet)."]},
+  electronics:{avionics:"Zhuk-ME PESA radar: ±70° scan; 80 km BVR; 10-target track; SAR/mapping. OLS-K IRST. IN upgrade: Israeli Elta EL/M-2052 AESA retrofit under evaluation (2024).",ew:"SPO-15 RWR; BEL CMDS upgrade (IN specific); L-175V jammer evaluation.",comms:"R-862 VHF/UHF; IFF Mk XII (IN); TACAN; IN-specific HF radio."},
+  software:{flight:"Fly-by-wire: hybrid analogue/digital (Russian) with IN upgrade to partial digital overlay. BEL integration for mission software.",tools:"RSK MiG design tools (Russian CAD); HAL: CATIA V5 for MRO documentation."},
+  ecosystem:{oem:"RSK MiG (Russia) — design + original manufacture",tier1:"Klimov (RD-33MK); Phazotron (Zhuk-ME radar); HAL (MRO, upgrade)",tier2:"BEL (avionics upgrades, CMDS); DARE (EW); Bharat Forge (LG component MRO forgings)",tier3:"Safran (seals, hydraulic components); Moog (actuator MRO)"}
+};
+
+// ── FRA-F-002 · Mirage 2000 ─────────────────────────────────
+DETAIL_DATA["FRA-F-002"] = {
+  overview:{desc:"Single-engine delta-wing multirole fighter. IAF operates upgraded DARIN-III version with new avionics suite. Famous for Kargil (1999) and Balakot (2019) operations. Carries SCALP and SPICE guided munitions. Planned phase-out as AMCA arrives.",firstFlight:"1978-03-10",inService:"1985 (IAF)",qty:"49 operational (IAF 2024)",crew:"1 (H) / 2 (TH)",span:"9.13 m",length:"14.36 m",height:"5.2 m",wing:"41.0 m²",ceiling:"17,060 m",thrust_wt:"1.03"},
+  wbs:{"1. Airframe":["1.1 Pure delta wing (no canard) — Al alloy structure","1.2 Ogival delta leading edge","1.3 Twin inward-canted fins (minimal)","1.4 Two-spar wing box (Al 7075)","1.5 Integral fuel tanks (wing + fuselage)"],
+  "2. Propulsion":["2.1 SNECMA M53-P2 turbofan","2.2 Single reheat nozzle (variable convergent-divergent)","2.3 Engine Bay: Al structure with titanium firewall"],
+  "3. Avionics (DARIN-III)":["3.1 RDY2 radar (Thomson-CSF, PESA)","3.2 ULISS 52G INS (Sagem)","3.3 VE-130 HUD","3.4 Mk-10 IFF","3.5 SAGEM Sigma-10 navigation system"]},
+  materials:{structural:["Al 7075-T6 primary wing structure","Al 2024 fuselage skins","Ti-6Al-4V engine bay (M53 mounting frames)"],coatings:["Sand/erosion resistant paint (IAF desert ops)","Anti-corrosion chromate primer"],special:["Honeycomb control surfaces (elevons)"]},
+  manufacturing:{processes:["Dassault Saint-Cloud (original manufacture)","HAL Nasik: DARIN-III avionics integration","Dassault/SAGEM depot MRO support"],facilities:["HAL Nasik (depot MRO, upgrade integration)","Dassault France (engineering authority for upgrades)"]},
+  propulsion:{engines:["SNECMA M53-P2: 64.3 kN dry / 95.1 kN wet; bypass ratio 0.36; 9-stage HP compressor; TBO 1,000 hr; FADEC (analogue); no Indian manufacture — 100% import/MRO France."]},
+  electronics:{avionics:"RDY2 radar (DARIN-III): 80 km BVR; RWS/TWS; ground mapping; weather. ULISS 52G: laser-gyro INS. HUD: VE-130 wide-angle. EW: DIRAC2 RWR + countermeasures. DARIN-III upgrade completed 2011.",ew:"DIRAC2 RWR; chaff/flare BOZ-101; SERVAL ELINT pod on some aircraft.",comms:"VHF/UHF radio; TACAN; IFF Mk-12; secure voice (IAF standard)."},
+  software:{flight:"Analogue FBW (pitch only) + mechanical yaw/roll. DARIN upgrade added digital avionics bus. No Ada-class software — legacy analogue.",tools:"Dassault Mérignac tools; HAL: limited CAD support for MRO documentation."},
+  ecosystem:{oem:"Dassault Aviation France (design, OEM)",tier1:"Safran (M53 engine, SNECMA origin); Thales (radar, comms); Sagem (navigation, HUD)",tier2:"HAL Nasik (depot MRO, avionics integration); BEL (comms upgrade India-specific); Cobham (IFR probe)",tier3:"Lisi Aerospace (fasteners); Zodiac (fuel system); Safran Landing (MRO for landing gear)"}
+};
+
+// ── IND-H-002 · LCH Prachand ───────────────────────────────
+DETAIL_DATA["IND-H-002"] = {
+  overview:{desc:"Light Combat Helicopter — India's first indigenously designed attack helicopter. Derived from ALH Dhruv but with a narrow fuselage, tandem cockpit, stub wings, and dedicated attack systems. First to land on Siachen Glacier at 4,700m. In service with IAF and IA.",firstFlight:"2010-03-29",inService:"2022 (IAF); 2023 (IA)",qty:"160 ordered (IAF 65 + IA 95)",crew:"2 (pilot + WSO, tandem)",span:"13.2 m (main rotor)",length:"15.8 m",height:"4.7 m",wing:"N/A",ceiling:"6,500 m service (combat 4,700 m at Siachen)"},
+  wbs:{"1. Fuselage":["1.1 Narrow tandem cockpit (2 crew, armoured)","1.2 Composite/Al semi-monocoque fuselage","1.3 Crashworthy structure (20g floor)","1.4 Stub wings (4 hardpoints, CFRP)","1.5 Retractable nose-wheel landing gear (vs skids on ALH)"],
+  "2. Rotor System":["2.1 4-blade bearingless main rotor (CFRP, ALH derivative)","2.2 Tail rotor (2-blade, CFRP)","2.3 Optimised blade twist for high altitude"],
+  "3. Propulsion":["3.1 2× Safran/HAL Shakti TM333-2C2H","3.2 FADEC","3.3 ECS (extreme altitude rated)","3.4 Fuel system (crash-resistant)"],
+  "4. Weapons":["4.1 DRDO 20mm M621 turret gun (70 rounds)","4.2 4× Helina/Dhruvastra ATGM (tank buster)","4.3 2× 70mm rocket pods (12 each)","4.4 Air-to-air Mistral-2 (future)","4.5 Laser designator pod (HAL/DRDO)"]},
+  materials:{structural:["CFRP (fuselage panels, rotor blades, stub wings)","Al alloy (main fuselage frames, decking)","Kevlar armour plates (cockpit, critical areas)","Ti-6Al-4V (rotor hub, engine mounts)"],coatings:["Low IR signature paint (olive drab with IR-suppressive additive)","Anti-corrosion primer (marine-resistant for altitude operations)"],special:["Ballistic-resistant cockpit transparency (PPG)","Crashworthy seats (energy absorbing, 20g rated)","Fuel bladder: self-sealing (MIL-DTL-27422)"]},
+  manufacturing:{processes:["HAL RWRDC Bangalore (design + FAL)","CFRP autoclave (rotor blades, fuselage panels)","Armour installation: DRDO ARDE process","Integration of weapons: BDL/HAL joint"],facilities:["HAL Rotary Wing R&D Centre, Bangalore","DRDO ARDE Pune (armour, weapons)","BDL Hyderabad (Helina integration)","HAL Koraput (Shakti engine)"]},
+  propulsion:{engines:["2× Shakti TM333-2C2H: 746 kW each; optimised for high altitude (derating for +4,700m density altitude); OEI: 895 kW; FADEC maintains power margin for Siachen conditions."]},
+  electronics:{avionics:"Honeywell/HAL glass cockpit (4 MFDs, 2 HUDs in tandem cockpit); FLIR (forward-looking IR for nap-of-earth); Selex Leonardo NVG-compatible; digital map. Fire control: Elbit OTAR laser designator range-finder.",ew:"BEL RWR (radar warning); CMDS 30-round chaff/flare; MAWS (UV-based); jamming capability under development.",comms:"VHF/UHF BEL radio; secure ICS; IFF Mode-4/5."},
+  software:{flight:"AFCS 4-axis (HAL); CSIO Chandigarh AFCS avionics management; VxWorks RTOS; DO-178B Level B. Weapons: fire control computer integrating laser designator with Helina ATGM seeker.",tools:"CATIA V5 (HAL design); FLIGHTLAB (rotorcraft simulation); MATLAB/Simulink (AFCS design)."},
+  ecosystem:{oem:"HAL Rotary Wing R&D Centre, Bangalore",tier1:"Safran (Shakti engine); BEL (avionics, comms); DRDO ARDE (armour, gun); BDL (Helina ATGM)",tier2:"HAL CSDO (CFRP rotor blades); MIDHANI (Ti alloy); Bharat Forge (rotor hub forgings); Elbit/HAL (fire control)",tier3:"Martin Baker (armoured ejection seats); Moog (actuators); Centum Electronics (boards); Paras Defence (sensors)"}
+};
+
+// ── IND-U-001 · Rustom-2 (TAPAS) ───────────────────────────
+DETAIL_DATA["IND-U-001"] = {
+  overview:{desc:"TAPAS-BH-201 (Tactical Airborne Platform for Aerial Surveillance — Beyond Horizon) is India's first MALE class UAV developed entirely by DRDO. Designed for day/night ISR at medium altitude, high endurance (24+ hours). Currently undergoing certification for IAF/IN/IA.",firstFlight:"2016-11-16",inService:"Development — IOC 2025 (target)",qty:"60+ planned across services",crew:"Unmanned (2 GCS operators)",span:"20.6 m",length:"9.5 m",height:"3.5 m",wing:"N/A",ceiling:"9,000 m",thrust_wt:"N/A"},
+  wbs:{"1. Airframe":["1.1 High-aspect-ratio composite wing (CFRP spar + GFRP skin)","1.2 Twin-boom fuselage (CFRP/GFRP monocoque)","1.3 V-tail empennage (composite)","1.4 Retractable tricycle undercarriage","1.5 ISR payload bay (nose + belly)"],
+  "2. Propulsion":["2.1 Rotax 914F turbocharged piston engine (115 hp)","2.2 Pusher configuration (rear-mounted propeller)","2.3 Fuel system: 800 L (AVGAS/MOGAS)","2.4 Engine Management Unit (EMU — digital)"],
+  "3. ISR Payload":["3.1 DRDO SAR (Synthetic Aperture Radar) — 1m resolution","3.2 EO/IR ball turret (day+night)","3.3 COMINT/ELINT module","3.4 AIS receiver (naval variant)","3.5 SATCOM data link (L-band)"],
+  "4. Avionics":["4.1 DRDO autopilot (MEMS IMU + GPS)","4.2 Ground Control Station (GCS) — HAL","4.3 C-band data link (LOS, 250 km)","4.4 SATCOM link (BLOS — GSAT)","4.5 ATC transponder (Mode S)"]},
+  materials:{structural:["CFRP T300/epoxy (wing main spar — co-cured)","GFRP E-glass (wing skin, fuselage panels)","Nomex honeycomb (control surfaces sandwich)","Al 6061 (fuselage internal frames, equipment bays)"],coatings:["White + grey DRDO scheme (low observable option under test)","Anti-UV polyurethane topcoat (long-duration exposure)"],special:["De-icing fluid spray system (leading edge — high altitude)","Radar-absorbing nose radome (SAR transparency)"]},
+  manufacturing:{processes:["DRDO ADE Bangalore (design + prototype manufacture)","HAL (production — anticipated)","CFRP hand layup + vacuum bag (prototypes); AFP planned for production","Payload integration: DRDO NAL (SAR), BEL (EO/IR)"],facilities:["DRDO ADE Bangalore (design, prototypes)","HAL (planned production)","Challakere test range (trials — Karnataka)","DRDO Aeronautical Test Range (ATR), Chitradurga"]},
+  propulsion:{engines:["Rotax 914F: 115 hp (85.8 kW); turbocharged; AVGAS/MOGAS; EMU digital; TBO 1,200 hr; Austrian import (replacement by Indian piston engine under development at GTRE/ADE)."]},
+  electronics:{avionics:"DRDO IMU-200 (MEMS, 10g vibration rated); GPS/NavIC; 2× SATCOM terminals (GSAT Ku-band primary, L-band backup); ATC Mode S; DRDO ground datalink (C-band, 250 km LOS); GCS: HAL-built (ruggedised OTS PC + custom software).",ew:"DRDO ESM payload (optional — frequency scanning RWR); no active jammer (ISR platform); jam-resistant FHSS data link.",comms:"SATCOM (GSAT-7A for military) BLOS link; LOS C-band 250 km; ATC comm (VHF COM)."},
+  software:{flight:"DRDO ADE autopilot software (C/C++, RTEMS); waypoint navigation; GCS mission planning (Google Maps-based India overlay); emergency return-to-base; parachute recovery mode.",tools:"DRDO in-house CAD; OpenFOAM (aerodynamics); MATLAB/Simulink (GNC); FlightGear (simulation); Python (mission planning GCS)."},
+  ecosystem:{oem:"DRDO ADE Bangalore (design authority)",tier1:"HAL (production planned); BEL (EO/IR payload, data links); DRDO SAC (SAR payload); ISRO (SATCOM — GSAT-7A slots)",tier2:"Bharat Electronics (data link modules); Centum Electronics (avionics PCBs); ideaForge (GCS software influence)",tier3:"Rotax Austria (engine — import); Toray (CFRP wing spar prepreg — import); BEL (transponder)"}
+};
+
+// ── USA-U-001 · MQ-9B SkyGuardian ─────────────────────────
+DETAIL_DATA["USA-U-001"] = {
+  overview:{desc:"General Atomics Predator B derivative certified for BVLOS operations in civil/military airspace. India acquired 31 MQ-9B (SkyGuardian + SeaGuardian mix) for IAF/IN/IA ISR and strike missions. Features satellite data link, 40-hour endurance, and multi-intelligence payload suite.",firstFlight:"2016-12-08 (SkyGuardian)",inService:"2025 (India delivery started)",qty:"31 acquired (India); 300+ USAF",crew:"Unmanned (2 operators — pilot + sensor)",span:"24.0 m",length:"11.7 m",height:"3.81 m",wing:"N/A",ceiling:"12,200 m (40,000 ft)",thrust_wt:"N/A"},
+  wbs:{"1. Airframe":["1.1 CFRP high-aspect-ratio wing (24 m span)","1.2 Pod-and-twin-boom fuselage","1.3 Turboprop nacelle (pusher)","1.4 9× hardpoints (underwing + fuselage)","1.5 Satellite communications dome (Ku-band SATCOM fairing)"],
+  "2. Propulsion":["2.1 Honeywell TPE331-10 turboprop (900 shp)","2.2 FADEC","2.3 Pusher propeller (4-blade composite)","2.4 Fuel: 3,084 L (JP-8 / Jet-A)"],
+  "3. ISR Payload":["3.1 GA-ASI Lynx Multi-mode Radar (SAR/GMTI)","3.2 MTS-C EO/IR ball turret","3.3 DAS (Detect and Avoid) radar (for BVLOS)","3.4 AIS/SIGINT (SeaGuardian naval variant)","3.5 LIDAR (optional)"],
+  "4. Strike Capability":["4.1 Hellfire AGM-114 (×4)","4.2 GBU-12 Paveway II (×2)","4.3 GBU-38 JDAM","4.4 AIM-92 Stinger (air-to-air — SeaGuardian)"]},
+  materials:{structural:["CFRP wing (high-stiffness, low weight for 40 hr endurance)","GFRP fairings and radomes","Al 6061 fuselage structure"],coatings:["Grey low-observable primer","Anti-erosion wing leading edge tape"],special:["Lightning protection mesh embedded in CFRP wing","ITAR-controlled radar-absorbing material (partial)"]},
+  manufacturing:{processes:["GA-ASI Poway California (design + manufacture)","India: no domestic manufacture — 100% import","Offset: L&T Aerospace + TASL awarded offset contracts (MRO + component supply)"],facilities:["GA-ASI Poway California (primary)","India: HAL Hyderabad (MRO arrangement)","L&T Aerospace (offset manufacturing of non-critical parts)"]},
+  propulsion:{engines:["Honeywell TPE331-10GD: 900 shp; turboprop; FADEC; JP-8/Jet-A; TBO 3,600 hr; pusher 4-blade composite propeller (reversible pitch); climb to 12,200 m on single engine."]},
+  electronics:{avionics:"Lynx Block 2 SAR (1A for GMTI, 1m SAR resolution); MTS-C EO/IR (MWIR + LWIR + CCD + laser); GA-ASI GDT ground data terminal (Ku-band SATCOM, 50 Mbps); DAS (Garmin ADS-B + radar for see-and-avoid); INS/GPS (dual-constellation).",ew:"ALQ-167 jammer pod (optional); RWR SPR-2; SATCOM anti-jam (nulling antenna); CM dispenser (flare/chaff — optional for military config).",comms:"Ku-band SATCOM LOS + BLOS; UHF LOS (military); Link-16 (mil config); ATC Mode S/C; ADS-B (BVLOS civil airspace)."},
+  software:{flight:"GA-ASI OneSystem GCS; waypoint + orbit management; payload tasking; Detect-and-Avoid TCAS-II equivalent; India: MIL-spec encryption overlay (BEL/DRDO integration).",tools:"GA-ASI proprietary tools; Python GCS interface; India: DRDO mission planning integration."},
+  ecosystem:{oem:"General Atomics Aeronautical Systems Inc (GA-ASI), Poway, California",tier1:"Honeywell (TPE331 engine); Raytheon (MTS-C EO/IR); Garmin (avionics); Viasat (SATCOM)",tier2:"L&T Aerospace India (offset MRO); TASL (offset component supply India); BEL (India-specific encryption integration)",tier3:"Toray (CFRP — GA-ASI proprietary supply chain); Parker Hannifin (hydraulics, fuel)"}
+};
+
+// ── TUR-U-001 · Bayraktar TB2 ──────────────────────────────
+DETAIL_DATA["TUR-U-001"] = {
+  overview:{desc:"Medium-altitude long-endurance UCAV that became globally famous for its effectiveness in Ukraine, Azerbaijan, Libya, and Ethiopia. 170+ TB2 built; exported to 24+ nations. Three-axis moving payload (Wescam MX-15), laser designation, and precision smart munition delivery.",firstFlight:"2014-04-24",inService:"2014 (TuAF)",qty:"500+ total built; 24+ export nations",crew:"Unmanned",span:"12.0 m",length:"6.5 m",height:"2.2 m",wing:"N/A",ceiling:"8,230 m",thrust_wt:"N/A"},
+  wbs:{"1. Airframe":["1.1 CFRP/Kevlar composite fuselage (Baykar design)","1.2 High-aspect-ratio wing (CFRP)","1.3 Twin-boom tail (CFRP)","1.4 V-tail empennage","1.5 Undercarriage (fixed tricycle)"],
+  "2. Propulsion":["2.1 Rotax 912iS (100 hp) — fuel injected","2.2 Pusher prop (2-blade)","2.3 Fuel: 300 L (mogas/avgas)"],
+  "3. Payload":["3.1 Wescam MX-15 EO/IR ball (export) / Aselsan CATS (Turkey)","3.2 Laser designator","3.3 MAM-L (micro munitions — 22 kg, laser guided)","3.4 MAM-C (micro smart micro munition — 6.5 kg)"],
+  "4. Avionics":["4.1 Baykar autopilot (MEMS IMU + GPS)","4.2 C-band data link (150 km LOS)","4.3 SATCOM (optional upgrade)","4.4 ATC transponder"]},
+  materials:{structural:["CFRP (wing, fuselage — Baykar-designed and manufactured)","Kevlar (fuselage belly, impact protection)","Al alloy (internal frames, engine mount)"],coatings:["Low-observable grey scheme","Anti-UV topcoat"],special:["MEMS vibration-isolated payload gimbal"]},
+  manufacturing:{processes:["Baykar Teknoloji Istanbul (all design + manufacture — vertically integrated)","CFRP: Baykar in-house composites facility","Engine: Rotax Austria (100% import)"],facilities:["Baykar Istanbul (main)","Baykar Ankara (R&D and Akıncı)","Ukraine factory (Baykar opening 2024)"]},
+  propulsion:{engines:["Rotax 912iS: 100 hp (74.6 kW); fuel-injected; 4-cylinder; 25 hr unlimited power; TBO 2,000 hr; AVGAS or MOGAS; import from Austria — Baykar evaluating Turkish engine (TEI)."]},
+  electronics:{avionics:"Baykar autopilot (Pitot-static + MEMS IMU + GPS/GLONASS); Aselsan CATS EO/IR (Turkey domestic — MWIR + visible + laser designator); data link C-band (150 km); Mode C transponder.",ew:"No organic EW — relies on MAM munition precision and surprise; RWR (optional — Ukraine-specific upgrades); chaff/flare (rare configuration).",comms:"C-band LOS data link; HF (limited range); ATC VHF communication relay."},
+  software:{flight:"Baykar GCS: proprietary (Turkish); waypoint + loiter; automatic take-off and landing; parachute recovery; 3-aircraft simultaneous control per GCS.",tools:"Baykar in-house tools (not published); reports suggest CATIA V5 (composite design); MATLAB/Simulink (GNC); OpenFOAM (CFD)."},
+  ecosystem:{oem:"Baykar Teknoloji, Istanbul — vertically integrated (fuselage, wing, avionics, SW all in-house)",tier1:"Rotax (engine — import); Wescam Canada (EO/IR — export); Aselsan (CATS EO/IR domestic); Roketsan (MAM munitions)",tier2:"STM Turkey (ground station integration); Havelsan (mission planning SW); Baykar composites team (in-house)",tier3:"Toray (CFRP import); various Turkish electronics suppliers (PCBs)"}
+};
+
+// ── IND-SAT-002 · LVM3 ─────────────────────────────────────
+DETAIL_DATA["IND-SAT-002"] = {
+  overview:{desc:"GSLV Mk III / LVM3 (Launch Vehicle Mark 3) is ISRO's heaviest operational launch vehicle. Placed Chandrayaan-2 (3,850 kg) in lunar orbit and launched OneWeb commercial payloads (5,800 kg to LEO). CE-20 cryogenic engine is fully indigenous. 100% mission success rate (6/6 as of 2024).",firstFlight:"2014-12-18 (suborbital); 2017-06-05 (orbital)",inService:"2017 — operational",qty:"6 missions (5 orbital, 1 suborbital)",crew:"N/A",span:"4.0 m (core) + 2× S200",length:"43.5 m",height:"N/A",wing:"N/A",ceiling:"N/A (GTO + LEO)"},
+  wbs:{"1. S200 Solid Boosters (×2)":["1.1 S200 motor casing (steel, 204 T propellant each)","1.2 HTPB-AP-Al solid propellant","1.3 Flex nozzle TVC","1.4 Thrust termination ports","1.5 Separation system (pyro ring)"],
+  "2. L110 Core (Liquid)":["2.1 2× Vikas engines (L110 variant, 800 kN each)","2.2 UDMH + N₂O₄ propellant","2.3 Common bulkhead tanks (Al 2219)","2.4 Stage separation (retro rockets)"],
+  "3. C25 Cryogenic Upper Stage":["3.1 CE-20 cryogenic engine (200 kN vac)","3.2 LOX + LH₂ propellant (28 T)","3.3 Aluminium-alloy cryogenic tanks","3.4 Thrust frame + thrust vector control (gimbal)","3.5 Main LOX/LH₂ venting valves"],
+  "4. Payload Fairing":["4.1 Ogive CFRP fairing (4.0 m dia, 8.7 m long)","4.2 Bisector split + spring separation","4.3 Acoustic blanket (foam + Nextel)"],
+  "5. Avionics":["5.1 Redundant INS (ISRO IISU, fibre-optic gyro)","5.2 On-board computer (ISRO design, 32-bit DSP)","5.3 S-band telemetry + C-band transponders","5.4 Range safety destruct (RSDS)"]},
+  materials:{structural:["Maraging Steel 250 (S200 casing)","Al 2219-T87 (L110 + C25 tanks — weldable, cryogenic)","CFRP M55J (payload fairing)","Inconel 625 (Vikas + CE-20 combustion chambers)","Ti-6Al-4V (CE-20 turbopump housing, TVC gimbals)"],coatings:["SLA-561V ablative (S200 nozzle, interstage)","Polyurethane foam (LH₂ tank insulation — C25)","MLI blankets (multi-layer, cryogenic stage)"],special:["Cryogenic joints: indium-wire seals (LH₂ compatibility)","CF/SiC composite nozzle throat insert (CE-20)","Self-pressurising helium (GHe) pressurant bottles"]},
+  manufacturing:{processes:["ISRO SDSC SHAR: S200 propellant casting (204 T blocks)","ISRO LPSC Mahendragiri: CE-20 manufacture, turbopump, C25 stage integration","Walchandnagar Industries: S200 casing (maraging steel)","ISRO VSSC: C25 cryogenic tank fabrication (Al-FSW)","Godrej Aerospace: Vikas engine turbopumps"],facilities:["ISRO SDSC SHAR Sriharikota (VAB + launch)","ISRO LPSC Mahendragiri (cryogenic engine + stage)","Walchandnagar Satara (S200 casings)","ISRO VSSC Thiruvananthapuram (tank fab, avionics)","Godrej Aerospace Mumbai (turbopumps)"]},
+  propulsion:{engines:["S200 (×2): 3,570 kN each SL thrust; 130 s burn; HTPB-AP-Al; TVC ±3.5°","L110 (×2 Vikas): 800 kN each vacuum; 203 s burn; UDMH/N₂O₄; gas generator cycle","CE-20 cryogenic: 200 kN vacuum; Isp 443 s; expander cycle (first in India); LOX/LH₂; turbopump 2,000 rpm; fully indigenous since 2017."]},
+  electronics:{avionics:"ISRO FOG-based INS (fibre-optic gyroscope, IISU); dual-redundant OBC (32-bit DSP, Ada flight software); S-band telemetry (2 × 2W transmitters); C-band transponder (tracking); range safety: encrypted destruct receiver (ISRO key management).",ew:"No EW — range safety only; RSDS (Range Safety Destruct System): encrypted uplink command.",comms:"ISTRAC network (Bangalore + SDSC); INSAT relay for real-time telemetry; TDRS-equivalent (ISRO SpaDeX future)."},
+  software:{flight:"Ada + C; ISRO GVSIM 6-DOF validated model; PEG (Powered Explicit Guidance) for C25 orbit injection; S200 guidance: gravity-turn with roll program; automatic abort logic (software watchdog).",tools:"ISRO proprietary GVSIM; NASTRAN (structural); OpenFOAM (plume aerodynamics); MATLAB (GNC design); Pro/ENGINEER CAD."},
+  ecosystem:{oem:"ISRO (VSSC + LPSC + SDSC + ISAC)",tier1:"ISRO LPSC (CE-20 + Vikas engines); ISRO SDSC SHAR (S200 propellant, launch); Walchandnagar Industries (S200 casings); Godrej Aerospace (turbopumps, tank closures)",tier2:"L&T (large structural + interstage fabrication); HAL Aerospace (machined Al parts); BEL (avionics electronics, telemetry transmitters); ECIL (range safety electronics)",tier3:"MTAR Technologies (precision parts — listed IPO 2021); Centum Electronics (PCBs); MIDHANI (maraging steel + Ti supply); Aequs (precision machined Al fittings)"}
+};
+
+// ── EUR-CP-001 · A320neo ────────────────────────────────────
+DETAIL_DATA["EUR-CP-001"] = {
+  overview:{desc:"Most popular narrowbody airliner. New Engine Option (neo) with CFM LEAP-1A or P&W PW1100G geared turbofan delivers 20% fuel savings vs ceo. IndiGo operates world's largest A320neo fleet (300+ aircraft). India is the world's fastest growing A320neo market.",firstFlight:"2014-09-25",inService:"2016",qty:"9,000+ ordered (A320neo family); India: 800+ IndiGo, Air India, SpiceJet",crew:"2",span:"35.8 m",length:"37.6 m",height:"11.8 m",wing:"122.6 m²",ceiling:"12,100 m",thrust_wt:"N/A"},
+  wbs:{"1. Airframe":["1.1 Aluminium-lithium (Al-Li 2196) fuselage frames","1.2 CFRP wing box (primary) + Al-Li ribs","1.3 Al-Li winglet (Sharklet — 2.4 m each)","1.4 CFRP empennage (fin + stabilisers)","1.5 Al 2024 fuselage skins"],
+  "2. Propulsion":["2.1 CFM LEAP-1A (IndiGo) / P&W PW1100G (Air India)","2.2 FADEC","2.3 Nacelle + thrust reverser (Safran Nacelles)","2.4 Fuel system: 26,730 L (wings + centre tank)"],
+  "3. Avionics":["3.1 Thales EFIS (two-screen SmartDisplay)","3.2 Honeywell FMS (flight management)","3.3 TCAS II + ADS-B Out","3.4 Dual ILS + GPS landing system","3.5 ACARS datalink"],
+  "4. Cabin":["4.1 Single-aisle 31-inch pitch (IndiGo economy)","4.2 150–194 passengers","4.3 CFM-rated OBOGS (supplemental oxygen)","4.4 CFRP interior panels (weight saving)"]},
+  materials:{structural:["Al-Li 2196 (fuselage frames + skins — 10% lighter than 2024)","CFRP T800/Cytec 977-3 (wing box upper/lower covers)","Al 7010 (wing ribs)","GFRP (radome, service doors, secondary panels)","Ti-6Al-4V (pylons, engine mounts)"],coatings:["AkzoNobel Aerodur 3001 basecoat + airline livery","Anti-corrosion sealant all joints","Deicing boot (leading edge inflatable rubber, pneumatic)"],special:["Al-Li 2196 — welded panels (Airbus proprietary FSW process)","Carbon fibre Sharklet winglets — blended winglet laminar flow","CFRP tail — T800 with toughened resin (bird-strike rated)"]},
+  manufacturing:{processes:["Airbus Hamburg (Final Assembly Line — Germany); Airbus Tianjin (A320 family China FAL)","Aerostructures: Premium Aerotec (Germany — fuselage sections); Stelia (France — nose); Spirit AeroSystems (US — not for neo)","Al-Li panels: Constellium (France)","CFRP wing: Airbus Broughton (UK)","India ToT: Tata Advanced Systems (Hyderabad) — A320 cabin doors, vertical tail (offset supply)"],facilities:["Airbus Hamburg + Toulouse (FAL)","Airbus Broughton UK (CFRP wing)","TASL Hyderabad (India — offset cabin doors, vertical tail)","Safran Nacelles Le Havre (LEAP-1A nacelle)"]},
+  propulsion:{engines:["CFM LEAP-1A: 100–130 kN; bypass 11:1 (ultra-high); CFRP fan; CMC turbine (SiC/SiC blades — 65% weight saving); FADEC dual-channel; TBO 4,000+ hr; 20% fuel burn reduction vs CFM56-5B.","P&W PW1100G: 120–143 kN; geared turbofan (GTF); 12:1 bypass; 16% fewer parts; gear reduction 3:1 (fan slower); 20% fuel saving + 50% NOx reduction."]},
+  electronics:{avionics:"Thales SmartDisplay (8 screen): PFD/ND/ECAM; Honeywell FMS with 4D RNAV; Garmin/Honeywell EGPWS; Rockwell Collins TCAS II v7.1; SELCAL (passenger alert); ADS-B Out mandated 2020.",ew:"No military EW. TCAS II for traffic avoidance. Honeywell EGPWS (terrain warning).",comms:"ACARS (Boeing/Thales CMF); HF + VHF radios; SATCOM (Inmarsat SwiftBroadband — optional); ADS-C (oceanic tracking)."},
+  software:{flight:"Airbus FBW: digital fly-by-wire (3 computers, ELAC/SEC/FAC); flight envelope protection (alpha floor, bank angle limit); MCDU (multifunction control and display unit) Thales. DO-178C Level A.",tools:"CATIA V6 (Airbus — 3D master model); MSC Nastran/Fluent FEA+CFD; Dassault SIMULIA (structural); Airbus ELFINI (in-house FEA solver); DOORS (requirements)."},
+  ecosystem:{oem:"Airbus SE (Toulouse + Hamburg FAL)",tier1:"CFM International (LEAP-1A engine); P&W (PW1100G); Thales (avionics); Safran (landing gear, nacelles, seats)",tier2:"Constellium (Al-Li 2196); Hexcel (CFRP prepreg); Spirit AeroSystems (nose section); Premium Aerotec (fuselage sections); TASL India (cabin doors — offset)",tier3:"Toray (CFRP fibres); Alcoa/Arconic (Al alloy); Lisi Aerospace (fasteners); Parker (hydraulics); Liebherr (ECS, landing gear components)"}
+};
+
+// ── USA-CP-001 · Boeing 737 MAX 8 ─────────────────────────
+DETAIL_DATA["USA-CP-001"] = {
+  overview:{desc:"Re-engined 737 narrowbody with CFM LEAP-1B engines and fuel-saving winglets. Returned to service globally in 2020 after MCAS-related grounding (2019-2020). SpiceJet and Air India Express (formerly Air Asia India) operate in India. Total orders 5,000+ (737 MAX family).",firstFlight:"2016-01-29",inService:"2017 (returned service 2020 post-grounding)",qty:"5,000+ ordered (MAX family); India: 155 SpiceJet, Air India orders",crew:"2",span:"35.9 m",length:"39.5 m",height:"12.3 m",wing:"125.0 m²",ceiling:"12,500 m",thrust_wt:"N/A"},
+  wbs:{"1. Airframe":["1.1 Aluminium 2024 fuselage skins (legacy construction)","1.2 Al 7075 structural frames","1.3 Split Scimitar winglets (CFRP)","1.4 CFRP tail sections","1.5 Al main wing structure (classic design)"],
+  "2. Propulsion":["2.1 CFM LEAP-1B (lower-mounted, forward for CG)","2.2 FADEC","2.3 Thrust reverser (Triumph Group)","2.4 Fuel: 26,020 L"],
+  "3. MCAS":["3.1 MCAS (Manoeuvring Characteristics Augmentation System) — revised","3.2 Dual AOA vane inputs (post-grounding fix)","3.3 Pilot override authority (post-fix)"],
+  "4. Avionics":["4.1 Honeywell FMS","4.2 Rockwell Collins avionics suite","4.3 TCAS II + ADS-B","4.4 LCD displays (4-screen)"]},
+  materials:{structural:["Al 2024-T3 fuselage skins (legacy — not Al-Li)","Al 7075 frames, ribs","CFRP winglets (Boeing design)","Ti-6Al-4V engine mounts, pylons"],coatings:["Hentzen Aerospace primer + Mapaero topcoat","Deicing boots (pneumatic inflatable, B.F. Goodrich)"],special:["CFM LEAP-1B: CMC turbine (SiC/SiC blades in HPT)","Forward-mounted engine pods (clearance via lengthened gear)"]},
+  manufacturing:{processes:["Boeing Renton Washington (FAL — highest rate in aviation: 38/month pre-2024)","Spirit AeroSystems Wichita (fuselage sections — Boeing-Spirit integration issues 2024)","CFRP winglets: Boeing Frederickson + Triumph","India offset: HAL, Tata (some parts under supplier agreements)"],facilities:["Boeing Renton WA (737 FAL)","Spirit AeroSystems Wichita (fuselage)","Boeing Portland (winglets, nacelles)"]},
+  propulsion:{engines:["CFM LEAP-1B: 100–130 kN; bypass 9:1; CFRP fan; CMC turbine; 14% better fuel burn vs CFM56-7B; mounted forward + lower (gear length limitation); FADEC; TBO 4,000+ hr."]},
+  electronics:{avionics:"Honeywell FMS Mk2 (RNAV, RNP-AR); 4-screen LCD EFIS; Rockwell Collins Pro Line Fusion option; TCAS II v7.1; ADS-B Out; MCAS revision (June 2020 re-certification) — dual AOA input, crew override, software bulletin.",ew:"No EW. EGPWS Honeywell. TCAS II.",comms:"ACARS; HF/VHF; SELCAL; optional Ku-band SATCOM (inflight WiFi — Viasat)."},
+  software:{flight:"Boeing FBW (pitch-only); MCAS (revised): activates only once per event, bounded input, crew can override with column force >15 lbs. DO-178C Level A. Post-grounding: FAA/EASA required dual AOA source monitoring.",tools:"Boeing CATIA V5 (legacy); MSC NASTRAN (structural); Boeing in-house aerodynamics (PANAIR legacy + Fluent)."},
+  ecosystem:{oem:"Boeing Commercial Airplanes, Renton WA",tier1:"CFM International (LEAP-1B); Honeywell (avionics, wheels, brakes); Rockwell Collins (displays, comms); Safran (landing gear, seats)",tier2:"Spirit AeroSystems (fuselage sections); Triumph Group (thrust reversers); Moog (flight control actuators); Parker (hydraulics)",tier3:"Alcoa/Arconic (Al alloy); Hexcel (CFRP winglets prepreg); Lisi Aerospace (fasteners); Ducommun (aerostructures)"}
+};
+
+// ── IND-M-004 · Astra Mk1 ─────────────────────────────────
+DETAIL_DATA["IND-M-004"] = {
+  overview:{desc:"India's first Beyond Visual Range air-to-air missile, developed by DRDO. Active radar seeker, solid rocket motor, and datalink for mid-course update. Now operational on Su-30MKI and clearing for Tejas. Mk2 under development for 160 km range.",firstFlight:"2003 (first test); 2011 (full range test)",inService:"2022 (IOC); 2023 (FOC)",qty:"248 ordered (first batch); 10-year production plan",crew:"N/A",span:"0.30 m",length:"3.57 m",height:"N/A",wing:"N/A",ceiling:"20,000 m (target intercept)",thrust_wt:"N/A"},
+  wbs:{"1. Missile Structure":["1.1 CFRP body (ogive + cylinder + boat-tail)","1.2 Canards (4× folding, CFRP)","1.3 Tail fins (4× fixed, Al alloy)","1.4 Warhead section (15 kg blast-fragmentation)","1.5 Seeker dome (ceramic — Alumina)"],
+  "2. Propulsion":["2.1 Dual-thrust solid rocket motor (HEMRL, DRDO)","2.2 Boost phase (4 s, 20 g acceleration)","2.3 Sustain phase (40 s coast)"],
+  "3. Guidance":["3.1 Active radar seeker (Ka-band, DRDO LRDE)","3.2 INS mid-course (strapdown + datalink update)","3.3 Proportional navigation (terminal)","3.4 Datalink (aircraft uplink mid-course correction)"],
+  "4. Warhead":["4.1 15 kg blast-fragmentation (DRDO ARDE)","4.2 Proximity fuse (active RF)","4.3 Contact fuse (backup)"]},
+  materials:{structural:["CFRP T300 (main body — weight critical)","Alumina ceramic (seeker dome — Ka-band transparent)","Al 7075 (tail fins, canard spars)","Maraging Steel 250 (motor casing)"],coatings:["Ablative nose coating (high-speed heating)","Anti-radar treatment (partial, dome excluded)"],special:["Ka-band seeker dome: hot-pressed sintered alumina (0.05 dB/mm loss at Ka-band)","Proximity fuse: DRDO ARDE design (time-of-flight + RF active)"]},
+  manufacturing:{processes:["DRDO DRDL Hyderabad (design authority)","BDL Hyderabad (production — HAL for aircraft integration)","Motor propellant: DRDO HEMRL Pune","Seeker: DRDO LRDE Chennai"],facilities:["BDL Hyderabad (Kanchanbagh, production)","DRDO DRDL Hyderabad (design)","DRDO HEMRL Pune (propellant)","DRDO LRDE Chennai (Ka-band seeker)"]},
+  propulsion:{engines:["Dual-thrust solid rocket motor: DRDO HEMRL formulation; Boost: ~15 kN for 4 s (20 g acceleration to ~Mach 4); Sustain: reduced thrust coast for 40 s; HTPB-AP-Al composite propellant; maraging steel casing."]},
+  electronics:{avionics:"Ka-band Active Radar Seeker (DRDO LRDE): monopulse, 10 km active range at front hemisphere; 20 Hz tracking update; strapdown INS (MEMS); datalink (S-band, one-way from launch aircraft for mid-course); proximity fuse (RF active, 6m lethal radius).",ew:"ECCM: frequency agile seeker (resistance to jamming); ARM (Anti-Radiation Mode — optional for passive track); noise and deceptive jamming resistance built into seeker signal processing.",comms:"Aircraft datalink (Su-30MKI 1553B uplink); one-way mid-course update; autonomous terminal homing."},
+  software:{flight:"INS: DRDO DRDL (C/Ada); proportional navigation + augmented PN (terminal); datalink processing: decodes uplink corrections and applies to INS; terminal: pure PN to intercept; DO-178B Level A equivalent (DRDO internal standard).",tools:"MATLAB/Simulink (GNC design, DRDO); ANSYS Fluent (aerodynamics); Python (seeker signal sim); DRDO in-house 6-DOF sim."},
+  ecosystem:{oem:"DRDO DRDL Hyderabad (design); BDL Hyderabad (production)",tier1:"DRDO HEMRL (motor propellant); DRDO LRDE (Ka-band seeker); DRDO ARDE (warhead, fuse); HAL (aircraft integration Su-30/Tejas)",tier2:"BDL Kanchanbagh (final assembly); Bharat Forge (motor casing forgings); Centum Electronics (seeker signal processing PCBs)",tier3:"MIDHANI (maraging steel for motor casing); Toray (CFRP body prepreg)"}
+};
+
+// ── USA-SAT-001 · SpaceX Falcon 9 ─────────────────────────
+DETAIL_DATA["USA-SAT-001"] = {
+  overview:{desc:"Most frequently flown orbital rocket in history. Reusable first stage (booster) — 21 reflights recorded. Block 5 is the final version. Launched 6,000+ Starlink satellites, OneWeb, and commercial payloads. SpaceX achieved $2,700/kg to LEO — lowest in industry.",firstFlight:"2010-06-04 (v1.0); 2018-05-11 (Block 5)",inService:"2010 — operational",qty:"300+ flights (Block 5); booster B1058 flew 19 times",crew:"N/A (crew variant: Dragon + 4 astronauts)",span:"N/A",length:"70.0 m (with fairing)",height:"N/A",wing:"N/A",ceiling:"N/A"},
+  wbs:{"1. First Stage (Reusable)":["1.1 9× Merlin 1D+ engines (Octaweb mount)","1.2 Aluminum-lithium propellant tanks (RP-1 + LOX)","1.3 Interstage (carbon composite)","1.4 Grid fins (Al-Ti, for atmospheric steering)","1.5 4× landing legs (CFRP + Al, deployable)","1.6 JDAV (autonomous drone ship landing)"],
+  "2. Second Stage":["2.1 1× Merlin 1D Vacuum (optimised nozzle)","2.2 Isogrid Al-Li tanks","2.3 Payload adapter ring (Lightband/custom)","2.4 Restart capability (multiple burns)"],
+  "3. Payload Fairing":["3.1 CFRP fairing (5.2 m dia)","3.2 Recovery system (parafoil + catcher — SpaceX)","3.3 Acoustic attenuation foam","3.4 Dispenser (ESPA ring for rideshare)"]},
+  materials:{structural:["Al-Li isogrid tank construction (SpaceX proprietary — CNC pocket-milled)","CFRP interstage + fairing","Ti-Al grid fins (high-temp reentry, Al on later variants)","Inconel Merlin engine nozzle (regeneratively cooled)"],coatings:["White HVOF thermal protection (interstage)","Black ablative on grid fins","Titanium nitride on turbopump bearings"],special:["CFRP fairing with embedded heating elements (pyrotechnic splits)","Composite over-wrapped pressure vessels (COPV) — helium pressurant"]},
+  manufacturing:{processes:["SpaceX Hawthorne CA (Merlin engine, tank manufacturing)","SpaceX Starbase Texas (Falcon 9 integration — legacy; now Starship focused)","SpaceX McGregor TX (engine test)","Vertical integration at launch site (LC-39A KSC / SLC-4E Vandenberg)"],facilities:["SpaceX Hawthorne CA (manufacture)","SpaceX McGregor TX (propulsion test)","LC-39A Kennedy + SLC-4E Vandenberg (launch)","Autonomous drone ships (ASDS): OCISLY + JRTI"]},
+  propulsion:{engines:["9× Merlin 1D+: 934 kN (SL) / 914 kN (vac) each; total 8.4 MN SL thrust; Isp 311 s (SL) / 348 s (vac); RP-1/LOX; gas generator turbopump; throttleable 39–100%; TBO: none (reused 19×); 2nd stage: Merlin Vacuum 934 kN (vac, 382 s Isp, expanded nozzle)."]},
+  electronics:{avionics:"Radiation-tolerant x86 CPUs (3× voting); proprietary SpaceX flight computer (Merlin DECS); autonomous return-to-launch-site (RTLS): GPS + inertial; Draco cold-gas thruster control (in-space); onboard camera telemetry (HD, SpaceX webcast).",ew:"No EW (commercial). Range safety: command destruct system (encrypted) + autonomous flight termination system (AFTS) — SpaceX proprietary.",comms:"S-band telemetry; Ka-band SATCOM (Starlink backhaul on later missions); TDRSS relay (optional)."},
+  software:{flight:"SpaceX Merlin DECS (Digital Engine Control System): C++ on Linux; fully autonomous launch sequence; stage separation: pneumatic pusher + cold gas; landing algorithm: X-TRAP (eXtended Trajectory Tracking Algorithm) — landing burn precision ±1m.",tools:"SpaceX proprietary: 'Mechanical Dragon' CAD (Siemens NX derivative); in-house CFD; Python (all automation + GCS); custom hardware testing (StarTest)."},
+  ecosystem:{oem:"SpaceX (vertically integrated — 85%+ in-house manufacture)",tier1:"Aerojet/Draper (second-source research, SpaceX now fully in-house for Merlin); Intel (processors); Honeywell (IMU baseline for early versions)",tier2:"Norsk Titanium (Ti additive parts); Orbital Sciences (early supplier); later all brought in-house","tier3":"Hexcel (CFRP fairing); Alcoa (Al-Li alloy stock); 3M (thermal protection foam)"}
+};
+
+// IMAGE GALLERY DATA - aircraft images via Wikimedia Commons
+const PLATFORM_IMAGES = {
+  "IND-F-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/LCA_Tejas_at_Aero_India_2013.jpg/640px-LCA_Tejas_at_Aero_India_2013.jpg", credit:"Wikimedia Commons — Indian Air Force"},
+  "RUS-F-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Sukhoi_Su-30MKI_at_Aero_India_2011.jpg/640px-Sukhoi_Su-30MKI_at_Aero_India_2011.jpg", credit:"Wikimedia Commons"},
+  "FRA-F-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Rafale_Indian_Air_Force_-_AeroIndia2021.jpg/640px-Rafale_Indian_Air_Force_-_AeroIndia2021.jpg", credit:"Wikimedia Commons"},
+  "IND-H-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Dhruv_HAL_Advanced_Light_Helicopter.jpg/640px-Dhruv_HAL_Advanced_Light_Helicopter.jpg", credit:"Wikimedia Commons"},
+  "IND-H-002": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/LCH_2020.jpg/640px-LCH_2020.jpg", credit:"Wikimedia Commons — HAL"},
+  "IND-M-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Brahmos_Missile.jpg/640px-Brahmos_Missile.jpg", credit:"Wikimedia Commons"},
+  "IND-SAT-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/PSLV-C11_rocket.jpg/400px-PSLV-C11_rocket.jpg", credit:"Wikimedia Commons — ISRO"},
+  "IND-SAT-002": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/GSLV_Mk_III_D2.jpg/400px-GSLV_Mk_III_D2.jpg", credit:"Wikimedia Commons — ISRO"},
+  "USA-SAT-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Falcon_9_B1060_SXM-7.jpg/400px-Falcon_9_B1060_SXM-7.jpg", credit:"Wikimedia Commons — SpaceX"},
+  "EUR-CP-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/IndiGo_A320neo_%28VT-ITO%29_%2848088891276%29.jpg/640px-IndiGo_A320neo_%28VT-ITO%29_%2848088891276%29.jpg", credit:"Wikimedia Commons"},
+  "USA-CP-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/SpiceJet_Boeing_737_MAX_8_%28VT-MXO%29_at_Hyderabad_Airport.jpg/640px-SpiceJet_Boeing_737_MAX_8_%28VT-MXO%29_at_Hyderabad_Airport.jpg", credit:"Wikimedia Commons"},
+  "TUR-U-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Bayraktar_TB2_-_2022_%28cropped%29.jpg/640px-Bayraktar_TB2_-_2022_%28cropped%29.jpg", credit:"Wikimedia Commons"},
+  "IND-M-004": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Astra_missile_at_AeroIndia_2021.jpg/640px-Astra_missile_at_AeroIndia_2021.jpg", credit:"Wikimedia Commons"},
+};
+
+// USER UPLOADED IMAGES (stored in memory session)
+const USER_IMAGES = {};
+
 
 
 // ══════════════════════════════════════════════════════════════
@@ -2118,6 +2460,7 @@ const DP_TABS = [
   {id:'electronics',icon:'ti-cpu',           label:'Electronics'},
   {id:'software',   icon:'ti-code',          label:'Software'},
   {id:'ecosystem',  icon:'ti-network',       label:'Ecosystem'},
+  {id:'images',     icon:'ti-photo',         label:'Images'},
 ];
 let _dpId = null;
 let _dpTab = 'overview';
@@ -2180,7 +2523,16 @@ function dpRender(tab) {
 
   if(tab === 'overview') {
     const o = det.overview;
+    const img = PLATFORM_IMAGES[_dpId] || null;
+    const userImg = USER_IMAGES[_dpId] ? USER_IMAGES[_dpId][0] : null;
+    const displayImg = userImg || img;
     body.innerHTML = `
+      <div class="dp-image-wrap" id="dp-main-img">
+        ${displayImg
+          ? `<img src="${displayImg.url||displayImg}" alt="${v.name}" onclick="openLightbox('${displayImg.url||displayImg}')" style="cursor:zoom-in">
+             <span class="dp-image-credit">${displayImg.credit||'User uploaded'}</span>`
+          : `<div class="dp-image-placeholder"><i class="ti ti-photo"></i><span>No image — upload one below</span></div>`}
+      </div>
       <div class="dp-desc">${o.desc}</div>
       <div class="dp-overview-grid">
         ${[['First Flight',o.firstFlight],['In Service',o.inService],['Quantity / Orders',o.qty],['Crew',o.crew],['Wingspan',o.span],['Length',o.length],['Height',o.height],['Wing Area',o.wing||'—'],['Service Ceiling',o.ceiling],['Thrust / Weight',o.thrust_wt]].map(([k,val])=>`
@@ -2250,6 +2602,61 @@ function closeDetailOuter(e) {
   if(e.target === document.getElementById('dp-overlay')) closeDetail();
 }
 
+
+  else if(tab === 'images') {
+    const imgs = USER_IMAGES[_dpId] || [];
+    const stock = PLATFORM_IMAGES[_dpId];
+    body.innerHTML = `
+      <div class="upload-zone" id="imgUploadZone">
+        <input type="file" id="imgFileInput" accept="image/*" multiple onchange="handleImgUpload(event)">
+        <i class="ti ti-cloud-upload"></i>
+        <h4>Upload images for ${v.name}</h4>
+        <p>Drag & drop or click to select JPG, PNG, WebP files<br>Images appear in the Overview tab and gallery below</p>
+      </div>
+      <div id="imgThumbGrid" class="upload-thumb-grid">
+        ${stock ? `<div class="upload-thumb" onclick="openLightbox('${stock.url}')"><img src="${stock.url}" alt=""><div style="position:absolute;bottom:0;left:0;right:0;padding:4px 6px;background:rgba(0,0,0,.6);font-size:9.5px;color:rgba(255,255,255,.7)">${stock.credit}</div></div>` : ''}
+        ${imgs.map((img,i) => `<div class="upload-thumb" onclick="openLightbox('${img}')"><img src="${img}" alt=""><button class="del-btn" onclick="event.stopPropagation();delUserImg(${i})">&times;</button></div>`).join('')}
+      </div>
+      ${imgs.length === 0 && !stock ? '<p style="color:var(--tx-3);text-align:center;padding:20px">No images yet. Upload above to add platform photos.</p>' : ''}`;
+
+    // drag & drop
+    const zone = document.getElementById('imgUploadZone');
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', e => { e.preventDefault(); zone.classList.remove('drag-over'); handleImgUploadFiles(e.dataTransfer.files); });
+  }
+
+function handleImgUpload(e) { handleImgUploadFiles(e.target.files); }
+function handleImgUploadFiles(files) {
+  if(!files || !files.length) return;
+  if(!USER_IMAGES[_dpId]) USER_IMAGES[_dpId] = [];
+  Array.from(files).forEach(file => {
+    if(!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      USER_IMAGES[_dpId].push(e.target.result);
+      dpRender('images');
+      // also refresh overview image if on overview
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function delUserImg(idx) {
+  if(USER_IMAGES[_dpId]) {
+    USER_IMAGES[_dpId].splice(idx, 1);
+    dpRender('images');
+  }
+}
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') { closeLightbox(); closeDetail(); } });
+
+
 // ══════════════════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════════════════
@@ -2257,5 +2664,11 @@ window.addEventListener('DOMContentLoaded', () => {
   renderVehicles();
 });
 </script>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
 </body>
 </html>
