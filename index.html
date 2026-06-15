@@ -1716,44 +1716,95 @@ DETAIL_DATA["USA-SAT-001"] = {
 
 // IMAGE GALLERY DATA - aircraft images via Wikimedia Commons
 const PLATFORM_IMAGES = {
-  // Using Commons Special:FilePath which has proper CORS and accepts any width
-  "IND-F-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/LCA_Tejas_at_Aero_India_2013.jpg?width=640", credit:"IAF / Wikimedia Commons"},
-  "IND-F-002": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/HAL_LCA_Tejas_LIMA_2019.jpg?width=640", credit:"HAL / Wikimedia Commons"},
-  "IND-F-003": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Advanced_Medium_Combat_Aircraft_(AMCA)_mockup.jpg?width=640", credit:"ADA/HAL / Wikimedia Commons"},
-  "RUS-F-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Sukhoi_Su-30MKI_at_Aero_India_2011.jpg?width=640", credit:"IAF / Wikimedia Commons"},
-  "FRA-F-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Rafale_Indian_Air_Force_-_AeroIndia2021.jpg?width=640", credit:"Dassault/IAF / Wikimedia Commons"},
-  "IND-H-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Dhruv_HAL_Advanced_Light_Helicopter.jpg?width=640", credit:"HAL / Wikimedia Commons"},
-  "IND-H-002": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/LCH_2020.jpg?width=640", credit:"HAL / Wikimedia Commons"},
-  "IND-M-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Brahmos_Missile.jpg?width=640", credit:"BrahMos Aerospace / Wikimedia"},
-  "IND-M-004": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Astra_missile_at_AeroIndia_2021.jpg?width=640", credit:"DRDO / Wikimedia Commons"},
-  "IND-M-007": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Akash_Missile_System.jpg?width=640", credit:"DRDO / Wikimedia Commons"},
-  "IND-SAT-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/PSLV-C11_rocket.jpg?width=640", credit:"ISRO / Wikimedia Commons"},
-  "IND-SAT-002": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/GSLV_Mk_III_D2.jpg?width=640", credit:"ISRO / Wikimedia Commons"},
-  "IND-T-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/HAL_HTT-40_at_Aero_India_2017.jpg?width=640", credit:"HAL / Wikimedia Commons"},
-  "TUR-U-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Bayraktar_TB2_-_2022_(cropped).jpg?width=640", credit:"Baykar / Wikimedia Commons"},
-  "USA-U-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/MQ-9_Reaper_UAV.jpg?width=640", credit:"USAF / Wikimedia Commons"},
-  "USA-SAT-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Falcon_9_B1060_SXM-7.jpg?width=640", credit:"SpaceX / Wikimedia Commons"},
-  "EUR-CP-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/IndiGo_A320neo_(VT-ITO)_(48088891276).jpg?width=640", credit:"Wikimedia Commons"},
-  "USA-CP-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/SpiceJet_Boeing_737_MAX_8_(VT-MXO)_at_Hyderabad_Airport.jpg?width=640", credit:"Wikimedia Commons"},
-  "USA-F-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/F-35A_58th_Fighter_Squadron_2013.jpg?width=640", credit:"USAF / Wikimedia Commons"},
-  "USA-F-004": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/F-22A_Raptor_edited.jpg?width=640", credit:"USAF / Wikimedia Commons"},
-  "EUR-F-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Eurofighter_EF-2000_Typhoon_F2_ZJ916_(cropped).jpg?width=640", credit:"RAF / Wikimedia Commons"},
-  "USA-H-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/AH-64D_Apache_Longbow_(cropped).jpg?width=640", credit:"US Army / Wikimedia Commons"},
-  "USA-TP-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/C-130J_Super_Hercules_of_Indian_Air_Force_at_Aero_India_2013.jpg?width=640", credit:"IAF / Wikimedia Commons"},
-  "USA-TP-002": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/C-17_Globemaster_III_on_final_approach_to_Changi_Airport.jpg?width=640", credit:"Wikimedia Commons"},
-  "USA-N-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/In_P8I.jpg?width=640", credit:"Indian Navy / Wikimedia Commons"},
-  "IND-GV-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Arjun_MBT_Mk_1A_Republic_Day_2021.jpg?width=640", credit:"Indian Army / Wikimedia Commons"},
-  "IND-U-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/DRDO_Rustom_2.jpg?width=640", credit:"DRDO / Wikimedia Commons"},
-  "RUS-F-002": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/MiG-29K_(cropped).jpg?width=640", credit:"Russian Navy / Wikimedia Commons"},
-  "FRA-F-002": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Dassault_Mirage_2000H_Indian_Air_Force.jpg?width=640", credit:"IAF / Wikimedia Commons"},
-  "IND-SAT-016": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Gaganyaan_mission_illustration.jpg?width=640", credit:"ISRO / Wikimedia Commons"},
-  "IND-SAT-005": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Vikram-S_rocket_launch.jpg?width=640", credit:"Skyroot Aerospace"},
-  "IND-SAT-009": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/SOrTeD_launch.jpg?width=640", credit:"Agnikul Cosmos"},
-  "RUS-F-003": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/Sukhoi_Su-57_in_2019.jpg?width=640", credit:"Russian Aerospace Forces / Wikimedia"},
-  "CHN-F-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/J-20_chengdu_02.jpg?width=640", credit:"Wikimedia Commons"},
-  "KOR-F-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/KF-21_Boramae_first_flight.jpg?width=640", credit:"DAPA/KAI / Wikimedia"},
-  "TUR-F-001": {url:"https://commons.wikimedia.org/wiki/Special:FilePath/KAAN_TF-X_first_flight_2023.jpg?width=640", credit:"TAI / Wikimedia"},
+  // Wikipedia article titles — images loaded via Wikipedia API (CORS-safe)
+  "IND-F-001": "HAL Tejas",
+  "IND-F-002": "HAL Tejas",
+  "IND-F-003": "Advanced Medium Combat Aircraft",
+  "IND-F-005": "Twin Engine Deck Based Fighter",
+  "RUS-F-001": "Sukhoi Su-30MKI",
+  "FRA-F-001": "Dassault Rafale",
+  "FRA-F-002": "Dassault Mirage 2000",
+  "RUS-F-002": "Mikoyan MiG-29K",
+  "USA-F-001": "Lockheed Martin F-35 Lightning II",
+  "USA-F-004": "Lockheed Martin F-22 Raptor",
+  "EUR-F-001": "Eurofighter Typhoon",
+  "RUS-F-003": "Sukhoi Su-57",
+  "CHN-F-001": "Chengdu J-20",
+  "KOR-F-001": "KF-21 Boramae",
+  "TUR-F-001": "TAI TF-X",
+  "PAK-F-001": "CAC/PAC JF-17 Thunder",
+  "IND-H-001": "HAL Dhruv",
+  "IND-H-002": "HAL Light Combat Helicopter",
+  "USA-H-001": "Boeing AH-64 Apache",
+  "IND-T-001": "HAL HTT-40",
+  "USA-TP-001": "Lockheed C-130 Hercules",
+  "USA-TP-002": "Boeing C-17 Globemaster III",
+  "IND-M-001": "BrahMos",
+  "IND-M-004": "Astra (missile)",
+  "IND-M-007": "Akash (missile)",
+  "IND-M-008": "S-400 missile system",
+  "IND-U-001": "DRDO Rustom",
+  "TUR-U-001": "Bayraktar TB2",
+  "USA-U-001": "General Atomics MQ-9 Reaper",
+  "USA-U-002": "General Atomics MQ-9 Reaper",
+  "IND-SAT-001": "Polar Satellite Launch Vehicle",
+  "IND-SAT-002": "Geosynchronous Satellite Launch Vehicle Mark III",
+  "IND-SAT-005": "Skyroot Vikram",
+  "IND-SAT-009": "Agnikul Cosmos",
+  "IND-SAT-013": "Chandrayaan-3",
+  "IND-SAT-014": "Aditya-L1",
+  "IND-SAT-016": "Gaganyaan",
+  "USA-SAT-001": "Falcon 9",
+  "EUR-CP-001": "Airbus A320neo family",
+  "USA-CP-001": "Boeing 737 MAX",
+  "EUR-CP-002": "Airbus A350",
+  "USA-CP-002": "Boeing 787 Dreamliner",
+  "IND-GV-001": "Arjun (tank)",
+  "IND-EV-001": "Electric aircraft",
+  "USA-H-002": "Sikorsky UH-60 Black Hawk",
+  "USA-H-003": "Boeing CH-47 Chinook",
+  "IND-H-009": "Boeing CH-47 Chinook",
+  "USA-AEW-001": "Boeing E-3 Sentry",
+  "USA-N-001": "Boeing P-8 Poseidon",
+  "CHN-SAT-001": "Long March 5",
+  "EUR-SAT-001": "Ariane 6",
 };
+
+
+// Load image for a platform via Wikipedia API
+async function loadPlatformImage(pid, imgEl, creditEl) {
+  const title = PLATFORM_IMAGES[pid];
+  if (!title || typeof title !== 'string') return;
+  if (!imgEl) return;
+  
+  // Check cache first
+  if (_wikiImgCache[pid]) {
+    imgEl.src = _wikiImgCache[pid].src;
+    if(creditEl) creditEl.textContent = _wikiImgCache[pid].credit;
+    imgEl.onclick = () => openLightbox(imgEl.src);
+    return;
+  }
+  
+  try {
+    const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
+    const resp = await fetch(url, {
+      headers: { 'Api-User-Agent': 'AeroIntelDB/3.0 (educational)' }
+    });
+    if (!resp.ok) return;
+    const data = await resp.json();
+    // Prefer originalimage for higher resolution, fall back to thumbnail
+    const src = data.originalimage?.source || data.thumbnail?.source;
+    if (src) {
+      _wikiImgCache[pid] = {src, credit: 'Wikipedia / ' + (data.titles?.display || title)};
+      imgEl.src = src;
+      imgEl.style.display = 'block';
+      imgEl.onclick = () => openLightbox(src);
+      if(creditEl) creditEl.textContent = _wikiImgCache[pid].credit;
+    }
+  } catch(e) {
+    // Keep SVG placeholder on failure
+  }
+}
 
 // USER UPLOADED IMAGES (stored in memory session)
 const USER_IMAGES = {};
@@ -3379,28 +3430,125 @@ const _aiHistory = [];
 // Local knowledge base for offline AI answers
 function getLocalAnswer(q) {
   const ql = q.toLowerCase();
-  if(ql.includes('tejas') || ql.includes('lca')) {
-    return 'LCA Tejas Mk1A: Single-engine delta-wing multirole fighter developed by ADA/HAL. MTOW 13,500 kg, range 3,000 km, speed Mach 1.8. Powered by GE F404-IN20 (83 kN). Features Uttam AESA radar (780 GaN T/R modules), Tarang RWR, Mayavi EW. 83 aircraft on order for IAF (Mk1A). Mk2 variant with EJ200 engine and larger airframe in development for 2027 first flight.';
-  }
-  if(ql.includes('brahmos')) {
-    return 'BrahMos Block III: Mach 2.8 cruise missile, range 290-600 km, 200-300 kg warhead. Joint India-Russia venture (50.5% India). Guidance: RLG INS + active radar seeker + DSMAC. Land, sea, sub-sea and air-launch variants. Air-launch from Su-30MKI. 65%+ indigenisation achieved 2024. BrahMos-NG (miniaturised, 1,000 kg) for Tejas integration under development.';
-  }
-  if(ql.includes('amca')) {
-    return 'AMCA Mk1: India 5th-gen stealth multirole fighter. MTOW 25,000 kg, twin EJ200 engines (interim), internal weapons bays, S-shaped DSI inlets. ADA design authority, HAL manufacture. Mk1 (4.5+ gen baseline) → Mk2 (full 5th gen with indigenous engine). First flight target 2027-28. Budget ₹15,000 Cr for 5 prototype aircraft. Features: Uttam AESA Mk2, DARE EW, IRST, supercruise capability on Mk2.';
-  }
-  if(ql.includes('pslv')) {
-    return 'PSLV-XL: India workhorse launch vehicle. 4 stages: solid PS1 (139T HTPB) + 6 PSOM strap-ons, liquid PS2 (Vikas engine), solid PS3, liquid PS4. Payload LEO 3,800 kg / SSO 1,750 kg. 58+ successful launches. 100% success rate post-2017. Manufactured at SDSC SHAR Sriharikota. Walchandnagar Industries (Stage 1 casing), ISRO LPSC (Vikas engine).';
-  }
-  if(ql.includes('s-400') || ql.includes('s400')) {
-    return 'S-400 Triumf (SA-21 Growler): Russia-supplied long-range SAM system. IAF ordered 5 squadrons (₹35,000 Cr). Range: 40N6E missile 400 km, 48N6 missile 250 km, 9M96E2 missile 120 km. Track simultaneously 80 targets, engage 36. 3 squadrons delivered by 2024. Covers entire Pakistan airspace from Indian soil. CAATSA risk managed via diplomatic waivers.';
-  }
-  if(ql.includes('indigenis') || ql.includes('import')) {
-    return 'India defence import dependency: ~$16.5B/year (FY23). Critical imports: EJ200/AL-31FP/M88 engines (100% import), Thales RBE2 radar (Rafale, no ToT), Martin Baker seats, CFRP T800 prepreg (Toray Japan), GaN RF wafers (Wolfspeed USA). Progress: Kaveri Mk2 (indigenous engine target 2030), Uttam AESA (70%+ indigenous), Maraging steel (MIDHANI, 100% indigenous). PIL has 509+ items banned from import.';
-  }
+
   if(ql.includes('skyroot') || ql.includes('vikram')) {
-    return 'Skyroot Vikram-1: India first private orbital launch vehicle. 3-stage solid-propellant rocket. Payload: 290-315 kg to LEO (SSLV-class). Kalaari Capital, Myntra founders backed. Successfully launched Vikram-S (sounding rocket) Nov 2022. Vikram-1 orbital test ongoing. CFRP composite motor casings, 3D-printed titanium components. Offices: Hyderabad. ISRO support: launch facilities, testing.';
+    return `<strong>Skyroot Aerospace — Current Projects & Technical Details:</strong><br><br>
+<strong>Vikram-S (Launched)</strong> — Suborbital sounding rocket. 3 solid stages, apogee 90 km. Launched 18 Nov 2022 from SDSC SHAR. First Indian private rocket in space.<br><br>
+<strong>Vikram-1 (Orbital, In Development)</strong> — 3-stage all-solid rocket, 20 m tall, 545 kg GLOW. Payload: 290–315 kg to 500 km LEO. Stage 1: Kalam-5 (500 kN HTPB-AP solid motor, CFRP casing). Stage 2: Kalam-250 (250 kN solid). Stage 3: Raman liquid engine (3D-printed Inconel, restartable). Avionics: embedded Linux + MEMS IMU + NavIC GPS. Expected orbital launch: 2024–25.<br><br>
+<strong>Vikram-2 (Planned)</strong> — Enhanced capacity, LOX/kerosene upper stage (Raman-2, restartable). Target 720 kg to SSO.<br><br>
+<strong>Raman Engine</strong> — In-house liquid bi-propellant engine. 3D-printed Inconel combustion chamber. Restartable. Target: 10 kN class. Used in Vikram-1 Stage 3.<br><br>
+<strong>Funding:</strong> ₹730 Cr raised. Investors: Peak XV (Sequoia India), Kalaari Capital, Myntra founders. HQ: Hyderabad. Founded: 2018 by ex-ISRO scientists.`;
   }
-  return `For detailed information about "${q}", this AeroIntel database contains ${VEHICLES.length} platforms with full WBS, materials, propulsion, electronics, software and supply chain data for 32 key platforms. Browse the Vehicle Master section or use the detail sheets by clicking any platform row.`;
+
+  if(ql.includes('agnikul') || ql.includes('agnibaan') || ql.includes('agnilet')) {
+    return `<strong>Agnikul Cosmos — Current Projects:</strong><br><br>
+<strong>Agnibaan SOrTeD</strong> — Successfully launched 30 May 2024 from Dhanush (India's first private launch pad at SHAR). Suborbital test flight. Vehicle uses single AgniletV engine.<br><br>
+<strong>AgniletV Engine</strong> — World's first single-piece 3D-printed semi-cryogenic engine (LOX + kerosene). No welds, no assembly — entire combustion chamber + nozzle printed in one piece on EOS M400 machine in Inconel 625. ~25 kN thrust, gimballed ±5°, restartable.<br><br>
+<strong>Agnibaan Orbital (In Development)</strong> — Configurable: 1–7 AgniletV engines on Stage 1. Target payload: 100 kg to 700 km SSO. Upper stage: solid kick motor. Launch: Dhanush pad SHAR.<br><br>
+<strong>HQ:</strong> IIT-Madras Research Park, Chennai. Founded 2017.`;
+  }
+
+  if(ql.includes('tejas') || ql.includes('lca')) {
+    return `<strong>HAL LCA Tejas Family:</strong><br><br>
+<strong>Mk1A (Current Production)</strong> — 83 aircraft on order IAF. GE F404-IN20 engine (83 kN AB). Uttam AESA radar (780 GaN T/R modules, 100 km range). Meteor BVR + Astra Mk1 AAM. Mayavi ASPJ EW. IOC 2024. MTOW 13,500 kg, Mach 1.8.<br><br>
+<strong>Mk2 (Development)</strong> — Enlarged delta wing, EJ200 engine (90 kN), 10 hardpoints, BrahMos-NG integration. First flight target 2027.<br><br>
+<strong>TEDBF (Naval)</strong> — Twin EJ200, folding wing, ski-jump + EMALS compatible. For INS Vikrant. First flight 2026–27 target.<br><br>
+<strong>AMCA Mk1/Mk2</strong> — 5th-gen stealth, S-duct DSI inlets, twin EJ200, internal bays. Mk1 first flight 2027–28. Mk2 with indigenous engine 2035.`;
+  }
+
+  if(ql.includes('brahmos')) {
+    return `<strong>BrahMos Missile Family:</strong><br><br>
+<strong>Block III (Air/Land/Sea)</strong> — Mach 2.8, 290–600 km range, 200–300 kg warhead. RLG INS + active radar seeker + DSMAC terrain matching. Land launch (IA TEL), Su-30MKI air launch, ship launch, submarine launch.<br><br>
+<strong>BrahMos-NG</strong> — Miniaturised version (~1,000 kg vs 2,500 kg). For Tejas/TEDBF/AMCA integration. MTOW 1,000 kg, Mach 3.5 target, 290 km range.<br><br>
+<strong>BrahMos-II Hypersonic</strong> — Target Mach 7–8, 600+ km range. Scramjet sustainer. In development with Russia NPO Mashinostroyeniya.<br><br>
+<strong>Indigenisation:</strong> 65%+ achieved 2024, target 85% by 2025. Ramjet sustainer, seekers, and GNC now made in India.`;
+  }
+
+  if(ql.includes('amca')) {
+    return `<strong>Advanced Medium Combat Aircraft (AMCA):</strong><br><br>
+<strong>Configuration</strong> — Twin-engine, stealth, 5th-gen multirole. MTOW ~25,000 kg. S-shaped DSI inlets (hide compressor face), canted twin fins, internal weapons bays (4 AIM-120 class BVR or 2 BrahMos-NG).<br><br>
+<strong>Engines</strong> — Mk1: 2× EJ200 (90 kN AB each, interim). Mk2: Indigenous GTX-35VS Kaveri successor (98 kN target). GTRE Bangalore.<br><br>
+<strong>Sensors</strong> — Uttam AESA Mk2 (1,024 T/R modules), IRST, DARE EW Mk2, MAWS 360°, MADL data link.<br><br>
+<strong>Timeline</strong> — 5 prototypes sanctioned (₹15,000 Cr). First flight: 2027–28. IOC: 2034 target. HAL Nasik FAL.<br><br>
+<strong>Stealth</strong> — RCS target: -30 dBsm (frontal). RAM tiles, ITO canopy, internal bays, aligned panel edges.`;
+  }
+
+  if(ql.includes('s-400') || ql.includes('s400') || ql.includes('triumf')) {
+    return `<strong>S-400 Triumf in India:</strong><br><br>
+<strong>Contract</strong> — ₹35,000 Cr (October 2018) for 5 squadrons. CAATSA risk managed via US waiver (strategic necessity recognised).<br><br>
+<strong>Delivery</strong> — 3 squadrons delivered by 2024. Remaining 2 by 2025–26.<br><br>
+<strong>Capabilities</strong> — Range: 40N6E missile (400 km) vs large aircraft; 48N6E3 (250 km); 9M96E2 (120 km). Engages: fighters, cruise missiles, ballistic missiles (limited ATBM). Simultaneously track 80 targets, engage 36.<br><br>
+<strong>Coverage</strong> — Each regiment covers ~400 km radius. 3 positioned to cover Pakistan front + China border.<br><br>
+<strong>Integration</strong> — Linked to Indian IACCS (Integrated Air Command Control System) via dedicated data bus (not standard Link-16).`;
+  }
+
+  if(ql.includes('indigeni') || ql.includes('import depend') || ql.includes('import')) {
+    return `<strong>India Defence Import Dependency Analysis:</strong><br><br>
+<strong>Current Status</strong> — ~$16.5B annual import bill (FY23). 70%+ defence spending still imported.<br><br>
+<strong>Critical Dependencies</strong>:<br>
+• Engines: EJ200/AL-31FP/M88 — 100% import for fighters<br>
+• CFRP prepreg: Toray T800/M21 (Japan) — no India equivalent<br>
+• GaN wafers: Wolfspeed USA (ITAR) — DRDO GAETEC partial<br>
+• Rafale radar (RBE2): No ToT from Thales<br>
+• Martin Baker ejection seats: 100% import<br><br>
+<strong>Indigenised Successfully</strong>:<br>
+• Maraging steel 250: MIDHANI (100%, exports to Russia/France)<br>
+• Shakti turboshaft engine: HAL Koraput (100%)<br>
+• Uttam AESA radar: BEL (70%+, GaN T/R modules Hyderabad)<br>
+• BrahMos: 65%+ indigenous<br>
+• PSLV/LVM3: 95%+ indigenous<br><br>
+<strong>PIL</strong> — 509+ items banned from import (Positive Indigenisation List). Target: 75% domestic procurement by 2047.`;
+  }
+
+  if(ql.includes('pslv') || ql.includes('isro') || ql.includes('launch vehicle')) {
+    return `<strong>ISRO Launch Vehicles:</strong><br><br>
+<strong>PSLV-XL</strong> — Workhorse. 4 stages (solid+liquid+solid+liquid). LEO 3,800 kg / SSO 1,750 kg. 58+ launches, near-100% success rate. Used for Chandrayaan-1/2/3, Mangalyaan, NavIC.<br><br>
+<strong>LVM3 (GSLV Mk III)</strong> — Heavy lift. L110 liquid core + S200 solid strap-ons + C25 cryogenic. LEO 10,000 kg / GTO 4,000 kg. Used for OneWeb (36 satellites), Chandrayaan-3.<br><br>
+<strong>SSLV</strong> — Small satellite, 3 solid stages. SSO 500 kg. Low cost, minimal crew, rapid turnaround. 2nd launch 2023 success.<br><br>
+<strong>NGLV (Next Gen LV)</strong> — In development. Reusable first stage target. LEO 30,000 kg class.<br><br>
+<strong>Gaganyaan</strong> — Crewed mission. LVM3 with human-rated CE-20 engine. First crewed flight: 2025 (delayed).`;
+  }
+
+  if(ql.includes('drdo') || ql.includes('uav') || ql.includes('tapas') || ql.includes('rustom')) {
+    return `<strong>DRDO UAV/UAS Programmes:</strong><br><br>
+<strong>Tapas-BH (Rustom-2)</strong> — MALE UAV. 1,800 kg MTOW, 250 km range (LoS), 28 hr endurance. Intel SAR + EO payload. ADE Bangalore. Delayed — IOC pending IAF/IN/IA evaluation.<br><br>
+<strong>CATS Warrior</strong> — Loyal wingman UCAV. HAL + NewSpace Research. 900 km range, ~10,000 kg. AI mission autonomy. Internal weapons bay. First flight 2025 target. Link-16 + MADL teaming with Tejas Mk2/AMCA.<br><br>
+<strong>AURA</strong> — Stealth UCAV concept. 15,000 kg+, Mach 0.9, internal bays. Long-term R&D (2030+).<br><br>
+<strong>Abhyas</strong> — Aerial target drone. 92 kg, 360 km/h, 150 km range. In service as practice target for SAMs/guns.<br><br>
+<strong>SkyStriker</strong> — Loitering munition (IAI collaboration). 35 kg, 100 km, 160 km/h. IA in service.`;
+  }
+
+  if(ql.includes('ej200') || ql.includes('al-31') || ql.includes('engine compar')) {
+    return `<strong>EJ200 vs AL-31FP Engine Comparison:</strong><br><br>
+<strong>EJ200 (Eurojet — Typhoon / Tejas Mk1A)</strong><br>
+• Thrust: 60 kN dry / 90 kN AB<br>
+• Bypass ratio: 0.40<br>
+• Stage count: 3LP + 5HP<br>
+• TBO: 4,000 hr<br>
+• FADEC: Yes (full authority)<br>
+• India manufacture: HAL Koraput licence (in progress)<br>
+• Weight: 1,000 kg<br><br>
+<strong>AL-31FP (Saturn — Su-30MKI)</strong><br>
+• Thrust: 74.5 kN dry / 122.6 kN AB (each, twin engine)<br>
+• Bypass ratio: 0.59<br>
+• TVC: Yes (±15° axisymmetric)<br>
+• TBO: 1,500 hr (shorter — Russian standard)<br>
+• FADEC: Partial (FADEC-lite)<br>
+• India manufacture: HAL Koraput overhaul only, not new build<br>
+• Weight: 1,530 kg<br><br>
+<strong>Key difference:</strong> AL-31FP has more thrust + TVC but much shorter TBO and Russian supply risk post-2022. EJ200 more modern, better fuel efficiency.`;
+  }
+
+  if(ql.includes('kf-21') || ql.includes('boramae')) {
+    return `<strong>KF-21 Boramae — Current Status:</strong><br><br>
+<strong>First flight:</strong> 19 July 2022. 6 prototypes flying as of 2024. 4 single-seat + 2 twin-seat. Supersonic achieved (Mach 1.1+ in tests).<br><br>
+<strong>Block 1 (2026 IOC)</strong> — External AESA radar pod, external IRST. No internal weapons bays. 4.5-gen capability. 2× GE F414-GE-400K (98 kN AB each).<br><br>
+<strong>Block 2 (2030)</strong> — Full internal AESA, 4 internal weapons bays, PL-15 class BVR integration. 5th-gen upgrade path.<br><br>
+<strong>Indonesia issue</strong> — Indonesia (20% development partner) behind on payments (₹2.2T KRW owed). Negotiating revised payment schedule. Indonesia still receives 50 aircraft once resolved.<br><br>
+<strong>Weapons certified:</strong> Meteor, IRIS-T SL, AIM-120, Taurus KEPD-350, Korean L-SAM integration.`;
+  }
+
+  return null; // No local answer — will show Claude.ai link
 }
 function setAIQ(q) {
   document.getElementById('aiQ') && (document.getElementById('aiQ').value = q);
@@ -3412,14 +3560,21 @@ async function doAI() {
   const out = document.getElementById('aiOut');
   if(!out) return;
   out.style.display = 'block';
-  out.innerHTML = '<span class="spinner"></span>Querying Claude…';
+  out.innerHTML = '<span class="spinner"></span> Querying AeroIntel AI…';
   document.getElementById('aiQ').value = '';
 
   _aiHistory.unshift({q, t: new Date().toLocaleTimeString()});
   const hist = document.getElementById('aiHistory');
-  if(hist) hist.innerHTML = _aiHistory.slice(0,6).map(h => `<div style="padding:6px 0;border-bottom:1px solid var(--bdr)"><span style="color:var(--tx-dim);font-size:10px">${h.t}</span> — ${h.q}</div>`).join('');
+  if(hist) hist.innerHTML = _aiHistory.slice(0,8).map(h =>
+    `<div style="padding:6px 0;border-bottom:1px solid var(--bdr)"><span style="color:var(--tx-dim);font-size:10px">${h.t}</span> — <span style="color:var(--tx-2)">${h.q}</span></div>`
+  ).join('');
 
-  const ctx = `You are AeroIntel, a world-class aerospace and defence intelligence assistant. You have deep knowledge of all Indian, US, European, Russian, Israeli aerospace platforms, defence systems, UAVs, missiles, satellites, launch vehicles, and their subsystems. Database: ${VEHICLES.length} platforms indexed including fighters, helicopters, missiles, launch vehicles. Full detail sheets for: LCA Tejas Mk1A, AMCA Mk1, Su-30MKI, Rafale EH, ALH Dhruv Mk4, BrahMos Block III, PSLV-XL. Answer with precise technical data: specifications, WBS, materials, manufacturing, supply chains, indigenisation status. Focus on India's aerospace industry context where applicable. Format clearly.`;
+  // First: try local knowledge base for instant response
+  const local = getLocalAnswer(q);
+
+  // Then: try Claude API
+  const ctx = `You are AeroIntel, a world-class aerospace and defence intelligence AI. You have encyclopaedic knowledge of all global aerospace platforms, defence systems, UAVs, missiles, satellites, launch vehicles — with deep expertise in India's aerospace industry. Database context: ${VEHICLES.length} platforms indexed. Respond with precise technical data: specifications, WBS breakdowns, materials, manufacturing processes, supply chains, indigenisation status. Be concise but thorough. Use bullet points for lists. Focus on Indian context where relevant.`;
+
   try {
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -3432,27 +3587,44 @@ async function doAI() {
         model: 'claude-sonnet-4-6',
         max_tokens: 1500,
         system: ctx,
-        messages: [{role:'user', content:q}]
+        messages: [{role:'user', content: q}]
       })
     });
-    const d = await r.json();
-    if(d.error) {
-      // Show formatted error with suggestion
-      out.innerHTML = `<span style="color:var(--amber)">⚠ API Note:</span> ${d.error.message || 'API error'}
-<br><br><span style="color:var(--tx-2);font-size:12px">The AI Query Engine requires the app to be served from Claude.ai (artifacts) or a backend proxy. You can still ask questions about this platform using the Ask AI button which links to the Claude.ai chat.</span>`;
-    } else {
-      const txt = d.content?.map(b=>b.text||'').join('\n') || 'No response.';
-      out.textContent = txt;
+
+    if(r.ok) {
+      const d = await r.json();
+      if(d.content) {
+        const txt = d.content.map(b => b.text||'').join('\n');
+        out.style.whiteSpace = 'pre-wrap';
+        out.innerHTML = `<div style="color:var(--tx);line-height:1.8;font-size:13px">${txt.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/^• /gm,'&bull; ')}</div>`;
+        return;
+      }
     }
-  } catch(e) {
-    // Friendly error with manual fallback
-    const enc = encodeURIComponent('AeroIntel: ' + q);
-    out.innerHTML = `<span style="color:var(--amber)">⚠ AI Query requires internet access and API connectivity.</span>
-<br><br>
-<b style="color:var(--tx)">Answer from built-in knowledge:</b><br>
-<span style="color:var(--tx-2);font-size:12px;line-height:1.8">${getLocalAnswer(q)}</span>
-<br><br>
-<a href="https://claude.ai/chat?q=${enc}" target="_blank" style="color:var(--accent);font-size:12px">🔗 Ask on Claude.ai →</a>`;
+  } catch(e) {}
+
+  // Fallback: show local knowledge answer
+  if(local) {
+    out.innerHTML = `
+      <div style="margin-bottom:10px;display:flex;align-items:center;gap:6px">
+        <span style="font-size:10px;padding:2px 8px;background:var(--amber-bg);color:var(--amber);border-radius:10px;font-weight:600">OFFLINE MODE</span>
+        <span style="font-size:11px;color:var(--tx-3)">API unavailable — answering from built-in knowledge</span>
+      </div>
+      <div style="color:var(--tx);line-height:1.8;font-size:13px">${local}</div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--bdr)">
+        <a href="https://claude.ai/new?q=${encodeURIComponent('AeroIntel question: '+q)}" target="_blank"
+           style="color:var(--accent);font-size:12px;display:inline-flex;align-items:center;gap:4px">
+          <i class="ti ti-external-link"></i> Get full AI answer on Claude.ai →
+        </a>
+      </div>`;
+  } else {
+    out.innerHTML = `
+      <div style="color:var(--tx-2);line-height:1.8;font-size:13px">
+        I don't have a cached answer for that specific question, but this AeroIntel database has ${VEHICLES.length} platforms with full technical data for 39 key platforms.<br><br>
+        <a href="https://claude.ai/new?q=${encodeURIComponent('AeroIntel: '+q)}" target="_blank"
+           style="color:var(--accent);font-size:12px">
+          <i class="ti ti-external-link"></i> Ask on Claude.ai for a full answer →
+        </a>
+      </div>`;
   }
 }
 
@@ -3630,26 +3802,28 @@ function dpRender(tab) {
 
   if(tab === 'overview') {
     const o = det.overview;
-    const img = PLATFORM_IMAGES[_dpId] || null;
-    const userImg = USER_IMAGES[_dpId] ? USER_IMAGES[_dpId][0] : null;
-    const displayImg = userImg || img;
+    const userImg = USER_IMAGES[_dpId]?.[0] || null;
+    // Always start with SVG placeholder; Wikipedia API will replace it
+    const initSrc = userImg ? (userImg.url||userImg) : makeSVGPlaceholder(v);
+    const initCredit = userImg ? 'User uploaded' : '';
     body.innerHTML = `
       <div class="dp-image-wrap" id="dp-main-img">
-        ${displayImg
-          ? `<img id="dp-hero-img" src="${displayImg.url||displayImg}" alt="${v.name}"
-               referrerpolicy="no-referrer"
-               onerror="this.onerror=null;loadDetailImage('${_dpId}','${v.name}',this,null)"
-               onclick="openLightbox(this.src)"
-               style="cursor:zoom-in;width:100%;height:100%;object-fit:cover;object-position:center top;display:block">
-             <span class="dp-image-credit">${displayImg.credit||'User uploaded'}</span>`
-          : `<img id="dp-hero-img" src="${makeSVGPlaceholder(v)}" alt="${v.name}"
-               style="width:100%;height:100%;object-fit:cover;display:block">`}
+        <img id="dp-hero-img" src="${initSrc}" alt="${v.name}"
+             onclick="openLightbox(this.src)"
+             style="cursor:zoom-in;width:100%;height:100%;object-fit:cover;object-position:center top;display:block">
+        <span class="dp-image-credit" id="dp-img-credit">${initCredit}</span>
       </div>
       <div class="dp-desc">${o.desc}</div>
       <div class="dp-overview-grid">
         ${[['First Flight',o.firstFlight],['In Service',o.inService],['Quantity / Orders',o.qty],['Crew',o.crew],['Wingspan',o.span],['Length',o.length],['Height',o.height],['Wing Area',o.wing||'—'],['Service Ceiling',o.ceiling],['Thrust / Weight',o.thrust_wt]].map(([k,val])=>`
           <div class="dp-spec"><div class="dp-spec-lbl">${k}</div><div class="dp-spec-val">${val||'—'}</div></div>`).join('')}
       </div>`;
+    // If no user image, try Wikipedia API
+    if(!userImg) {
+      const heroEl = document.getElementById('dp-hero-img');
+      const creditEl = document.getElementById('dp-img-credit');
+      loadPlatformImage(_dpId, heroEl, creditEl);
+    }
   }
   else if(tab === 'wbs') {
     if(!det.wbs) { body.innerHTML = '<p style="color:var(--tx-3);padding:20px">WBS data not available.</p>'; return; }
