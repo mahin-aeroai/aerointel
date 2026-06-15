@@ -853,15 +853,22 @@ tbody tr:hover td { background: var(--bg-hover); }
 .dp-image-wrap {
   position: relative;
   width: 100%;
-  height: 220px;
+  height: 240px;
   background: var(--bg-raised);
   border: 1px solid var(--bdr);
   border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.dp-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }
 .dp-image-wrap img {
   width: 100%; height: 100%;
@@ -947,13 +954,34 @@ tbody tr:hover td { background: var(--bg-hover); }
 /* lightbox */
 #lightbox {
   position: fixed; inset: 0;
-  background: rgba(0,0,0,.92);
-  z-index: 500;
+  background: rgba(0,0,0,.93);
+  z-index: 1000;
   display: none;
   align-items: center;
   justify-content: center;
   cursor: zoom-out;
 }
+#lightbox.open { display: flex; }
+#lightbox img {
+  max-width: 90vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 80px rgba(0,0,0,.9);
+}
+#lightbox-close {
+  position: absolute;
+  top: 16px; right: 20px;
+  font-size: 28px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  cursor: pointer;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+#lightbox-close:hover { background: rgba(255,255,255,.2); }
 #lightbox.open { display: flex; }
 #lightbox img {
   max-width: 90vw;
@@ -1688,19 +1716,19 @@ DETAIL_DATA["USA-SAT-001"] = {
 
 // IMAGE GALLERY DATA - aircraft images via Wikimedia Commons
 const PLATFORM_IMAGES = {
-  "IND-F-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/LCA_Tejas_at_Aero_India_2013.jpg/640px-LCA_Tejas_at_Aero_India_2013.jpg", credit:"Wikimedia Commons — Indian Air Force"},
-  "RUS-F-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Sukhoi_Su-30MKI_at_Aero_India_2011.jpg/640px-Sukhoi_Su-30MKI_at_Aero_India_2011.jpg", credit:"Wikimedia Commons"},
-  "FRA-F-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Rafale_Indian_Air_Force_-_AeroIndia2021.jpg/640px-Rafale_Indian_Air_Force_-_AeroIndia2021.jpg", credit:"Wikimedia Commons"},
-  "IND-H-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Dhruv_HAL_Advanced_Light_Helicopter.jpg/640px-Dhruv_HAL_Advanced_Light_Helicopter.jpg", credit:"Wikimedia Commons"},
-  "IND-H-002": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/LCH_2020.jpg/640px-LCH_2020.jpg", credit:"Wikimedia Commons — HAL"},
-  "IND-M-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Brahmos_Missile.jpg/640px-Brahmos_Missile.jpg", credit:"Wikimedia Commons"},
-  "IND-SAT-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/PSLV-C11_rocket.jpg/400px-PSLV-C11_rocket.jpg", credit:"Wikimedia Commons — ISRO"},
-  "IND-SAT-002": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/GSLV_Mk_III_D2.jpg/400px-GSLV_Mk_III_D2.jpg", credit:"Wikimedia Commons — ISRO"},
-  "USA-SAT-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Falcon_9_B1060_SXM-7.jpg/400px-Falcon_9_B1060_SXM-7.jpg", credit:"Wikimedia Commons — SpaceX"},
-  "EUR-CP-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/IndiGo_A320neo_%28VT-ITO%29_%2848088891276%29.jpg/640px-IndiGo_A320neo_%28VT-ITO%29_%2848088891276%29.jpg", credit:"Wikimedia Commons"},
-  "USA-CP-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/SpiceJet_Boeing_737_MAX_8_%28VT-MXO%29_at_Hyderabad_Airport.jpg/640px-SpiceJet_Boeing_737_MAX_8_%28VT-MXO%29_at_Hyderabad_Airport.jpg", credit:"Wikimedia Commons"},
-  "TUR-U-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Bayraktar_TB2_-_2022_%28cropped%29.jpg/640px-Bayraktar_TB2_-_2022_%28cropped%29.jpg", credit:"Wikimedia Commons"},
-  "IND-M-004": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Astra_missile_at_AeroIndia_2021.jpg/640px-Astra_missile_at_AeroIndia_2021.jpg", credit:"Wikimedia Commons"},
+  "IND-F-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/LCA_Tejas_at_Aero_India_2013.jpg/800px-LCA_Tejas_at_Aero_India_2013.jpg", credit:"IAF / Wikimedia"},
+  "RUS-F-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Sukhoi_Su-30MKI_at_Aero_India_2011.jpg/800px-Sukhoi_Su-30MKI_at_Aero_India_2011.jpg", credit:"IAF / Wikimedia"},
+  "FRA-F-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Rafale_Indian_Air_Force_-_AeroIndia2021.jpg/800px-Rafale_Indian_Air_Force_-_AeroIndia2021.jpg", credit:"Dassault/IAF / Wikimedia"},
+  "IND-H-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Dhruv_HAL_Advanced_Light_Helicopter.jpg/800px-Dhruv_HAL_Advanced_Light_Helicopter.jpg", credit:"HAL / Wikimedia"},
+  "IND-H-002": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/LCH_2020.jpg/800px-LCH_2020.jpg", credit:"HAL / Wikimedia"},
+  "IND-M-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Brahmos_Missile.jpg/800px-Brahmos_Missile.jpg", credit:"BrahMos Aerospace / Wikimedia"},
+  "IND-SAT-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/PSLV-C11_rocket.jpg/600px-PSLV-C11_rocket.jpg", credit:"ISRO / Wikimedia"},
+  "IND-SAT-002": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/GSLV_Mk_III_D2.jpg/600px-GSLV_Mk_III_D2.jpg", credit:"ISRO / Wikimedia"},
+  "USA-SAT-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Falcon_9_B1060_SXM-7.jpg/600px-Falcon_9_B1060_SXM-7.jpg", credit:"SpaceX / Wikimedia"},
+  "EUR-CP-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/IndiGo_A320neo_%28VT-ITO%29_%2848088891276%29.jpg/800px-IndiGo_A320neo_%28VT-ITO%29_%2848088891276%29.jpg", credit:"Wikimedia Commons"},
+  "USA-CP-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/SpiceJet_Boeing_737_MAX_8_%28VT-MXO%29_at_Hyderabad_Airport.jpg/800px-SpiceJet_Boeing_737_MAX_8_%28VT-MXO%29_at_Hyderabad_Airport.jpg", credit:"Wikimedia Commons"},
+  "TUR-U-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Bayraktar_TB2_-_2022_%28cropped%29.jpg/800px-Bayraktar_TB2_-_2022_%28cropped%29.jpg", credit:"Baykar / Wikimedia"},
+  "IND-M-004": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Astra_missile_at_AeroIndia_2021.jpg/800px-Astra_missile_at_AeroIndia_2021.jpg", credit:"DRDO / Wikimedia"},
   "USA-F-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/An_F-35A_from_the_58th_Fighter_Squadron_flies_over_Luke_Air_Force_Base%2C_Arizona%2C_2013.jpg/640px-An_F-35A_from_the_58th_Fighter_Squadron_flies_over_Luke_Air_Force_Base%2C_Arizona%2C_2013.jpg", credit:"Wikimedia Commons — USAF"},
   "USA-F-004": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/F-22A_Raptor_edited.jpg/640px-F-22A_Raptor_edited.jpg", credit:"Wikimedia Commons — USAF"},
   "EUR-F-001": {url:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Eurofighter_EF-2000_Typhoon_F2_ZJ916_%28cropped%29.jpg/640px-Eurofighter_EF-2000_Typhoon_F2_ZJ916_%28cropped%29.jpg", credit:"Wikimedia Commons — RAF"},
@@ -3272,6 +3300,45 @@ const DP_TABS = [
 let _dpId = null;
 let _dpTab = 'overview';
 
+function makeSVGPlaceholder(v) {
+  // Generate a styled SVG card as fallback image
+  const icons = {
+    Fighter:'✈', Trainer:'✈', Transport:'🚁', Helicopter:'🚁',
+    UAV:'🛸', 'Loitering Munition':'💥', Missile:'🚀',
+    'Satellite/Space':'🛰', Commercial:'✈', Cargo:'📦',
+    'Business Jet':'✈', eVTOL:'🚁', 'Ground Vehicle':'🚗',
+    'Autonomous Vehicle':'🤖', 'Naval Aircraft':'⚓', 'Surveillance/AEW':'📡',
+  };
+  const cols = {
+    Fighter:'#38bdf8', Trainer:'#60a5fa', Transport:'#a78bfa',
+    Helicopter:'#34d399', UAV:'#fbbf24', 'Loitering Munition':'#f87171',
+    Missile:'#f87171', 'Satellite/Space':'#c084fc', Commercial:'#22d3ee',
+  };
+  const col = cols[v.cat] || '#64748b';
+  const ico = icons[v.cat] || '⚙';
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='240'>
+    <defs>
+      <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+        <stop offset='0%' stop-color='#0d1117'/>
+        <stop offset='100%' stop-color='#1a2234'/>
+      </linearGradient>
+    </defs>
+    <rect width='800' height='240' fill='url(#bg)'/>
+    <rect width='800' height='3' fill='${col}' opacity='0.8'/>
+    <text x='400' y='90' font-size='52' text-anchor='middle' fill='${col}' opacity='0.3'>${ico}</text>
+    <text x='400' y='140' font-family='Inter,sans-serif' font-size='20' font-weight='700'
+          text-anchor='middle' fill='#e2e8f0'>${v.name}</text>
+    <text x='400' y='168' font-family='Inter,sans-serif' font-size='13'
+          text-anchor='middle' fill='#64748b'>${v.cat} · ${v.origin} · ${v.mfr}</text>
+    <text x='400' y='195' font-family='Inter,sans-serif' font-size='11'
+          text-anchor='middle' fill='#475569'>Upload an image in the Images tab</text>
+    <rect x='330' y='207' width='140' height='18' rx='9' fill='${col}' opacity='0.15'/>
+    <text x='400' y='220' font-family='Inter,sans-serif' font-size='10' font-weight='600'
+          text-anchor='middle' fill='${col}'>${v.status}</text>
+  </svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
 function openDetail(id) {
   const v = VEHICLES.find(x => x.id === id);
   if(!v) return;
@@ -3316,7 +3383,16 @@ function dpRender(tab) {
   if(!v) return;
 
   if(!det) {
+    const img0 = PLATFORM_IMAGES[_dpId] || null;
+    const uimg0 = USER_IMAGES[_dpId]?.[0] || null;
+    const dimg0 = uimg0 || img0;
     body.innerHTML = `
+      ${dimg0 ? `
+      <div class="dp-image-wrap">
+        <img src="${dimg0.url||dimg0}" alt="${v.name}" crossorigin="anonymous"
+          onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover">
+        <span class="dp-image-credit">${dimg0.credit||'User uploaded'}</span>
+      </div>` : ''}
       <div class="no-detail-placeholder">
         <i class="ti ti-file-unknown"></i>
         <h3>Full detail sheet not yet available</h3>
@@ -3336,9 +3412,17 @@ function dpRender(tab) {
     body.innerHTML = `
       <div class="dp-image-wrap" id="dp-main-img">
         ${displayImg
-          ? `<img src="${displayImg.url||displayImg}" alt="${v.name}" onclick="openLightbox('${displayImg.url||displayImg}')" style="cursor:zoom-in">
-             <span class="dp-image-credit">${displayImg.credit||'User uploaded'}</span>`
-          : `<div class="dp-image-placeholder"><i class="ti ti-photo"></i><span>No image — upload one below</span></div>`}
+          ? `<img src="${displayImg.url||displayImg}" alt="${v.name}"
+               crossorigin="anonymous"
+               onerror="this.style.display='none';this.nextElementSibling&&(this.nextElementSibling.style.display='none');this.parentElement.querySelector('.img-fallback').style.display='flex'"
+               onclick="openLightbox('${displayImg.url||displayImg}')"
+               style="cursor:zoom-in;width:100%;height:100%;object-fit:cover;object-position:center">
+             <span class="dp-image-credit">${displayImg.credit||'User uploaded'}</span>
+             <div class="img-fallback" style="display:none;flex-direction:column;align-items:center;gap:8px;color:var(--tx-3)">
+               <i class="ti ti-photo-off" style="font-size:36px"></i>
+               <span style="font-size:12px">Image blocked by browser — <a href="${displayImg.url||displayImg}" target="_blank" style="color:var(--accent)">open directly</a></span>
+             </div>`
+          : `<img src="${makeSVGPlaceholder(v)}" alt="${v.name}" style="width:100%;height:100%;object-fit:cover">`}
       </div>
       <div class="dp-desc">${o.desc}</div>
       <div class="dp-overview-grid">
